@@ -1,0 +1,37 @@
+fields:
+  google_tag_manager:
+    type: section
+    instructions: 'Manage your Google tag manager settings here.'
+    display: 'Google Tag Manager'
+  enable_gtm_script:
+    type: toggle
+    width: 33
+    display: Enable Google Tag Manager Script
+    instructions: Toggle whether the GTM script is placed on the website
+  gtm_code:
+    type: text
+    width: 66
+    instructions: 'Copy your Google tag manager identifier here.'
+    display: 'Google Tag Manager'
+    show_when:
+      enable_gtm_script: true
+  site_verification:
+    type: section
+    instructions: 'You can place site verification codes here for the various webmaster platforms.'
+    display: 'Site verification'
+  google_verification_code:
+    type: text
+    width: 50
+    display: 'Google verification code'
+  bing_verification_code:
+    type: text
+    width: 50
+    display: 'Bing verification code'
+  yandex_verification_code:
+    type: text
+    width: 50
+    display: 'Yandex verification code'
+  baidu_verification_code:
+    type: text
+    width: 50
+    display: 'Baidu verification code'

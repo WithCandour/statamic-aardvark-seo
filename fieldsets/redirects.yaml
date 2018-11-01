@@ -1,0 +1,19 @@
+fields:
+  redirects:
+    type: grid
+    add_row: Create Redirect
+    fields:
+      source:
+        display: Source URL
+        type: text
+      target:
+        display: Target URL
+        type: text
+      status_code:
+        display: HTTP Status Code
+        width: 10
+        type: select
+        default: "301"
+        options:
+          - "301"
+          - "302"

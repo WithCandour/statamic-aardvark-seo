@@ -1,0 +1,28 @@
+routes:
+  /:
+    uses: index
+    as: seo-box
+  general:
+    uses: getGeneralForm
+    as: seo-box.general
+  marketing:
+    uses: getMarketingForm
+    as: seo-box.marketing
+  social:
+    uses: getSocialForm
+    as: seo-box.social
+  post@update:
+    uses: cpUpdate
+    as: seo-box.update-globals
+  redirects:
+    uses: RedirectsController@index
+    as: seo-box.redirects
+  post@updateRedirects:
+    uses: RedirectsController@cpUpdate
+    as: seo-box.update-redirects
+  sitemap:
+    uses: SitemapController@index
+    as: seo-box.sitemap
+  post@updateSitemap:
+    uses: SitemapController@cpUpdate
+    as: seo-box.update-sitemap

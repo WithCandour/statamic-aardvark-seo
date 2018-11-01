@@ -1,0 +1,114 @@
+{{# Site indexing #}}
+{{ if no_index || page_no_index || no_follow_links }}
+<meta name="robots" content="{{ if no_index || page_no_index }}noindex,noodp{{ if no_follow_links }},{{ /if }}{{ /if }}{{ if no_follow_links }}nofollow{{ /if }}" />
+{{ /if }}
+
+{{# Google tag manager #}}
+{{ if enable_gtm_script && gtm_code }}
+<script>
+  (function (w, d, s, l, i) {
+  w[l] = w[l] || []; w[l].push({
+    'gtm.start':
+      new Date().getTime(), event: 'gtm.js'
+  }); var f = d.getElementsByTagName(s)[0],
+    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+      'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', '{{ gtm_code }}');
+</script>
+{{ /if }}
+
+{{# General default meta tags #}}
+<title>{{ meta_title or calculated_title }}</title>
+<meta name="description" content="{{ meta_description }}">
+<link rel="canonical" href="{{ canonical_url or permalink }}">
+{{ localized_urls }}
+<link rel="alternate" hreflang="{{ locale }}" href="{{ url }}">
+{{ /localized_urls }}
+
+{{# Facebook OG tags #}}
+<meta property="og:site_name" content="{{ site_name }}">
+<meta property="og:title" content="{{ facebook_title or meta_title or title }}">
+<meta property="og:description" content="{{ facebook_description or meta_description }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="{{ locale }}">
+{{ localized_urls }}
+<meta property="og:locale:alternate" content="{{ locale }}">
+{{ /localized_urls }}
+<meta property="og:url" content="{{ canonical_url or permalink }}">
+{{ if calculated_facebook_image }}
+{{ asset:calculated_facebook_image }}
+<meta property="og:image" content="{{ permalink }}">
+<meta property="og:image:width" content="{{ width }}">
+<meta property="og:image:height" content="{{ height }}">
+<meta property="og:image:alt" content="{{ alt }}">
+{{ /asset:calculated_facebook_image }}
+{{ else }}
+<meta property="og:image" content="{{ site_url ensure_right='apple-touch-icon.png' }}">
+{{ /if }}
+
+{{# Twitter card tags #}}
+{{ if twitter_title }}
+<meta name="twitter:title" content="{{ twitter:title }}">{{ /if }}
+
+{{ if twitter_description }}
+<meta name="twitter:description" content="{{ twitter_description }}">{{ /if }}
+
+<meta name="twitter:card" content="{{ twitter_card_type_page }}">
+{{ if twitter_username }}
+<meta name="twitter:site" content="{{ twitter_username ensure_left='@' }}">
+<meta name="twitter:creator" content="{{ twitter_username ensure_left='@' }}">
+{{ /if }}
+{{ if twitter_card_type === 'summary_large_image' && calculated_twitter_large_image }}
+{{ asset:calculated_twitter_large_image }}
+<meta name="twitter:image" content="{{ permalink }}">
+{{ /asset:calculated_twitter_large_image }}
+{{ elseif calculated_twitter_summary_image }}
+<meta name="twitter:image" content="{{ asset:calculated_twitter_summary_image }}{{ permalink }}{{ /asset:calculated_twitter_summary_image }}">
+<meta name="twitter:image:alt" content="{{ asset:calculated_twitter_summary_image }}{{ alt }}{{ /asset:calculated_twitter_summary_image }}">
+{{ /if }}
+
+{{# Site verification codes #}}
+{{ if google_verification_code }}<meta name="google-site-verification-code" content="{{ google_verification_code }}">{{ /if }}
+
+{{ if bing_verification_code }}<meta name="msvalidate.01" content="{{ bing_verification_code }}">{{ /if }}
+
+{{ if yandex_verification_code }}<meta name="yandex-verification" content="{{ yandex_verification_code }}">{{ /if }}
+
+{{ if baidu_verification_code }}<meta name="baidu-site-verification" content="{{ baidu_verification_code }}">{{ /if }}
+
+{{# Top level schema #}}
+<script type="application/ld+json" id="schema">
+  {
+    "@context": "http://schema.org",
+    "@type": "{{ if company_or_person === 'company' }}Organization{{ else }}Person{{ /if }}",
+    "url": "{{ site_url }}",
+    "name": "{{ if company_or_person === 'company' }}{{ company_name}}{{ else }}{{ your_name }}{{ /if }}",
+    {{ if company_or_person === 'company' && company_logo != '' }}
+    "logo": "{{ asset:company_logo }}{{ permalink }}{{ /asset:company_logo}}",
+    {{ /if }}
+    "sameAs": [
+      {{ social_links }}"{{ url}}"{{ if !last }},
+      {{ /if }}{{ /social_links }}
+    ]
+  }
+</script>
+
+{{# Breadcrumbs trail #}}
+{{ if enable_breadcrumbs && url !== '/' }}
+<script type="application/ld+json" id="breadcrumbs-ld">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {{ nav:breadcrumbs include_home="false" }}
+        {
+          "@type": "ListItem",
+          "position": {{ index }},
+          "name": "{{ title }}",
+          "item": "{{ permalink }}"
+        }{{ if !last }},{{ /if }}
+      {{ /nav:breadcrumbs }}
+    ]
+  }
+</script>
+{{ /if }}

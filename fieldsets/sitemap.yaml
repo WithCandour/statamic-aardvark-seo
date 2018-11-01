@@ -1,0 +1,29 @@
+fields:
+  enable_sitemap:
+    type: toggle
+    default: true
+    display: 'Enable Sitemap'
+  sitemap_url:
+    type: text
+    default: 'sitemap.xml'
+    display: 'Sitemap URL'
+    instructions: 'What URL should the sitemap be available on?'
+    show_when:
+      enable_sitemap: true
+  sitemap_cache_expiration:
+    type: select
+    display: Sitemap cache expiration
+    instructions: Set the amount of time before the sitemap should be regenerated
+    default: 180
+    options:
+      null: 'Forever'
+      60: '1 Hour'
+      180: '3 Hours'
+      720: '12 Hours'
+      1140: '1 Day'
+      10080: '1 Week'
+      40320: '1 Month'
+      120960: '3 Months'
+      483840: '1 Year'
+    show_when:
+      enable_sitemap: true

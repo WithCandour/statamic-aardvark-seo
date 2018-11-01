@@ -1,0 +1,78 @@
+fields:
+  titles_section:
+    type: section
+    display: Titles
+    instructions: Control how your site titles appear
+  title_separator:
+    type: select
+    display: Title separator
+    width: 33
+    instructions: Set the character that should be used for separating the site name and page name in the meta title
+    options:
+      - "|"
+      - "-"
+      - "~"
+      - "•"
+      - "/"
+      - "//"
+      - "»"
+      - "«"
+      - ">"
+      - "<"
+      - "*"
+      - "+"
+    default: "|"
+  site_name:
+    type: 'text'
+    width: 66
+    instructions: Set the name for the website
+    display: 'Website name'
+  knowledge_graph:
+    type: section
+    display: 'Knowledge Graph Data'
+  company_or_person:
+    options:
+      company: Company
+      person: Person
+    inline: true
+    type: radio
+    instructions: 'Select whether the content on this website represents a company or a person'
+    display: 'Company or Person?'
+    default: company
+  company_name:
+    type: text
+    width: 50
+    display: 'Company name'
+    show_when:
+      company_or_person: company
+  company_logo:
+    folder: seo
+    restrict: false
+    type: assets
+    width: 50
+    display: 'Company logo'
+    max_files: 1
+    show_when:
+      company_or_person: company
+  your_name:
+    type: text
+    display: 'Your name'
+    show_when:
+      company_or_person: person
+  breadcrumbs_section:
+    type: section
+    display: 'Breadcrumbs'
+    instructions: 'Enable breadcrumbs schema for pages (see [https://developers.google.com/search/docs/data-types/breadcrumb](https://developers.google.com/search/docs/data-types/breadcrumb)).'
+  enable_breadcrumbs:
+    type: toggle
+    default: true
+    display: 'Enable breadcrumbs'
+  no_index_section:
+    type: section
+    display: 'No Index'
+    instructions: 'Check to exclude the **whole site** from search engine indexing - this can also be configured on a per-page basis'
+  no_index:
+    type: toggle
+    instructions: 'Turn full site indexing on/off'
+    display: 'No Index'
+

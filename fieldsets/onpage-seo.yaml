@@ -1,0 +1,123 @@
+fields:
+  meta_section:
+    type: section
+    display: Meta Data
+    instructions: Edit the meta data for this specific page.
+  meta_title:
+    display: 'Meta Title'
+    type: text
+  meta_description:
+    type: textarea
+  canonical_url:
+    display: 'Canonical URL'
+    type: text
+  localized_urls:
+    display: Alternate URLs
+    instructions: Create a list of urls for alternate locales
+    type: grid
+    add_row: Add a new locale
+    fields:
+      locale:
+        type: text
+        width: 30
+      url:
+        display: URL
+        type: text
+  page_no_index:
+    type: toggle
+    display: 'No Index'
+    instructions: 'Toggle whether this page will get indexed by search engines'
+    width: 50
+  no_follow_links:
+    type: toggle
+    display: 'Link following'
+    instructions: 'Control whether search engines should follow links on this page'
+    width: 50
+  sitemap_priority:
+    type: select
+    display: Sitemap priority
+    instructions: Set the priorty of this page in the sitemap (1.0 being the most important)
+    default: '0.5'
+    width: 50
+    options:
+      - '0.0'
+      - '0.1'
+      - '0.2'
+      - '0.3'
+      - '0.4'
+      - '0.5'
+      - '0.6'
+      - '0.7'
+      - '0.8'
+      - '0.9'
+      - '1.0'
+  sitemap_changefreq:
+    type: select
+    display: Change frequency
+    instructions: Set how often this page will change for the sitemap
+    width: 50
+    default: 'daily'
+    options:
+      - "always"
+      - "hourly"
+      - "daily"
+      - "weekly"
+      - "monthly"
+      - "yearly"
+      - "never"
+  share_section_facebook:
+    type: section
+    display: 'Facebook sharing data'
+    instructions: 'Control how this page looks when shared on Facebook'
+  facebook_title:
+    type: text
+    display: 'Facebook title'
+  facebook_description:
+    type: textarea
+    display: 'Facebook description'
+  facebook_image:
+    type: assets
+    folder: seo
+    max_files: 1
+    display: 'Facebook share image'
+    instructions: 'Upload an image to display when this page is shared on Facebook, this image will also be inherited for Twitter if no images are uploaded below. The recommended size is 1200px x 630px'
+  share_section_twitter:
+    type: section
+    display: 'Twitter sharing data'
+    instructions: 'Control how this page looks when shared on Twitter'
+  twitter_title:
+    type: text
+    display: 'Twitter title'
+  twitter_description:
+    type: textarea
+    display: Twitter Description
+  twitter_card_type_page:
+    type: select
+    display: Twitter card type
+    instructions: Select which type of twitter card should show when this page is shared
+    width: 50
+    options:
+      summary: Summary Card
+      summary_large_image: Summary Card with Large Image
+  twitter_summary_image:
+    type: assets
+    max_files: 1
+    folder: seo
+    width: 50
+    display: Twitter summary card image
+    instructions: Upload an image to show on twitter when this page is shared. The recommended size is 240px x 240px
+    show_when:
+      twitter_card_type_page:
+        - default
+        - summary
+  twitter_summary_large_image:
+    type: assets
+    max_files: 1
+    folder: seo
+    width: 50
+    display: Twitter large summary card image
+    instructions: Upload an image to show on twitter when this page is shared. The recommended size is 876px x 438 px
+    show_when:
+      twitter_card_type_page:
+        - default
+        - summary_large_image
