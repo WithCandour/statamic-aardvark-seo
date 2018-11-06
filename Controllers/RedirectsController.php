@@ -130,6 +130,33 @@ class RedirectsController extends Controller
 
 
   /**
+   * Abstract URL transformation
+   * @param string $path The path to transform
+   * @return string The transformed url
+   */
+  private static function getRouteFromPath($path)
+  {
+    return URL::buildFromPath($path);
+  }
+
+
+  /**
+   * Top level sanitization for adding new
+   * routes to the yaml file
+   * @param string $from
+   * @param string $to
+   * @param array $data
+   * @return array
+   */
+  private static function sanitizeRoutes($from, $to, $data)
+  {
+    $data = self::removePotentialInfiniteRedirects($to, $data);
+    $data = self::removeChainingRedirects($from, $to, $data);
+    return $data;
+  }
+
+
+  /**
    * Will remove any redirects that will redirect infinitely
    * by taking out existing redirects in the $data that redirect
    * from the route you are redirecting $to
@@ -147,18 +174,28 @@ class RedirectsController extends Controller
 
 
   /**
-   * Abstract URL transformation
-   * @param string $path The path to transform
-   * @return string The transformed url
+   * Prevent chaining redirects by updating any previous
+   * redirects to point to the new target
+   * @param string $from
+   * @param string $to
+   * @param array $data
+   * @return array
    */
-  private static function getRouteFromPath($path)
+  private static function removeChainingRedirects($from, $to, $data)
   {
-    return URL::buildFromPath($path);
+    foreach($data as $existingFrom => $existingTo) {
+      if($from === $existingTo) {
+        $data[$existingFrom] = $to;
+      }
+    }
+    return $data;
   }
 
 
+
+
   /**
-   * Creates a new redirect
+   * API endpoint for creating a new redirect
    * @param string $from The source route
    * @param string $to The target url
    * @param bool $isPermenant Should the redirect be 301?... or 302?
@@ -168,7 +205,7 @@ class RedirectsController extends Controller
     $category = $isPermenant ? 'redirect' : 'vanity';
     $existingRoutes = self::readFromRoutesFile();
     $existingRoutes[$category][$from] = $to;
-    $existingRoutes[$category] = self::removePotentialInfiniteRedirects($to, $existingRoutes[$category]);
+    $existingRoutes[$category] = self::sanitizeRoutes($from, $to, $existingRoutes[$category]);
     return self::writeToRoutesFile($existingRoutes);
   }
 
