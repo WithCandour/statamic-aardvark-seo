@@ -88,7 +88,8 @@ class SitemapController extends Controller
 
 
   /**
-   *
+   * Return a http response containing the xsl content for the sitemap
+   * @return
    */
   public function getSitemapStyles()
   {
@@ -145,14 +146,14 @@ class SitemapController extends Controller
    */
   public static function clearCacheBasedOnDataObject($content)
   {
-    switch(true) {
-      case ($content instanceof Page):
+    switch($content->contentType()) {
+      case ('page'):
         $handle = 'pages';
         break;
-      case ($content instanceof Entry):
+      case ('entry'):
         $handle = $content->collectionName();
         break;
-      case ($content instanceof Term):
+      case ('term'):
         $handle = $content->taxonomyName();
         break;
       default:

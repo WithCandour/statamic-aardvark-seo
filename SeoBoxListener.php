@@ -10,6 +10,7 @@ use Stataimc\Events\Event;
 use Stataimc\Events\RoutesMapping;
 
 use Statamic\Addons\SeoBox\Controllers\SeoBoxController;
+use Statamic\Addons\SeoBox\Controllers\RedirectsController;
 use Statamic\Addons\SeoBox\Controllers\SitemapController;
 use Statamic\Addons\SeoBox\Traits\TransformsAssetsFieldtypes;
 use Statamic\Addons\SeoBox\Traits\PopulatesDefaultFields;
@@ -30,7 +31,11 @@ class SeoBoxListener extends Listener
     'Statamic\Events\Data\PublishFieldsetFound' => 'appendOnPageSeoFields',
     'Statamic\Events\RoutesMapping' => 'addSitemapRoutes',
     'Statamic\Events\Data\PageMoved' => 'clearPageSitemapCaches',
-    'Statamic\Events\Data\ContentSaved' => 'clearSitemapCaches'
+    'Statamic\Events\Data\ContentSaved' => 'clearSitemapCaches',
+    'Statamic\Events\Data\PageMoved' => 'handlePageMovedRedirect',
+    'Statamic\Events\Data\PageSaved' => 'handlePageSavedRedirect',
+    'Statamic\Events\Data\EntrySaved' => 'handleDataSavedRedirect',
+    'Statamic\Events\Data\TermSaved' => 'handleDataSavedRedirect'
   ];
 
   /**
@@ -89,6 +94,9 @@ class SeoBoxListener extends Listener
 
   }
 
+
+
+
   /**
    * Add the dynamic route for the sitemap and point it to
    * the controller method
@@ -112,6 +120,7 @@ class SeoBoxListener extends Listener
       $event->router->get('seo-sitemap.xsl', 'Statamic\Addons\SeoBox\Controllers\SitemapController@getSitemapStyles');
     }
   }
+
 
   /**
    * Clear the sitemap caches when content is saved
@@ -139,4 +148,23 @@ class SeoBoxListener extends Listener
   {
     return SitemapController::clearCacheByHandle($handle);
   }
+
+
+  public function handlePageMovedRedirect($event)
+  {
+    return RedirectsController::createRedirectFromPageMoved($event);
+  }
+
+
+  public function handlePageSavedRedirect($event)
+  {
+    return RedirectsController::createRedirectFromPageSaved($event);
+  }
+
+
+  public function handleDataSavedRedirect($event)
+  {
+    return RedirectsController::createRedirectFromDataSaved($event);
+  }
+
 }
