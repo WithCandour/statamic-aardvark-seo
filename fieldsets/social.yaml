@@ -10,11 +10,11 @@ sections:
         add_row: Add a new social icon
         fields:
           social_icon:
-            type: font_awesome
+            max_items: 1
+            type: suggest
+            mode: SeoBox.SocialIcon
             width: 33
             display: 'Social Icon'
-            category_filter:
-              - 'Brand Icons'
           url:
             type: text
             width: 66
