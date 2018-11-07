@@ -32,14 +32,17 @@ class RedirectsController extends Controller
   {
     $fieldset = $this->createAddonFieldset('redirects');
 
-    $data = $this->preProcessWithBlankFields(
+    $data = $this->storage->getYAML(self::STORAGE_KEY);
+    $data['redirects'] = $this->extractGridDataFromFile();
+
+    $processedData = $this->preProcessWithBlankFields(
         $fieldset,
-        $this->extractGridDataFromFile()
+        $data
     );
 
     return $this->view('cp', [
       'id' => null,
-      'data' => $data,
+      'data' => $processedData,
       'title' => 'Redirection',
       'fieldset'=> $fieldset->toPublishArray(),
       'submitUrl' => route('seo-box.update-redirects')
@@ -105,7 +108,7 @@ class RedirectsController extends Controller
       $data[] = ['source' => $from, 'target' => $to, 'status_code' => '302'];
     }
 
-    return ['redirects' => $data];
+    return $data;
   }
 
   /**

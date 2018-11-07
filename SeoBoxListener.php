@@ -146,12 +146,24 @@ class SeoBoxListener extends Listener
   }
 
   /**
+   * Check whether the site admin has opted-in for automatic redirects
+   * @return bool
+   */
+  private function autoRedirectsEnabled()
+  {
+    $requiredAttr = 'create_auto_redirects';
+    $storage = $this->storage->getYAML(RedirectsController::STORAGE_KEY);
+    $isEnabled = collect($storage)->get($requiredAttr);
+    return $isEnabled;
+  }
+
+  /**
    * Handler for PageMoved events
    * @param Statamic\Events\Data\PageMoved $event
    */
   public function handlePageMovedRedirect($event)
   {
-    return RedirectsController::createRedirectFromPageMoved($event);
+    return $this->autoRedirectsEnabled() ? RedirectsController::createRedirectFromPageMoved($event) : null;
   }
 
   /**
@@ -160,7 +172,7 @@ class SeoBoxListener extends Listener
    */
   public function handlePageSavedRedirect($event)
   {
-    return RedirectsController::createRedirectFromPageSaved($event);
+    return $this->autoRedirectsEnabled() ? RedirectsController::createRedirectFromPageSaved($event) : null;
   }
 
   /**
@@ -169,7 +181,7 @@ class SeoBoxListener extends Listener
    */
   public function handleDataSavedRedirect($event)
   {
-    return RedirectsController::createRedirectFromDataSaved($event);
+    return $this->autoRedirectsEnabled() ? RedirectsController::createRedirectFromDataSaved($event) : null;
   }
 
 }
