@@ -38,8 +38,8 @@ class SocialIconSuggestMode extends AbstractMode
       ['value' => 'spotify', 'text' => 'Spotify'],
       ['value' => 'twitch', 'text' => 'Twitch'],
       ['value' => 'twitter', 'text' => 'Twitter'],
-      ['value' => 'tumblr', 'text' => 'Tubmlr'],
-      ['value' => 'whatsapp', 'text' => 'Whatsapp'],
+      ['value' => 'tumblr', 'text' => 'Tumblr'],
+      ['value' => 'whatsapp', 'text' => 'WhatsApp'],
       ['value' => 'yelp', 'text' => 'Yelp'],
       ['value' => 'youtube', 'text' => 'YouTube']
     ];
