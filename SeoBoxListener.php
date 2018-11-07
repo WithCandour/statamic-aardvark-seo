@@ -52,7 +52,7 @@ class SeoBoxListener extends Listener
       $item->add(Nav::item('General')->route('seo-box.general'));
       $item->add(Nav::item('Marketing')->route('seo-box.marketing'));
       $item->add(Nav::item('Social')->route('seo-box.social'));
-      $item->add(Nav::item('Redirects')->route('seo-box.redirects'));
+      $item->add(Nav::item('Redirects')->route('seo-box.redirects')->badge('BETA'));
       $item->add(Nav::item('Sitemap')->route('seo-box.sitemap'));
     });
 
