@@ -24,6 +24,7 @@ class RedirectsController extends Controller
 
   const ROUTES_FILE = 'site/settings/routes.yaml';
 
+
   /**
    * Return the control panel redirects grid
    */
@@ -128,7 +129,6 @@ class RedirectsController extends Controller
     return File::put(self::ROUTES_FILE, $yaml);
   }
 
-
   /**
    * Abstract URL transformation
    * @param string $path The path to transform
@@ -138,7 +138,6 @@ class RedirectsController extends Controller
   {
     return URL::buildFromPath($path);
   }
-
 
   /**
    * Top level sanitization for adding new
@@ -155,7 +154,6 @@ class RedirectsController extends Controller
     return $data;
   }
 
-
   /**
    * Will remove any redirects that will redirect infinitely
    * by taking out existing redirects in the $data that redirect
@@ -171,7 +169,6 @@ class RedirectsController extends Controller
     }
     return $data;
   }
-
 
   /**
    * Prevent chaining redirects by updating any previous
@@ -191,9 +188,6 @@ class RedirectsController extends Controller
     return $data;
   }
 
-
-
-
   /**
    * API endpoint for creating a new redirect
    * @param string $from The source route
@@ -209,7 +203,6 @@ class RedirectsController extends Controller
     return self::writeToRoutesFile($existingRoutes);
   }
 
-
   /**
    * Create a redirect when a page object is 'moved' in the sitetree
    * @param Statamic\Events\Data\PageMoved
@@ -223,7 +216,6 @@ class RedirectsController extends Controller
     return self::create_redirect($oldPath, $newPath);
   }
 
-
   /**
    * Create a redirect when a page is saved (check for the slug change)
    * @param Statamic\Events\Data\PageSaved
@@ -236,7 +228,6 @@ class RedirectsController extends Controller
     $newPath = self::getRouteFromPath($event->data->path());
     return self::create_redirect($oldPath, $newPath);
   }
-
 
   /**
    * Extract the new/old routes from a data saved event
@@ -263,7 +254,6 @@ class RedirectsController extends Controller
       'old' => $oldRoute
     ];
   }
-
 
   /**
    * Create a redirect when a collection entry is saved

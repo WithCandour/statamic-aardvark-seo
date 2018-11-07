@@ -86,7 +86,6 @@ class SitemapController extends Controller
     return response($view)->header('Content-Type', 'text/xml');
   }
 
-
   /**
    * Return a http response containing the xsl content for the sitemap
    * @return
@@ -98,7 +97,6 @@ class SitemapController extends Controller
     return response($contents)->header('Content-Type', 'text/xsl');
   }
 
-
   /**
    * Return the storage data for the sitemap module
    * @return Illuminate\Support\Collection
@@ -107,7 +105,6 @@ class SitemapController extends Controller
   {
     return collect($this->storage->getYAML(self::STORAGE_KEY));
   }
-
 
   /**
    * Return the user-set value for the sitemap cache expiration
@@ -118,7 +115,6 @@ class SitemapController extends Controller
     return $this->getStore()->get('sitemap_cache_expiration');
   }
 
-
   /**
    * Clear the sitemap index cache - this should be
    * called in parallel to clearing any of the 'sub-sitemaps'
@@ -127,7 +123,6 @@ class SitemapController extends Controller
   {
     return Cache::forget('sitemap.index');
   }
-
 
   /**
    * Clear an individual cached sitemap
@@ -138,7 +133,6 @@ class SitemapController extends Controller
     self::clearIndexCache();
     return Cache::forget("sitemap.{$handle}");
   }
-
 
   /**
    * Clear extract the data from an object and clear it's sitemap cache

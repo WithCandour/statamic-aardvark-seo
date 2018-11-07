@@ -9,6 +9,7 @@ use Statamic\Data\Taxonomies\Term;
 
 trait GeneratesDataUris {
 
+
   /**
    * Generate a term uri for a specific taxonomy based on the slug
    * @param string $slug

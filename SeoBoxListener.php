@@ -94,9 +94,6 @@ class SeoBoxListener extends Listener
 
   }
 
-
-
-
   /**
    * Add the dynamic route for the sitemap and point it to
    * the controller method
@@ -120,7 +117,6 @@ class SeoBoxListener extends Listener
       $event->router->get('seo-sitemap.xsl', 'Statamic\Addons\SeoBox\Controllers\SitemapController@getSitemapStyles');
     }
   }
-
 
   /**
    * Clear the sitemap caches when content is saved
@@ -149,19 +145,28 @@ class SeoBoxListener extends Listener
     return SitemapController::clearCacheByHandle($handle);
   }
 
-
+  /**
+   * Handler for PageMoved events
+   * @param Statamic\Events\Data\PageMoved $event
+   */
   public function handlePageMovedRedirect($event)
   {
     return RedirectsController::createRedirectFromPageMoved($event);
   }
 
-
+  /**
+   * Handler for PageSaved events
+   * @param Statamic\Events\Data\PageSaved
+   */
   public function handlePageSavedRedirect($event)
   {
     return RedirectsController::createRedirectFromPageSaved($event);
   }
 
-
+  /**
+   * Handle events emitted when Entries or Terms are saved
+   * @param Statamic\Events\Data\ContentSaved
+   */
   public function handleDataSavedRedirect($event)
   {
     return RedirectsController::createRedirectFromDataSaved($event);

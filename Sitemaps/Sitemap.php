@@ -84,7 +84,6 @@ class Sitemap
     return $items->first()['lastmod'];
   }
 
-
   /**
    * Generate a list of all possible sitemaps
    * @return array
@@ -114,7 +113,6 @@ class Sitemap
 
     return $sitemap_objects->all();
   }
-
 
   /**
    * Get a list of sitemaps matching a specific handle
