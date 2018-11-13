@@ -78,7 +78,7 @@ class RedirectsController extends Controller
    * @param array $data Output from the grid
    * @return array
    */
-  private function collectRoutesFromData($data)
+  public function collectRoutesFromData($data)
   {
     $routes = ['redirect' => [], 'vanity' => []];
     foreach($data as $key => $redirect) {
@@ -165,7 +165,7 @@ class RedirectsController extends Controller
    * @param array $data
    * @return array
    */
-  private static function removePotentialInfiniteRedirects($to, $data)
+  public static function removePotentialInfiniteRedirects($to, $data)
   {
     if(\array_key_exists($to, $data)) {
       unset($data[$to]);
@@ -181,7 +181,7 @@ class RedirectsController extends Controller
    * @param array $data
    * @return array
    */
-  private static function removeChainingRedirects($from, $to, $data)
+  public static function removeChainingRedirects($from, $to, $data)
   {
     foreach($data as $existingFrom => $existingTo) {
       if($from === $existingTo) {

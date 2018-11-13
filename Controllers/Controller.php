@@ -20,7 +20,7 @@ class Controller extends StatamicController
    * @param $name The fieldset name
    * @return Fieldset
    */
-  protected function createAddonFieldset($name)
+  public function createAddonFieldset($name)
   {
     $contents = File::get($this->getDirectory() . "/fieldsets/{$name}.yaml");
     $yaml = Yaml::parse($contents);

@@ -66,12 +66,14 @@ class Sitemap
 
   /**
    * Automatically generates some meta data about this sitemap
+   * @return string
    */
-  protected function generateSitemapURL()
+  public function generateSitemapURL()
   {
     $handle = $this->handle ?: 'pages';
     $this->route = sprintf('%s_%s.xml', self::FILENAME_PREFIX, $handle);
     $this->url = Config::getSiteUrl() . $this->route;
+    return $this->url;
   }
 
   /**
