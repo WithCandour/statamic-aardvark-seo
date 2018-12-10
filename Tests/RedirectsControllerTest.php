@@ -27,7 +27,7 @@ class RedirectsControllerTest extends TestCase
    */
   public function routes_filepath_is_correctly_set()
   {
-    return $this->assertEquals(RedirectsController::ROUTES_FILE, 'site/settings/routes.yaml');
+    return $this->assertEquals(RedirectsController::ROUTES_FILE, 'routes.yaml');
   }
 
   /**

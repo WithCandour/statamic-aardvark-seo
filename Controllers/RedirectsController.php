@@ -22,7 +22,7 @@ class RedirectsController extends Controller
 
   const STORAGE_KEY = 'seo-redirects';
 
-  const ROUTES_FILE = 'site/settings/routes.yaml';
+  const ROUTES_FILE = 'routes.yaml';
 
 
   /**
@@ -117,7 +117,7 @@ class RedirectsController extends Controller
    */
   private static function readFromRoutesFile()
   {
-    $redirectsFile = File::get(self::ROUTES_FILE);
+    $redirectsFile = File::get(settings_path(self::ROUTES_FILE));
     return YAML::parse($redirectsFile);
   }
 
@@ -129,7 +129,7 @@ class RedirectsController extends Controller
   private static function writeToRoutesFile($data)
   {
     $yaml = YAML::dump($data);
-    return File::put(self::ROUTES_FILE, $yaml);
+    return File::put(settings_path(self::ROUTES_FILE), $yaml);
   }
 
   /**
