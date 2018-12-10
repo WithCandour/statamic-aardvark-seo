@@ -28,6 +28,7 @@ class SeoBoxListener extends Listener
 
   public $events = [
     'cp.nav.created' => 'addSeoNavItems',
+    'cp.add_to_head' => "injectSEOBoxStyles",
     'Statamic\Events\Data\PublishFieldsetFound' => 'appendOnPageSeoFields',
     'Statamic\Events\RoutesMapping' => 'addSitemapRoutes',
     'Statamic\Events\Data\PageMoved' => 'clearPageSitemapCaches',
@@ -92,6 +93,18 @@ class SeoBoxListener extends Listener
 
     $fieldset->contents($fieldsetContents);
 
+  }
+
+  /**
+   * Inject the SeoBox stylesheet
+   *
+   * @return void
+   */
+  public function injectSEOBoxStyles()
+  {
+    $stylesheet = $this->css->url('seo-box.css');
+    $tag = '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '">';
+    return $tag;
   }
 
   /**

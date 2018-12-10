@@ -5,9 +5,9 @@ fields:
     instructions: Edit the meta data for this specific page.
   meta_title:
     display: 'Meta Title'
-    type: text
+    type: seo_box.valid_meta_title
   meta_description:
-    type: textarea
+    type: seo_box.valid_meta_description
   canonical_url:
     display: 'Canonical URL'
     type: text
