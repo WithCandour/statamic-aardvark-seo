@@ -20,9 +20,11 @@ fields:
       locale:
         type: text
         width: 30
+        placeholder: 'fr-fr'
       url:
         display: URL
         type: text
+        placeholder: 'mysite.com/fr/'
   page_no_index:
     type: toggle
     display: 'No Index'
