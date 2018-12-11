@@ -3,6 +3,7 @@
 namespace Statamic\Addons\SeoBox\Controllers;
 
 use Illuminate\Http\Request;
+use Statamic\API\Page;
 use Statamic\API\Fieldset;
 use Statamic\API\File;
 use Statamic\API\YAML;
@@ -229,7 +230,30 @@ class RedirectsController extends Controller
     if($event->data->path() === $event->original['attributes']['path']) return;
     $oldPath = self::getRouteFromPath($event->original['attributes']['path']);
     $newPath = self::getRouteFromPath($event->data->path());
-    return self::create_redirect($oldPath, $newPath);
+    self::create_redirect($oldPath, $newPath);
+    self::redirectChildPages($event->data->id(), $oldPath, $newPath);
+  }
+
+  /**
+   * Redirect children and all further child pages
+   *
+   * @param string $id
+   * @param string $oldPath
+   * @param string $newPath
+   * @return null
+   */
+  public static function redirectChildPages($id, $oldPath, $newPath)
+  {
+    $page = Page::find($id);
+    $childPages = $page->children(1);
+    if(!empty($childPages) && $childPages->count() > 0) {
+      $childPages->each(function($childPage) use($oldPath, $newPath) {
+        $oldChildPath = \sprintf('%s/%s', $oldPath, $childPage->slug());
+        $newChildPath = \sprintf('%s/%s', $newPath, $childPage->slug());
+        self::create_redirect($oldChildPath, $newChildPath);
+        self::redirectChildPages($childPage->id(), $oldChildPath, $newChildPath);
+      });
+    }
   }
 
   /**
