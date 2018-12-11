@@ -43,7 +43,7 @@ class SeoBoxListener extends Listener
    * Add our SEO 'globals' to the left nav
    *
    * @param Statamic\CP\Navigation\Nav $nav The navigation object
-   * @return null;
+   * @return void;
    */
   public function addSeoNavItems($nav) {
 
@@ -65,7 +65,7 @@ class SeoBoxListener extends Listener
    * Append SEO fields to pages, entries and taxonomies
    *
    * @param Stataimc\Events\Event $event The event that fired
-   * @return null
+   * @return void
    */
   public function appendOnPageSeoFields($event)
   {
@@ -112,7 +112,7 @@ class SeoBoxListener extends Listener
    * the controller method
    *
    * @param Stataimc\Events\RoutesMapping $event The event that fired
-   * @return null
+   * @return void
    */
   public function addSitemapRoutes($event)
   {

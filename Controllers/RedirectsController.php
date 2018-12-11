@@ -63,7 +63,7 @@ class RedirectsController extends Controller
   /**
    * Write the routes generated in the CP to the routes.yaml file
    * @param Illuminate\Http\Request $request
-   * @return null
+   * @return void
    */
   public function updateSiteRoutesFromCP($request)
   {
@@ -125,7 +125,7 @@ class RedirectsController extends Controller
   /**
    * Write an array of processed data to the site's `routes.yaml` file
    * @param array $data The data to be written
-   * @return null
+   * @return void
    */
   private static function writeToRoutesFile($data)
   {
@@ -210,7 +210,7 @@ class RedirectsController extends Controller
   /**
    * Create a redirect when a page object is 'moved' in the sitetree
    * @param Statamic\Events\Data\PageMoved
-   * @return null
+   * @return void
    */
   public static function createRedirectFromPageMoved($event)
   {
@@ -223,7 +223,7 @@ class RedirectsController extends Controller
   /**
    * Create a redirect when a page is saved (check for the slug change)
    * @param Statamic\Events\Data\PageSaved
-   * @return null
+   * @return void
    */
   public static function createRedirectFromPageSaved($event)
   {
@@ -240,7 +240,7 @@ class RedirectsController extends Controller
    * @param string $id
    * @param string $oldPath
    * @param string $newPath
-   * @return null
+   * @return void
    */
   public static function redirectChildPages($id, $oldPath, $newPath)
   {
@@ -285,7 +285,7 @@ class RedirectsController extends Controller
   /**
    * Create a redirect when a collection entry is saved
    * @param Statamic\Events\Data\EntrySaved
-   * @return null
+   * @return void
    */
   public static function createRedirectFromDataSaved($event)
   {
