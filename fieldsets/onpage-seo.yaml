@@ -4,10 +4,15 @@ fields:
     display: Meta Data
     instructions: Edit the meta data for this specific page.
   meta_title:
-    display: 'Meta Title'
     type: seo_box.valid_meta_title
   meta_description:
     type: seo_box.valid_meta_description
+  meta_preview:
+    display: Google search preview
+    type: seo_box.meta_preview
+  urls_section:
+    type: section
+    display: URL Options
   canonical_url:
     display: 'Canonical URL'
     type: text
@@ -25,6 +30,9 @@ fields:
         display: URL
         type: text
         placeholder: 'mysite.com/fr/'
+  indexing_section:
+    type: section
+    display: Indexing and Sitemaps
   page_no_index:
     type: toggle
     display: 'No Index'

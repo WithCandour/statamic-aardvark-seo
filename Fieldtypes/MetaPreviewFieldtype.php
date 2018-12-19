@@ -4,9 +4,7 @@ namespace Statamic\Addons\SeoBox\Fieldtypes;
 
 use Statamic\Extend\Fieldtype;
 
-class ValidMetaDescriptionFieldtype extends Fieldtype
+class MetaPreviewFieldtype extends Fieldtype
 {
-
   public $selectable = false;
-
 }

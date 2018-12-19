@@ -77,3 +77,29 @@
   margin-top: 5px;
   font-size: 11px;
 }
+
+.google-styles {
+  margin-top: 10px;
+  border-radius: 4px;
+  padding: 10px 15px;
+}
+
+.google-styles__title {
+  color: #1A0DAB;
+}
+
+.google-styles__title:hover {
+  text-decoration: underline;
+  color: #1A0DAB;
+}
+
+.google-styles__link {
+  display: block;
+  color: #006621;
+  font-size: 13px;
+}
+
+.google-styles__description {
+  font-size: 13px;
+  color: #545454;
+}

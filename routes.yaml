@@ -26,3 +26,6 @@ routes:
   post@updateSitemap:
     uses: SitemapController@cpUpdate
     as: seo-box.update-sitemap
+  seo-box-json:
+    uses: SeoBoxJsonController@index
+    as: seo-box.seo-box-json

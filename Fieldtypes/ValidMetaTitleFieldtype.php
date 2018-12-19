@@ -6,7 +6,5 @@ use Statamic\Extend\Fieldtype;
 
 class ValidMetaTitleFieldtype extends Fieldtype
 {
-
-  public $category = [ 'special' ];
-
+  public $selectable = false;
 }

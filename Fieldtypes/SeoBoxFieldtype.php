@@ -7,6 +7,6 @@ use Statamic\Extend\Fieldtype;
 class SeoBoxFieldtype extends Fieldtype
 {
 
-  public $category = [ 'special' ];
+  public $selectable = false;
 
 }
