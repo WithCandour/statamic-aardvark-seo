@@ -58,7 +58,7 @@ Vue.component("seo_box-valid_meta_title-fieldtype", {
         <input v-on:keyup="handleKeyUp" :type="mode" class="form-control" v-model="data" tabindex="0" :autofocus="autofocus" :placeholder="_generateDefaultTitle()" />
         <progress max="70" :value="contentLength" :class="'meta_text_validator--progress meta_text_validator--progress--' + validation.step"></progress>
       </div>
-      <span class="meta_text_validator--caption">{{ validation.caption }}</span>
+      <span class="meta_text_validator--caption" v-html="validation.caption"></span>
     </div>
   `,
 
@@ -122,7 +122,7 @@ Vue.component("seo_box-valid_meta_description-fieldtype", {
         <textarea v-on:keyup="handleKeyUp" class="form-control" v-model="data" v-el:textarea v-elastic :placeholder="placeholder"></textarea>
         <progress max="300" :value="contentLength" :class="'meta_text_validator--progress meta_text_validator--progress--' + validation.step"></progress>
       </div>
-      <span class="meta_text_validator--caption">{{ validation.caption}} </span>
+      <span class="meta_text_validator--caption" v-html="validation.caption"></span>
     </div>
   `,
 
@@ -192,7 +192,7 @@ Vue.component("seo_box-meta_preview-fieldtype", {
   },
 
   template: `
-    <div class="google-styles meta-preview__preview w-3/4 z-depth-1">
+    <div class="google-styles meta-preview__preview z-depth-1">
         <div v-if="loading">
           <div class="loading loading-basic">
             <span class="icon icon-circular-graph animation-spin"></span> {{ translate('cp.loading') }}
@@ -202,6 +202,73 @@ Vue.component("seo_box-meta_preview-fieldtype", {
           <a class="google-styles__title">{{ metaTitle }}</a>
           <span class="google-styles__link">{{ url }}</span>
           <p class="google-styles__description">{{ metaDescription }}</p>
+        </div>
+    </div>
+  `
+});
+
+/**
+ * Toggle box that will show an alert when being turned on
+ */
+Vue.component("seo_box-toggle_index-fieldtype", {
+  mixins: [Fieldtype],
+
+  data() {
+    return {
+      autoBindChangeWatcher: false
+    };
+  },
+
+  computed: {
+    isOn: function() {
+      let match = true;
+      if (this.config && this.config.reverse) {
+        match = false;
+      }
+
+      return this.data === match;
+    }
+  },
+
+  methods: {
+    toggle: function() {
+      // Show an alert when the option is turned on
+      if (!this.data) {
+        const self = this;
+        swal({
+          type: 'warning',
+          title: translate('cp.are_you_sure'),
+          text: `Turning this option on will prevent ${this.config.is_site ? 'the whole website' : 'this page'} from getting indexed by search engines, meaning it won\'t show in the results for relevant search terms`,
+          confirmButtonText: translate('cp.yes_im_sure'),
+          cancelButtonText: translate('cp.cancel'),
+          showCancelButton: true
+        }, function () {
+          self.data = !self.data;
+        });
+      } else {
+        this.data = !this.data;
+      }
+    },
+    focus: function() {
+      this.$els.knob.focus();
+    }
+  },
+
+  ready: function() {
+    if (this.data == null) {
+      const config = this.config || {};
+      this.data = config.default || false;
+    }
+
+    this.bindChangeWatcher();
+  },
+
+  template: `
+    <div class="toggle-fieldtype-wrapper">
+        <div class="toggle-container" :class="{ 'on': isOn }" @click="toggle">
+            <div class="toggle-slider">
+                <div class="toggle-knob" tabindex="0" @keyup.prevent.space.enter="toggle" v-el:knob tabindex="0"></div>
+            </div>
         </div>
     </div>
   `

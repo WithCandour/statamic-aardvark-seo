@@ -72,7 +72,8 @@ fields:
     display: 'No Index'
     instructions: 'Check to exclude the **whole site** from search engine indexing - this can also be configured on a per-page basis'
   no_index:
-    type: toggle
-    instructions: 'Turn full site indexing on/off'
+    type: seo_box.toggle_index
+    is_site: true
+    instructions: 'Turn full site indexing off'
     display: 'No Index'
 

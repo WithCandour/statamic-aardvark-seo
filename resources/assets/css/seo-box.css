@@ -78,6 +78,15 @@
   font-size: 11px;
 }
 
+.seo_box\.meta_preview-fieldtype {
+  padding-top: 0;
+}
+
+.meta-preview__preview {
+  width: 100%;
+  max-width: 600px;
+}
+
 .google-styles {
   margin-top: 10px;
   border-radius: 4px;

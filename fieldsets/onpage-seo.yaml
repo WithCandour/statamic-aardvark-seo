@@ -34,9 +34,9 @@ fields:
     type: section
     display: Indexing and Sitemaps
   page_no_index:
-    type: toggle
+    type: seo_box.toggle_index
     display: 'No Index'
-    instructions: 'Toggle whether this page will get indexed by search engines'
+    instructions: 'Set to on to prevent this page from being indexed by search engines'
     width: 50
   no_follow_links:
     type: toggle
