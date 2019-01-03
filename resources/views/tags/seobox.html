@@ -31,9 +31,6 @@
 <meta property="og:description" content="{{ facebook_description or meta_description }}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="{{ locale }}">
-{{ localized_urls }}
-<meta property="og:locale:alternate" content="{{ locale }}">
-{{ /localized_urls }}
 <meta property="og:url" content="{{ canonical_url or permalink }}">
 {{ if calculated_facebook_image }}
 {{ asset:calculated_facebook_image }}
