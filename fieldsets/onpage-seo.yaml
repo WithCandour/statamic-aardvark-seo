@@ -131,3 +131,21 @@ fields:
       twitter_card_type_page:
         - default
         - summary_large_image
+  scripts_section:
+    type: section
+    display: Custom Scripts
+    instructions: Place any custom scripts in the following boxes to add them to this page or entry
+  head_snippets:
+    type: textarea
+    width: 50
+    display: Head snippets
+    instructions: Custom snippets to get placed in the head, remember to wrap your scripts with `<script>` tags
+  footer_snippets:
+    type: textarea
+    width: 50
+    display: Footer snippets
+    instructions: Custom snippets to get placed in the footer, remember to wrap your scripts with `<script>` tags
+  schema_objects:
+    type: textarea
+    display: JSON-LD Schema
+    instructions: Paste your custom schema objects here (Recipe, Event etc...)

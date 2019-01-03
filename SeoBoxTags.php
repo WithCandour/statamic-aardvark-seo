@@ -32,6 +32,16 @@ class SeoBoxTags extends Tags
   }
 
   /**
+   * Return the footer scripts template string
+   * @return string
+   */
+  public function footer()
+  {
+    $template_file = $this->getTemplateFile('seobox-footer');
+    return Parse::template($template_file, $this->getData());
+  }
+
+  /**
    * Return a template file from this addon
    * @param string $name The name of the html view file
    * @return Statamic\API\File

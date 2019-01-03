@@ -112,7 +112,7 @@ Vue.component("seo_box-valid_meta_description-fieldtype", {
   data: function() {
     return {
       placeholder:
-        "No meta description has been set for this page, search engines will use a relevent body of text from the page instead."
+        "No meta description has been set for this page, search engines will use a relevent body of text from the page content instead."
     };
   },
 
