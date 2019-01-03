@@ -1,9 +1,11 @@
 {!! $xmlDefinition !!}{!! $xslLink !!}
 <sitemapindex>
 @foreach( $sitemaps as $sitemap )
-<sitemap>
-  <loc>{{ $sitemap->url }}</loc>
-  <lastmod>{{ $sitemap->getLastMod() }}</lastmod>
-</sitemap>
+  @if( count($sitemap->getSitemapItems()) >= 1 )
+    <sitemap>
+      <loc>{{ $sitemap->url }}</loc>
+      <lastmod>{{ $sitemap->getLastMod() }}</lastmod>
+    </sitemap>
+  @endif
 @endforeach
 </sitemapindex>
