@@ -83,12 +83,10 @@
     {{ if company_or_person === 'company' && company_logo != '' }}
     "logo": "{{ asset:company_logo }}{{ permalink }}{{ /asset:company_logo}}",
     {{ /if }}
-    {{ if social_links }}
     "sameAs": [
       {{ social_links }}"{{ url}}"{{ if !last }},
       {{ /if }}{{ /social_links }}
     ]
-    {{ /if }}
   }
 </script>
 
@@ -110,6 +108,10 @@
     ]
   }
 </script>
+{{ /if }}
+
+{{ if schema_objects }}
+  {{ schema_objects }}
 {{ /if }}
 
 {{# Custom page scripts #}}

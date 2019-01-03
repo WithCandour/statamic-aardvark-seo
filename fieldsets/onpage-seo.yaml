@@ -148,4 +148,5 @@ fields:
   schema_objects:
     type: textarea
     display: JSON-LD Schema
-    instructions: Paste your custom schema objects here (Recipe, Event etc...)
+    instructions: Paste your custom schema objects here (Recipe, Event etc...) - objects will need to be wrapped in `<script type="application/ld+json">` tags
+    rows: 10
