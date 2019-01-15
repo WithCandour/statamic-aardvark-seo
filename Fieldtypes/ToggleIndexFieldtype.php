@@ -6,17 +6,15 @@ use Statamic\Extend\Fieldtype;
 
 class ToggleIndexFieldtype extends Fieldtype
 {
+    public $selectable = false;
 
-  public $selectable = false;
+    public function process($data)
+    {
+        return (bool) $data;
+    }
 
-  public function process($data)
-  {
-      return (bool) $data;
-  }
-
-  public function canHaveDefault()
-  {
-      return true;
-  }
-
+    public function canHaveDefault()
+    {
+        return true;
+    }
 }

@@ -6,7 +6,5 @@ use Statamic\Extend\Fieldtype;
 
 class ValidMetaDescriptionFieldtype extends Fieldtype
 {
-
-  public $selectable = false;
-
+    public $selectable = false;
 }

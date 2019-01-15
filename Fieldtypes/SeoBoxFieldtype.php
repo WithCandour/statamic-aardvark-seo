@@ -6,7 +6,5 @@ use Statamic\Extend\Fieldtype;
 
 class SeoBoxFieldtype extends Fieldtype
 {
-
-  public $selectable = false;
-
+    public $selectable = false;
 }
