@@ -96,4 +96,5 @@ return PhpCsFixer\Config::create()
       ->notName('*.xml')
       ->notName('*.yml')
       ->notName('*.yaml')
+      ->in(__DIR__)
   );
