@@ -1,22 +1,22 @@
 <?php
 
-namespace Statamic\Addons\SeoBox;
+namespace Statamic\Addons\AardvarkSeo;
 
-use Statamic\Addons\SeoBox\Controllers\SeoBoxController;
+use Statamic\Addons\AardvarkSeo\Controllers\AardvarkSeoController;
 use Statamic\API\File;
 use Statamic\API\Parse;
 use Statamic\Extend\Tags;
 
-class SeoBoxTags extends Tags
+class AardvarkSeoTags extends Tags
 {
     /**
      * Return the meta template string.
      *
      * @return string
      */
-    public function index()
+    public function head()
     {
-        $template_file = $this->getTemplateFile('seobox');
+        $template_file = $this->getTemplateFile('aardvark-seo-head');
         return Parse::template($template_file, $this->getData());
     }
 
@@ -27,7 +27,7 @@ class SeoBoxTags extends Tags
      */
     public function body()
     {
-        $template_file = $this->getTemplateFile('seobox-body');
+        $template_file = $this->getTemplateFile('aardvark-seo-body');
         return Parse::template($template_file, $this->getData());
     }
 
@@ -38,7 +38,7 @@ class SeoBoxTags extends Tags
      */
     public function footer()
     {
-        $template_file = $this->getTemplateFile('seobox-footer');
+        $template_file = $this->getTemplateFile('aardvark-seo-footer');
         return Parse::template($template_file, $this->getData());
     }
 
@@ -61,7 +61,7 @@ class SeoBoxTags extends Tags
      */
     private function getData()
     {
-        $combinedData = array_merge($this->storage->getYAML(SeoBoxController::STORAGE_KEY), $this->context);
+        $combinedData = array_merge($this->storage->getYAML(AardvarkSeoController::STORAGE_KEY), $this->context);
         $this->rawData = collect($combinedData);
         return $this->parseData()->all();
     }

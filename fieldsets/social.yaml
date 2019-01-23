@@ -12,7 +12,7 @@ sections:
           social_icon:
             max_items: 1
             type: suggest
-            mode: SeoBox.SocialIcon
+            mode: AardvarkSeo.SocialIcon
             width: 33
             display: 'Social Icon'
           url:

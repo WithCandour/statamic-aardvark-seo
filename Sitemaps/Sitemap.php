@@ -1,6 +1,6 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Sitemaps;
+namespace Statamic\Addons\AardvarkSeo\Sitemaps;
 
 use Statamic\API\Collection;
 use Statamic\API\Config;
@@ -121,7 +121,7 @@ class Sitemap
      *
      * @param string $handle
      *
-     * @return Statamic\Addons\SeoBox\Sitemaps\Sitemap
+     * @return Statamic\Addons\AardvarkSeo\Sitemaps\Sitemap
      */
     public static function whereHandle($handle = '')
     {

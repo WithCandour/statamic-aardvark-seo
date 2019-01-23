@@ -1,8 +1,8 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Traits;
+namespace Statamic\Addons\AardvarkSeo\Traits;
 
-use Statamic\Addons\SeoBox\Controllers\SeoBoxController;
+use Statamic\Addons\AardvarkSeo\Controllers\AardvarkSeoController;
 
 trait PopulatesDefaultFields
 {
@@ -23,7 +23,7 @@ trait PopulatesDefaultFields
      */
     protected function populateDefaults($fields, $storage)
     {
-        $defaults = $storage->getYAML(SeoBoxController::STORAGE_KEY);
+        $defaults = $storage->getYAML(AardvarkSeoController::STORAGE_KEY);
         foreach ($this->field_mapping as $field => $value) {
             $fields[$field]['default'] = \array_key_exists($value, $defaults) ? $defaults[$value] : '';
         }

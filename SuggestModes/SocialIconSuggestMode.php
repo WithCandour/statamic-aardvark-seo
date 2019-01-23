@@ -1,6 +1,6 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\SuggestModes;
+namespace Statamic\Addons\AardvarkSeo\SuggestModes;
 
 use Statamic\Addons\Suggest\Modes\AbstractMode;
 

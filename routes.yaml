@@ -1,31 +1,31 @@
 routes:
   /:
     uses: index
-    as: seo-box
+    as: aardvark-seo
   general:
     uses: getGeneralForm
-    as: seo-box.general
+    as: aardvark-seo.general
   marketing:
     uses: getMarketingForm
-    as: seo-box.marketing
+    as: aardvark-seo.marketing
   social:
     uses: getSocialForm
-    as: seo-box.social
+    as: aardvark-seo.social
   post@update:
     uses: cpUpdate
-    as: seo-box.update-globals
+    as: aardvark-seo.update-globals
   redirects:
     uses: RedirectsController@index
-    as: seo-box.redirects
+    as: aardvark-seo.redirects
   post@updateRedirects:
     uses: RedirectsController@cpUpdate
-    as: seo-box.update-redirects
+    as: aardvark-seo.update-redirects
   sitemap:
     uses: SitemapController@index
-    as: seo-box.sitemap
+    as: aardvark-seo.sitemap
   post@updateSitemap:
     uses: SitemapController@cpUpdate
-    as: seo-box.update-sitemap
-  seo-box-json:
-    uses: SeoBoxJsonController@index
-    as: seo-box.seo-box-json
+    as: aardvark-seo.update-sitemap
+  aardvark-seo-json:
+    uses: AardvarkSeoJsonController@index
+    as: aardvark-seo.aardvark-seo-json

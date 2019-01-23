@@ -1,9 +1,9 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Controllers;
+namespace Statamic\Addons\AardvarkSeo\Controllers;
 
 use Illuminate\Http\Request;
-use Statamic\Addons\SeoBox\Traits\Redirects\GeneratesDataUris;
+use Statamic\Addons\AardvarkSeo\Traits\Redirects\GeneratesDataUris;
 use Statamic\API\File;
 use Statamic\API\Page;
 use Statamic\API\URL;
@@ -41,7 +41,7 @@ class RedirectsController extends Controller
             'data' => $processedData,
             'title' => 'Redirection',
             'fieldset' => $fieldset->toPublishArray(),
-            'submitUrl' => route('seo-box.update-redirects'),
+            'submitUrl' => route('aardvark-seo.update-redirects'),
         ]);
     }
 
@@ -53,7 +53,7 @@ class RedirectsController extends Controller
     public function cpUpdate(Request $request)
     {
         $this->updateSiteRoutesFromCP($request);
-        return $this->updateStorage($request, self::STORAGE_KEY, 'seo-box.redirects'); // Is this necessary if we're reading only from the routes.yaml file?
+        return $this->updateStorage($request, self::STORAGE_KEY, 'aardvark-seo.redirects'); // Is this necessary if we're reading only from the routes.yaml file?
     }
 
     /**

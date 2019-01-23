@@ -1,8 +1,8 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Tests;
+namespace Statamic\Addons\AardvarkSeo\Tests;
 
-use Statamic\Addons\SeoBox\Sitemaps\Sitemap;
+use Statamic\Addons\AardvarkSeo\Sitemaps\Sitemap;
 use Statamic\Testing\TestCase;
 
 class SitemapTest extends TestCase

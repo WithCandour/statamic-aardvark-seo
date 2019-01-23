@@ -1,9 +1,9 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Tests;
+namespace Statamic\Addons\AardvarkSeo\Tests;
 
 use Mockery;
-use Statamic\Addons\SeoBox\Controllers\Controller;
+use Statamic\Addons\AardvarkSeo\Controllers\Controller;
 use Statamic\Testing\TestCase;
 
 class ControllerTest extends TestCase

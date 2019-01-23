@@ -1,6 +1,6 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Fieldtypes;
+namespace Statamic\Addons\AardvarkSeo\Fieldtypes;
 
 use Statamic\Extend\Fieldtype;
 

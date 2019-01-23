@@ -1,12 +1,12 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Controllers;
+namespace Statamic\Addons\AardvarkSeo\Controllers;
 
 use Illuminate\Http\Request;
 use Statamic\API\Fieldset;
 use Statamic\CP\Publish\ProcessesFields;
 
-class SeoBoxController extends Controller
+class AardvarkSeoController extends Controller
 {
     use ProcessesFields;
 
@@ -17,7 +17,7 @@ class SeoBoxController extends Controller
      */
     public function index()
     {
-        return redirect()->route('seo-box.general');
+        return redirect()->route('aardvark-seo.general');
     }
 
     /**
@@ -27,7 +27,7 @@ class SeoBoxController extends Controller
     {
         return $this->renderCPForm('general', [
             'title' => 'General SEO Settings',
-            'submitRoute' => 'seo-box.update-globals',
+            'submitRoute' => 'aardvark-seo.update-globals',
         ], self::STORAGE_KEY);
     }
 
@@ -38,7 +38,7 @@ class SeoBoxController extends Controller
     {
         return $this->renderCPForm('marketing', [
             'title' => 'SEO Marketing Options',
-            'submitRoute' => 'seo-box.update-globals',
+            'submitRoute' => 'aardvark-seo.update-globals',
         ], self::STORAGE_KEY);
     }
 
@@ -49,7 +49,7 @@ class SeoBoxController extends Controller
     {
         return $this->renderCPForm('social', [
             'title' => 'Social Media Settings',
-            'submitRoute' => 'seo-box.update-globals',
+            'submitRoute' => 'aardvark-seo.update-globals',
         ], self::STORAGE_KEY);
     }
 
@@ -60,6 +60,6 @@ class SeoBoxController extends Controller
      */
     public function cpUpdate(Request $request)
     {
-        return $this->updateStorage($request, self::STORAGE_KEY, 'seo-box.general');
+        return $this->updateStorage($request, self::STORAGE_KEY, 'aardvark-seo.general');
     }
 }

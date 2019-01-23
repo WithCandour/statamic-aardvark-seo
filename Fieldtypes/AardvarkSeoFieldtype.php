@@ -4,7 +4,7 @@ namespace Statamic\Addons\AardvarkSeo\Fieldtypes;
 
 use Statamic\Extend\Fieldtype;
 
-class ValidMetaTitleFieldtype extends Fieldtype
+class AardvarkSeoFieldtype extends Fieldtype
 {
     public $selectable = false;
 }

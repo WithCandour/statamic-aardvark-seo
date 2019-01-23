@@ -1,6 +1,6 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Traits\Redirects;
+namespace Statamic\Addons\AardvarkSeo\Traits\Redirects;
 
 use Statamic\API\Collection;
 use Statamic\API\Taxonomy;
