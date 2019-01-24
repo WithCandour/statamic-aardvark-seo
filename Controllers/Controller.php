@@ -1,9 +1,9 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Controllers;
+namespace Statamic\Addons\AardvarkSeo\Controllers;
 
 use Illuminate\Http\Request;
-use Statamic\Addons\SeoBox\Traits\TransformsAssetsFieldtypes;
+use Statamic\Addons\AardvarkSeo\Traits\TransformsAssetsFieldtypes;
 use Statamic\API\Fieldset;
 use Statamic\API\File;
 use Statamic\API\Yaml;

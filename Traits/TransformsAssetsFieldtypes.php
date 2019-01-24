@@ -1,6 +1,6 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Traits;
+namespace Statamic\Addons\AardvarkSeo\Traits;
 
 trait TransformsAssetsFieldtypes
 {

@@ -31,7 +31,7 @@ const metaBus = new Vue({
 /**
  * Meta title fieldtype component
  */
-Vue.component("seo_box-valid_meta_title-fieldtype", {
+Vue.component("aardvark_seo-valid_meta_title-fieldtype", {
   mixins: [Fieldtype, MetaAnalysis],
 
   props: ["data", "config", "name"],
@@ -44,7 +44,7 @@ Vue.component("seo_box-valid_meta_title-fieldtype", {
   },
 
   created: function() {
-    this.$http.get(cp_url("addons/seo-box/seo-box-json")).success(response => {
+    this.$http.get(cp_url("addons/aardvark-seo/aardvark-seo-json")).success(response => {
       this.title_separator = response.title_separator;
       this.site_name = response.site_name;
       metaBus.title = this.data || this._generateDefaultTitle();
@@ -104,7 +104,7 @@ Vue.component("seo_box-valid_meta_title-fieldtype", {
 /**
  * Meta description fieldtype component
  */
-Vue.component("seo_box-valid_meta_description-fieldtype", {
+Vue.component("aardvark_seo-valid_meta_description-fieldtype", {
   mixins: [Fieldtype, MetaAnalysis],
 
   props: ["data", "config", "name"],
@@ -162,7 +162,7 @@ Vue.component("seo_box-valid_meta_description-fieldtype", {
 /**
  * Google search preview fieldtype component
  */
-Vue.component("seo_box-meta_preview-fieldtype", {
+Vue.component("aardvark_seo-meta_preview-fieldtype", {
   mixins: [Fieldtype],
 
   props: ["data", "config", "name"],
@@ -210,7 +210,7 @@ Vue.component("seo_box-meta_preview-fieldtype", {
 /**
  * Toggle box that will show an alert when being turned on
  */
-Vue.component("seo_box-toggle_index-fieldtype", {
+Vue.component("aardvark_seo-toggle_index-fieldtype", {
   mixins: [Fieldtype],
 
   data() {

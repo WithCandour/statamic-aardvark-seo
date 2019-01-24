@@ -1,10 +1,10 @@
 <?php
 
-namespace Statamic\Addons\SeoBox\Controllers;
+namespace Statamic\Addons\AardvarkSeo\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Statamic\Addons\SeoBox\Sitemaps\Sitemap;
+use Statamic\Addons\AardvarkSeo\Sitemaps\Sitemap;
 use Statamic\API\Content;
 use Statamic\API\File;
 use Statamic\CP\Publish\ProcessesFields;
@@ -24,7 +24,7 @@ class SitemapController extends Controller
     {
         return $this->renderCPForm('sitemap', [
             'title' => 'Sitemap Settings',
-            'submitRoute' => 'seo-box.update-sitemap',
+            'submitRoute' => 'aardvark-seo.update-sitemap',
         ], self::STORAGE_KEY);
     }
 
@@ -35,7 +35,7 @@ class SitemapController extends Controller
      */
     public function cpUpdate(Request $request)
     {
-        return $this->updateStorage($request, self::STORAGE_KEY, 'seo-box.sitemap');
+        return $this->updateStorage($request, self::STORAGE_KEY, 'aardvark-seo.sitemap');
     }
 
     /**

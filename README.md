@@ -1,2 +1,2 @@
-# SEO Box (Working title)
+# Aardvark SEO
 Our custom SEO addon for Statamic

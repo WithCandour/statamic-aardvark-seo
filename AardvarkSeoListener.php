@@ -1,13 +1,13 @@
 <?php
 
-namespace Statamic\Addons\SeoBox;
+namespace Statamic\Addons\AardvarkSeo;
 
 use Stataimc\Events\Event;
-use Statamic\Addons\SeoBox\Controllers\RedirectsController;
-use Statamic\Addons\SeoBox\Controllers\SitemapController;
-use Statamic\Addons\SeoBox\Sitemaps\Sitemap;
-use Statamic\Addons\SeoBox\Traits\PopulatesDefaultFields;
-use Statamic\Addons\SeoBox\Traits\TransformsAssetsFieldtypes;
+use Statamic\Addons\AardvarkSeo\Controllers\RedirectsController;
+use Statamic\Addons\AardvarkSeo\Controllers\SitemapController;
+use Statamic\Addons\AardvarkSeo\Sitemaps\Sitemap;
+use Statamic\Addons\AardvarkSeo\Traits\PopulatesDefaultFields;
+use Statamic\Addons\AardvarkSeo\Traits\TransformsAssetsFieldtypes;
 use Statamic\API\File;
 use Statamic\API\Nav;
 use Statamic\API\YAML;
@@ -16,14 +16,14 @@ use Statamic\Extend\Listener;
 /**
  * Listener to add our custom data to the cp.
  */
-class SeoBoxListener extends Listener
+class AardvarkSeoListener extends Listener
 {
     use TransformsAssetsFieldtypes;
     use PopulatesDefaultFields;
 
     public $events = [
         'cp.nav.created' => 'addSeoNavItems',
-        'cp.add_to_head' => 'injectSEOBoxStyles',
+        'cp.add_to_head' => 'injectAardvarkSeoStyles',
         'Statamic\Events\Data\PublishFieldsetFound' => 'appendOnPageSeoFields',
         'Statamic\Events\RoutesMapping' => 'addSitemapRoutes',
         'Statamic\Events\Data\PageMoved' => 'clearPageSitemapCaches',
@@ -43,14 +43,14 @@ class SeoBoxListener extends Listener
      */
     public function addSeoNavItems($nav)
     {
-        $seo_section = Nav::item('seobox')->title('SEO')->route('seo-box')->icon('line-graph');
+        $seo_section = Nav::item('aardvark-seo')->title('SEO')->route('aardvark-seo')->icon('line-graph');
 
         $seo_section->add(function ($item) {
-            $item->add(Nav::item('General')->route('seo-box.general'));
-            $item->add(Nav::item('Marketing')->route('seo-box.marketing'));
-            $item->add(Nav::item('Social')->route('seo-box.social'));
-            $item->add(Nav::item('Redirects')->route('seo-box.redirects')->badge('BETA'));
-            $item->add(Nav::item('Sitemap')->route('seo-box.sitemap'));
+            $item->add(Nav::item('General')->route('aardvark-seo.general'));
+            $item->add(Nav::item('Marketing')->route('aardvark-seo.marketing'));
+            $item->add(Nav::item('Social')->route('aardvark-seo.social'));
+            $item->add(Nav::item('Redirects')->route('aardvark-seo.redirects')->badge('BETA'));
+            $item->add(Nav::item('Sitemap')->route('aardvark-seo.sitemap'));
         });
 
         $nav->addTo('tools', $seo_section);
@@ -88,11 +88,11 @@ class SeoBoxListener extends Listener
     }
 
     /**
-     * Inject the SeoBox stylesheet.
+     * Inject the AardvarkSeo stylesheet.
      */
-    public function injectSEOBoxStyles()
+    public function injectAardvarkSeoStyles()
     {
-        $stylesheet = $this->css->url('seo-box.css');
+        $stylesheet = $this->css->url('aardvark-seo.css');
         $tag = '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '">';
         return $tag;
     }
@@ -110,13 +110,13 @@ class SeoBoxListener extends Listener
         if ($store->get('enable_sitemap')) {
             $url = $store->get('sitemap_url');
 
-            $event->router->get($url, 'Statamic\Addons\SeoBox\Controllers\SitemapController@renderSitemapIndex');
+            $event->router->get($url, 'Statamic\Addons\AardvarkSeo\Controllers\SitemapController@renderSitemapIndex');
 
             // Add a catch-all for our sitemap single routes
-            $event->router->get(SitemapController::SINGLE_ROUTE, 'Statamic\Addons\SeoBox\Controllers\SitemapController@renderSingleSitemap');
+            $event->router->get(SitemapController::SINGLE_ROUTE, 'Statamic\Addons\AardvarkSeo\Controllers\SitemapController@renderSingleSitemap');
 
             // Handle the asset route to load our custom xsl
-            $event->router->get('seo-sitemap.xsl', 'Statamic\Addons\SeoBox\Controllers\SitemapController@getSitemapStyles');
+            $event->router->get('seo-sitemap.xsl', 'Statamic\Addons\AardvarkSeo\Controllers\SitemapController@getSitemapStyles');
         }
     }
 
