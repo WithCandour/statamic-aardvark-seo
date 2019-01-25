@@ -108,10 +108,24 @@
                     <a target="_blank" rel="noopener nofollow" href="{$pageLink}"><xsl:value-of select="loc" /></a>
                   </td>
                   <td>
-                    <xsl:value-of select="priority" />
+                    <xsl:choose>
+                      <xsl:when test="priority != ''">
+                        <xsl:value-of select="priority" />
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:text>0.5</xsl:text>
+                      </xsl:otherwise>
+                    </xsl:choose>
                   </td>
                   <td>
-                    <xsl:value-of select="changefreq" />
+                    <xsl:choose>
+                      <xsl:when test="changefreq != ''">
+                        <xsl:value-of select="changefreq" />
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:text>daily</xsl:text>
+                      </xsl:otherwise>
+                    </xsl:choose>
                   </td>
                   <td>
                     <xsl:value-of select="concat(substring(lastmod,0,11),concat(' ', substring(lastmod,12,5)))" />
