@@ -111,7 +111,7 @@ class SitemapController extends Controller
      */
     private function getCacheExpiration()
     {
-        return $this->getStore()->get('sitemap_cache_expiration');
+        return $this->getStore()->get('sitemap_cache_expiration') ?: 180;
     }
 
     /**
