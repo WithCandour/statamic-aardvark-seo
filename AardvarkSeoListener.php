@@ -95,25 +95,25 @@ class AardvarkSeoListener extends Listener
         $stylesheet = $this->css->url('aardvark-seo.css');
         $tag = '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '">';
         return $tag;
-	}
+    }
 
-	/**
-	 * Determine whether sitemaps have been enabled for this site, this ensures
-	 * we aren't relying on the settings being saved by the site author
-	 *
-	 * @param Illuminate\Support\Collection
-	 *
-	 * @return boolean
-	 */
-	private function testSitemapsAreEnabled($store)
-	{
-		$storage_key = 'enable_sitemap';
-		if($store->contains($storage_key)) {
-			return $store->get($storage_key);
-		}
+    /**
+     * Determine whether sitemaps have been enabled for this site, this ensures
+     * we aren't relying on the settings being saved by the site author
+     *
+     * @param Illuminate\Support\Collection
+     *
+     * @return boolean
+     */
+    private function testSitemapsAreEnabled($store)
+    {
+        $storage_key = 'enable_sitemap';
+        if ($store->contains($storage_key)) {
+            return $store->get($storage_key);
+        }
 
-		return true;
-	}
+        return true;
+    }
 
     /**
      * Add the dynamic route for the sitemap and point it to
@@ -123,9 +123,9 @@ class AardvarkSeoListener extends Listener
      */
     public function addSitemapRoutes($event)
     {
-		$store = collect($this->storage->getYAML(SitemapController::STORAGE_KEY));
+        $store = collect($this->storage->getYAML(SitemapController::STORAGE_KEY));
 
-		$sitemaps_enabled = $this->testSitemapsAreEnabled($store);
+        $sitemaps_enabled = $this->testSitemapsAreEnabled($store);
 
         if ($sitemaps_enabled) {
             $url = $store->get('sitemap_url') ?: 'sitemap.xml';
