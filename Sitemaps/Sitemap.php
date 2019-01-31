@@ -92,18 +92,26 @@ class Sitemap
      */
     public static function all()
     {
-        $collections = collect(Collection::handles())->map(function ($handle) {
-            return [
-                'type' => 'collection',
-                'handle' => $handle,
-            ];
-        });
-        $taxonomies = collect(Taxonomy::handles())->map(function ($handle) {
-            return [
-                'type' => 'taxonomy',
-                'handle' => $handle,
-            ];
-        });
+        $collections = collect(Collection::all())
+            ->filter(function ($collection) {
+                return !is_null($collection->route());
+            })
+            ->map(function ($collection) {
+                return [
+                    'type' => 'collection',
+                    'handle' => $collection->path(),
+                ];
+            });
+        $taxonomies = collect(Taxonomy::all())
+            ->filter(function ($taxonomy) {
+                return !is_null($taxonomy->route());
+            })
+            ->map(function ($handle) {
+                return [
+                    'type' => 'taxonomy',
+                    'handle' => $taxonomy->path(),
+                ];
+            });
         $pages = [['type' => 'pages', 'handle' => 'pages']];
 
         $sitemaps = collect([$collections, $taxonomies, $pages])->collapse();
