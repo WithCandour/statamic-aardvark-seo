@@ -39,7 +39,11 @@ class AardvarkSeoTags extends Tags
     public function socials()
     {
         $data = collect($this->getData());
-        return $this->parseLoop($data->get('social_links'));
+        $socials = $data->get('social_links');
+        if (isset($socials)) {
+            return $this->parseLoop($socials);
+        }
+        return false;
     }
 
     /**
