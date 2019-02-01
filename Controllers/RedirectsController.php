@@ -66,7 +66,7 @@ class RedirectsController extends Controller
         $existingRedirects = $this->readFromRoutesFile();
         $grid = $request->fields['redirects'];
         $routes = $this->collectRoutesFromData($grid);
-        return $this->writeToRoutesFile(array_merge($existingRedirects, $routes));
+        return $this->writeToRoutesFile(array_merge($existingRedirects ?: [], $routes));
     }
 
     /**

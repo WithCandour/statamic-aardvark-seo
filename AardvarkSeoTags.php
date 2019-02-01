@@ -76,7 +76,7 @@ class AardvarkSeoTags extends Tags
      */
     private function getData()
     {
-        $combinedData = array_merge($this->storage->getYAML(AardvarkSeoController::STORAGE_KEY), $this->context);
+        $combinedData = array_merge($this->storage->getYAML(AardvarkSeoController::STORAGE_KEY) ?: [], $this->context);
         $this->rawData = collect($combinedData);
         return $this->parseData()->all();
     }
