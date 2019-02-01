@@ -40,8 +40,8 @@ fields:
     width: 50
   no_follow_links:
     type: toggle
-    display: 'Link following'
-    instructions: 'Control whether search engines should follow links on this page'
+    display: 'Nofollow links'
+    instructions: 'Enabling this will prevent site crawlers from following on-page links'
     width: 50
   sitemap_priority:
     type: select
