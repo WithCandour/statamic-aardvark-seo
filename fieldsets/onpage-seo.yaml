@@ -36,7 +36,7 @@ fields:
   page_no_index:
     type: aardvark_seo.toggle_index
     display: 'No Index'
-    instructions: 'Set to on to prevent this page from being indexed by search engines'
+    instructions: 'Prevent this page from being indexed by search engines'
     width: 50
   no_follow_links:
     type: toggle

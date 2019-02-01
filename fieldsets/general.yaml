@@ -74,6 +74,6 @@ fields:
   no_index:
     type: aardvark_seo.toggle_index
     is_site: true
-    instructions: 'Turn full site indexing off'
+    instructions: 'Prevent indexing across the entire site'
     display: 'No Index'
 
