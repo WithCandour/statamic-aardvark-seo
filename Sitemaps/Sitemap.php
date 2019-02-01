@@ -106,7 +106,7 @@ class Sitemap
             ->filter(function ($taxonomy) {
                 return !is_null($taxonomy->route());
             })
-            ->map(function ($handle) {
+            ->map(function ($taxonomy) {
                 return [
                     'type' => 'taxonomy',
                     'handle' => $taxonomy->path(),
