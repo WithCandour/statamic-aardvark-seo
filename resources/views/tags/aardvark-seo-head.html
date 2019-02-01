@@ -50,7 +50,7 @@
 {{ if twitter_description }}
 <meta name="twitter:description" content="{{ twitter_description }}">{{ /if }}
 
-<meta name="twitter:card" content="{{ twitter_card_type_page }}">
+<meta name="twitter:card" content="{{ calculated_twitter_card_type }}">
 {{ if twitter_username }}
 <meta name="twitter:site" content="{{ twitter_username ensure_left='@' }}">
 <meta name="twitter:creator" content="{{ twitter_username ensure_left='@' }}">

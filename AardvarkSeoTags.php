@@ -92,6 +92,10 @@ class AardvarkSeoTags extends Tags
     {
         $calculatedValues = [
             'calculated_title' => $this->getCalculatedTitleValue(),
+            'calculated_twitter_card_type' => $this->getInheritedValue([
+                'twitter_card_type_page',
+                'twitter_card_type',
+            ]),
             'calculated_facebook_image' => $this->getInheritedValue([
                 'facebook_image',
                 'facebook_default_share_image',
