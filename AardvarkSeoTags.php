@@ -32,6 +32,17 @@ class AardvarkSeoTags extends Tags
     }
 
     /**
+     * Return the list of social icons created in the 'Social' menu
+     *
+     * @return string
+     */
+    public function socials()
+    {
+        $data = collect($this->getData());
+        return $this->parseLoop($data->get('social_links'));
+    }
+
+    /**
      * Return the footer scripts template string.
      *
      * @return string
