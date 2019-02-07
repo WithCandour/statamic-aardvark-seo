@@ -6,7 +6,6 @@ use Stataimc\Events\Event;
 use Statamic\Addons\AardvarkSeo\Controllers\RedirectsController;
 use Statamic\Addons\AardvarkSeo\Controllers\SitemapController;
 use Statamic\Addons\AardvarkSeo\Sitemaps\Sitemap;
-use Statamic\Addons\AardvarkSeo\Traits\PopulatesDefaultFields;
 use Statamic\Addons\AardvarkSeo\Traits\TransformsAssetsFieldtypes;
 use Statamic\API\File;
 use Statamic\API\Nav;
@@ -19,7 +18,6 @@ use Statamic\Extend\Listener;
 class AardvarkSeoListener extends Listener
 {
     use TransformsAssetsFieldtypes;
-    use PopulatesDefaultFields;
 
     public $events = [
         'cp.nav.created' => 'addSeoNavItems',
@@ -72,13 +70,12 @@ class AardvarkSeoListener extends Listener
         $assetContainer = $this->getConfig('asset_container') ?: 'main';
 
         $processedFields = $this->transformAssetsFields($fields, $assetContainer);
-        $populatedFields = $this->populateDefaults($processedFields, $this->storage);
 
         $fieldset = $event->fieldset;
         $fieldsetSections = $fieldset->sections();
 
         $fieldsetSections['SEO'] = [
-            'fields' => $populatedFields,
+            'fields' => $processedFields,
         ];
 
         $fieldsetContents = $fieldset->contents();
