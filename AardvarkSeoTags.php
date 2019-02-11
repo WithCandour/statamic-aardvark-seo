@@ -102,13 +102,11 @@ class AardvarkSeoTags extends Tags
             ]),
             'calculated_twitter_summary_image' => $this->getInheritedValue([
                 'twitter_summary_image',
-                'facebook_image',
                 'twitter_default_summary_image',
                 'facebook_default_share_image',
             ]),
             'calculated_twitter_large_image' => $this->getInheritedValue([
                 'twitter_summary_large_image',
-                'facebook_image',
                 'twitter_default_large_summary_image',
                 'twitter_default_summary_image',
                 'facebook_default_share_image',
