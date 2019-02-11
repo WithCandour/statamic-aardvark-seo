@@ -95,12 +95,25 @@ fields:
     type: section
     display: 'Twitter sharing data'
     instructions: 'Control how this page looks when shared on Twitter'
+  twitter_share_setting:
+    type: radio
+    display: 'Twitter data source'
+    options:
+      inherit: Use the Facebook sharing data from above
+      custom: Use custom Twitter sharing data (Leave the image field blank to use the default global twitter sharing image for the selected card type)
+    default: inherit
   twitter_title:
     type: text
-    display: 'Twitter title'
+    display: Twitter title
+    show_when:
+      twitter_share_setting:
+        - custom
   twitter_description:
     type: textarea
     display: Twitter Description
+    show_when:
+      twitter_share_setting:
+        - custom
   twitter_card_type_page:
     type: select
     display: Twitter card type
@@ -109,6 +122,9 @@ fields:
     options:
       summary: Summary Card
       summary_large_image: Summary Card with Large Image
+    show_when:
+      twitter_share_setting:
+        - custom
   twitter_summary_image:
     type: assets
     max_files: 1
@@ -120,6 +136,8 @@ fields:
       twitter_card_type_page:
         - default
         - summary
+      twitter_share_setting:
+        - custom
   twitter_summary_large_image:
     type: assets
     max_files: 1
@@ -131,6 +149,8 @@ fields:
       twitter_card_type_page:
         - default
         - summary_large_image
+      twitter_share_setting:
+        - custom
   scripts_section:
     type: section
     display: Custom Scripts
