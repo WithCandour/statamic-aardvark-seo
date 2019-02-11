@@ -7,6 +7,7 @@ use Statamic\Addons\AardvarkSeo\Traits\TransformsAssetsFieldtypes;
 use Statamic\API\Fieldset;
 use Statamic\API\File;
 use Statamic\API\Yaml;
+use Statamic\Events\Data\SettingsSaved;
 use Statamic\Extend\Controller as StatamicController;
 
 class Controller extends StatamicController
@@ -70,6 +71,9 @@ class Controller extends StatamicController
     {
         $data = $this->processFields($this->createAddonFieldset($request->fieldset), $request->fields);
         $this->storage->putYAML($storageKey, $data);
+
+        $file = site_storage_path('/addons/AardvarkSeo/' . $storageKey . '.yaml');
+        event(new SettingsSaved($file, $data));
 
         return $this->successResponse($route);
     }
