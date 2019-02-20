@@ -63,10 +63,10 @@ class RedirectsController extends Controller
      */
     public function updateSiteRoutesFromCP($request)
     {
-        $existingRedirects = $this->readFromRoutesFile();
         $grid = $request->fields['redirects'];
-        $routes = $this->collectRoutesFromData($grid);
-        return $this->writeToRoutesFile(array_merge($existingRedirects ?: [], $routes));
+        $routes = collect($this->collectRoutesFromData($grid));
+        $existingRedirects = collect($this->readFromRoutesFile());
+        return $this->writeToRoutesFile($routes->merge($existingRedirects)->all());
     }
 
     /**
