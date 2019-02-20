@@ -66,7 +66,7 @@ class AardvarkSeoTags extends Tags
      */
     private function getTemplateFile($name)
     {
-        return File::get($this->getDirectory() . "/resources/views/tags/{$name}.html", $this->getData());
+        return File::get($this->getDirectory() . "/resources/views/tags/{$name}.html");
     }
 
     /**
