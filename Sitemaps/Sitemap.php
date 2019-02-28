@@ -45,6 +45,10 @@ class Sitemap
             $items = Page::all();
         }
 
+        $items = $items->filter(function ($item) {
+            return $item->published();
+        });
+
         $sitemapData = collect($items)->map(function ($item) {
             $data = collect($item->data());
 
