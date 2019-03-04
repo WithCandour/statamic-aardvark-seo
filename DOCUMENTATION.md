@@ -2,7 +2,7 @@
 
 ## Installation
 
-Once you have a license for the addon you will be able to download the addon files from the Marketplace. The `AardvarkSEO` directory should be placed in you `site/addons` directory.
+Once you have a license for the addon you will be able to download the addon files from the Marketplace. The `AardvarkSeo` directory should be placed in you `site/addons` directory.
 
 There is only one setting that will need to be configured after installation, we add image fields to pages, as a result we ask that you tell the addon which asset container to use for storing any images that get uploaded. This can be set on the `cp/addons/aardvark-seo/settings` page.
 
