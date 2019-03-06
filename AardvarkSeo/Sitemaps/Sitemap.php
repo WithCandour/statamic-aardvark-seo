@@ -2,6 +2,7 @@
 
 namespace Statamic\Addons\AardvarkSeo\Sitemaps;
 
+use Statamic\Addons\AardvarkSeo\Sitemaps\SitemapItem;
 use Statamic\API\Collection;
 use Statamic\API\Config;
 use Statamic\API\Page;
@@ -46,21 +47,27 @@ class Sitemap
         }
 
         $items = $items->filter(function ($item) {
-            return $item->published();
+            return $item->published() && !$item->get('page_no_index');
         });
 
-        $sitemapData = collect($items)->map(function ($item) {
-            $data = collect($item->data());
-
-            $data = [
-                'url' => $item->absoluteURL(),
-                'changefreq' => $data->get('sitemap_changefreq'),
-                'priority' => $data->get('sitemap_priority'),
-                'lastmod' => $item->lastModified()->format('Y-m-d\TH:i:sP'),
-            ];
-
-            return $data;
+        $sitemap_items = collect($items)->map(function ($item) {
+            return new SitemapItem($item);
         });
+
+        $sitemapData = $sitemap_items
+            ->unique(function ($item) {
+                return $item->getUrl();
+            })
+            ->map(function ($item) {
+                $data = [
+                    'url' => $item->getUrl(),
+                    'changefreq' => $item->getChangeFreq(),
+                    'priority' => $item->getPriority(),
+                    'lastmod' => $item->getFormattedLastMod(),
+                ];
+
+                return $data;
+            });
 
         return $sitemapData->all();
     }
