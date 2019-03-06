@@ -46,7 +46,7 @@ class Sitemap
         }
 
         $items = $items->filter(function ($item) {
-            return $item->published();
+            return $item->published() && !$item->get('page_no_index');
         });
 
         $sitemapData = collect($items)->map(function ($item) {
