@@ -61,8 +61,8 @@
       <div class="sitemap__outer">
         <h1>XML Sitemap</h1>
         <p>This is the sitemap for your website, the sitemap's purpose is to inform search engines of the pages on your website that can be indexed.</p>
-        <xsl:if test="count(sitemapindex/sitemap) &gt; 0">
-          <p>This sitemap index consists of <strong><xsl:number value="count(sitemapindex/sitemap)" /></strong> sitemap(s).</p>
+        <xsl:if test="count(sitemap:sitemapindex/sitemap:sitemap) &gt; 0">
+          <p>This sitemap index consists of <strong><xsl:number value="count(sitemap:sitemapindex/sitemap:sitemap)" /></strong> sitemap(s).</p>
           <table class="sitemap__table" cellpadding="6">
             <thead>
               <tr>
@@ -71,24 +71,24 @@
               </tr>
             </thead>
             <tbody>
-              <xsl:for-each select="sitemapindex/sitemap">
+              <xsl:for-each select="sitemap:sitemapindex/sitemap:sitemap">
                 <tr>
                   <td>
                     <xsl:variable name="sitemapLink">
-                      <xsl:value-of select="loc" />
+                      <xsl:value-of select="sitemap:loc" />
                     </xsl:variable>
-                    <a href="{$sitemapLink}"><xsl:value-of select="loc" /></a>
+                    <a href="{$sitemapLink}"><xsl:value-of select="sitemap:loc" /></a>
                   </td>
                   <td>
-                    <xsl:value-of select="concat(substring(lastmod,0,11),concat(' ', substring(lastmod,12,5)))" />
+                    <xsl:value-of select="concat(substring(sitemap:lastmod,0,11),concat(' ', substring(sitemap:lastmod,12,5)))" />
                   </td>
                 </tr>
               </xsl:for-each>
             </tbody>
           </table>
         </xsl:if>
-        <xsl:if test="count(urlset/url) &gt; 0">
-          <p>This sitemap consists of <strong><xsl:number value="count(urlset/url)" /></strong> link(s).</p>
+        <xsl:if test="count(sitemap:urlset/sitemap:url) &gt; 0">
+          <p>This sitemap consists of <strong><xsl:number value="count(sitemap:urlset/sitemap:url)" /></strong> link(s).</p>
           <table class="sitemap__table" cellpadding="4">
             <thead>
               <tr>
@@ -99,18 +99,18 @@
               </tr>
             </thead>
             <tbody>
-              <xsl:for-each select="urlset/url">
+              <xsl:for-each select="sitemap:urlset/sitemap:url">
                 <tr>
                   <td>
                     <xsl:variable name="pageLink">
-                      <xsl:value-of select="loc" />
+                      <xsl:value-of select="sitemap:loc" />
                     </xsl:variable>
-                    <a target="_blank" rel="noopener nofollow" href="{$pageLink}"><xsl:value-of select="loc" /></a>
+                    <a target="_blank" rel="noopener nofollow" href="{$pageLink}"><xsl:value-of select="sitemap:loc" /></a>
                   </td>
                   <td>
                     <xsl:choose>
-                      <xsl:when test="priority != ''">
-                        <xsl:value-of select="priority" />
+                      <xsl:when test="sitemap:priority != ''">
+                        <xsl:value-of select="sitemap:priority" />
                       </xsl:when>
                       <xsl:otherwise>
                         <xsl:text>0.5</xsl:text>
@@ -119,8 +119,8 @@
                   </td>
                   <td>
                     <xsl:choose>
-                      <xsl:when test="changefreq != ''">
-                        <xsl:value-of select="changefreq" />
+                      <xsl:when test="sitemap:changefreq != ''">
+                        <xsl:value-of select="sitemap:changefreq" />
                       </xsl:when>
                       <xsl:otherwise>
                         <xsl:text>daily</xsl:text>
@@ -128,7 +128,7 @@
                     </xsl:choose>
                   </td>
                   <td>
-                    <xsl:value-of select="concat(substring(lastmod,0,11),concat(' ', substring(lastmod,12,5)))" />
+                    <xsl:value-of select="concat(substring(sitemap:lastmod,0,11),concat(' ', substring(sitemap:lastmod,12,5)))" />
                   </td>
                 </tr>
               </xsl:for-each>
