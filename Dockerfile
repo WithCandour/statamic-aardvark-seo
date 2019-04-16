@@ -32,9 +32,7 @@ RUN wget -q https://getcomposer.org/download/$COMPOSER_VERSION/composer.phar && 
     chmod +x /usr/bin/composer
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
-ENV CODESNIFFER_VERSION 3.4.2
-RUN composer -q global require "squizlabs/php_codesniffer=$CODESNIFFER_VERSION" && \
-    phpcs --version
+RUN composer -q global require mnapoli/pretty
 
 ENV STATAMIC_VERSION 2.11.10
 ENV STATAMIC_CHECKSUM c2a87267ee63623478ea047336945b4f1caa1cb51b803d713cc7c8cf69158782
@@ -43,6 +41,10 @@ RUN wget -q https://outpost.statamic.com/v2/get/$STATAMIC_VERSION -O statamic-$S
     unzip -q statamic-$STATAMIC_VERSION.zip -d /tmp/ && \
     mv /tmp/statamic/* /var/www/html && \
     rm statamic-$STATAMIC_VERSION.zip
+
+ENV STATAMIC_ADMIN_USER admin
+ENV STATAMIC_ADMIN_PASS password
+RUN echo "password: $STATAMIC_ADMIN_PASS\nsuper: true\nfirst_name: Test\nlast_name: Admin" > /var/www/html/site/users/$STATAMIC_ADMIN_USER.yaml
 
 WORKDIR /var/www/html
 EXPOSE 3000
