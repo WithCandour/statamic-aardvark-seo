@@ -11,5 +11,5 @@ and launched with the following commands:
 
 ```
 docker build -t statamic .
-docker run -v $(pwd)/AardvarkSeo:/var/www/html/site/addons/AardvarkSeo -p 3000:3000 statamic
+docker run -v $(pwd)/:/var/www/html/site/addons/ -p 3000:3000 statamic
 ```
