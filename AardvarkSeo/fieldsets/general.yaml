@@ -42,7 +42,7 @@ fields:
     folder: seo
     restrict: false
     max_files: 1
-    validate: image|mimes:png,jpg,jpeg,svg,gif
+    validate: image|mimes:png,jpg,jpeg,svg,gif,ico
   knowledge_graph:
     type: section
     display: 'Knowledge Graph Data'

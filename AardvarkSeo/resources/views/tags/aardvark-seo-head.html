@@ -28,7 +28,7 @@
 {{# Favicon tag #}}
 {{ if global_favicon }}
   {{ asset:global_favicon }}
-    <link rel="shortcut icon" type="image/{{ extension }}" sizes="{{ width }}x{{ height }}" href="{{ permalink }}">
+    <link rel="shortcut icon" href="{{ permalink }}">
   {{ /asset:global_favicon }}
 {{ /if }}
 
