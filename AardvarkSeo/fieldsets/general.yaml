@@ -27,6 +27,22 @@ fields:
     width: 66
     instructions: Set the name for the website
     display: 'Website name'
+  favicon_section:
+    type: section
+    display: Favicon
+    instructions: |
+      Upload a favicon to show in search results and the browser. It is recommended that your favicon is:
+          <ul>
+            <li>A multiple of 48px square in dimensions</li>
+            <li>A supported favicon file format, we recommend using `.png`</li>
+          </ul>
+  global_favicon:
+    display: Global favicon
+    type: assets
+    folder: seo
+    restrict: false
+    max_files: 1
+    validate: image|mimes:png,jpg,jpeg,svg,gif
   knowledge_graph:
     type: section
     display: 'Knowledge Graph Data'
