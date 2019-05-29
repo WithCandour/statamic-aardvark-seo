@@ -25,6 +25,13 @@
 <link rel="alternate" hreflang="{{ locale }}" href="{{ url }}">
 {{ /localized_urls }}
 
+{{# Favicon tag #}}
+{{ if global_favicon }}
+  {{ asset:global_favicon }}
+    <link rel="shortcut icon" href="{{ permalink }}">
+  {{ /asset:global_favicon }}
+{{ /if }}
+
 {{# Facebook OG tags #}}
 <meta property="og:site_name" content="{{ site_name }}">
 <meta property="og:title" content="{{ facebook_title or meta_title or title }}">
