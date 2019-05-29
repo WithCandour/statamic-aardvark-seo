@@ -78,7 +78,7 @@ fields:
   share_section_facebook:
     type: section
     display: 'Facebook sharing data'
-    instructions: 'Control how this page looks when shared on Facebook'
+    instructions: 'Control how this page looks when shared on Facebook, this data uses the opengraph protocol and as such will be used for sites like LinkedIn which inherit share data from OG.'
   facebook_title:
     type: text
     display: 'Facebook title'
