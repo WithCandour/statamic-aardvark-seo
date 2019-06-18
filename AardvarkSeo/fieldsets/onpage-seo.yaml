@@ -5,17 +5,21 @@ fields:
     instructions: Edit the meta data for this specific page.
   meta_title:
     type: aardvark_seo.valid_meta_title
+    localizable: true
   meta_description:
     type: aardvark_seo.valid_meta_description
+    localizable: true
   meta_preview:
     display: Google search preview
     type: aardvark_seo.meta_preview
+    localizable: true
   urls_section:
     type: section
     display: URL Options
   canonical_url:
     display: 'Canonical URL'
     type: text
+    localizable: true
   localized_urls:
     display: Alternate URLs
     instructions: Create a list of urls for alternate locales
@@ -30,6 +34,7 @@ fields:
         display: URL
         type: text
         placeholder: 'mysite.com/fr/'
+  localizable: true
   indexing_section:
     type: section
     display: Indexing and Sitemaps
@@ -38,11 +43,13 @@ fields:
     display: 'No Index'
     instructions: 'Prevent this page from being indexed by search engines'
     width: 50
+    localizable: true
   no_follow_links:
     type: toggle
     display: 'Nofollow links'
     instructions: 'Enabling this will prevent site crawlers from following on-page links'
     width: 50
+    localizable: true
   sitemap_priority:
     type: select
     display: Sitemap priority
@@ -82,15 +89,18 @@ fields:
   facebook_title:
     type: text
     display: 'Facebook title'
+    localizable: true
   facebook_description:
     type: textarea
     display: 'Facebook description'
+    localizable: true
   facebook_image:
     type: assets
     folder: seo
     max_files: 1
     display: 'Facebook share image'
     instructions: 'Upload an image to display when this page is shared on Facebook, this image will also be inherited for Twitter if no images are uploaded below. The recommended size is 1200px x 630px'
+    localizable: true
   share_section_twitter:
     type: section
     display: 'Twitter sharing data'
@@ -102,18 +112,21 @@ fields:
       inherit: Use the Facebook sharing data from above
       custom: Use custom Twitter sharing data (Leave the image field blank to use the default global twitter sharing image for the selected card type)
     default: inherit
+    localizable: true
   twitter_title:
     type: text
     display: Twitter title
     show_when:
       twitter_share_setting:
         - custom
+    localizable: true
   twitter_description:
     type: textarea
     display: Twitter Description
     show_when:
       twitter_share_setting:
         - custom
+    localizable: true
   twitter_card_type_page:
     type: select
     display: Twitter card type
@@ -125,6 +138,7 @@ fields:
     show_when:
       twitter_share_setting:
         - custom
+    localizable: true
   twitter_summary_image:
     type: assets
     max_files: 1
@@ -138,6 +152,7 @@ fields:
         - summary
       twitter_share_setting:
         - custom
+    localizable: true
   twitter_summary_large_image:
     type: assets
     max_files: 1
@@ -151,6 +166,7 @@ fields:
         - summary_large_image
       twitter_share_setting:
         - custom
+    localizable: true
   scripts_section:
     type: section
     display: Custom Scripts
@@ -160,13 +176,16 @@ fields:
     width: 50
     display: Head snippets
     instructions: Custom snippets to get placed in the head, remember to wrap your scripts with `<script>` tags
+    localizable: true
   footer_snippets:
     type: textarea
     width: 50
     display: Footer snippets
     instructions: Custom snippets to get placed in the footer, remember to wrap your scripts with `<script>` tags
+    localizable: true
   schema_objects:
     type: textarea
     display: JSON-LD Schema
     instructions: Paste your custom schema objects here (Recipe, Event etc...) - objects will need to be wrapped in `<script type="application/ld+json">` tags
     rows: 10
+    localizable: true
