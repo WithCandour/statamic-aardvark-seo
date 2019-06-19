@@ -280,14 +280,14 @@ class RedirectsController extends Controller
         $attrs = $event->original['attributes'];
 
         switch (true) {
-        case $event instanceof EntrySaved:
-            $oldRoute = self::entry_uri($attrs['slug'], $attrs['collection']);
-            break;
-        case $event instanceof TermSaved:
-            $oldRoute = self::term_uri($attrs['slug'], $attrs['taxonomy']);
-            break;
-        default:
-            $oldRoute = null;
+            case $event instanceof EntrySaved:
+                $oldRoute = self::entry_uri($attrs['slug'], $attrs['collection']);
+                break;
+            case $event instanceof TermSaved:
+                $oldRoute = self::term_uri($attrs['slug'], $attrs['taxonomy']);
+                break;
+            default:
+                $oldRoute = null;
         }
 
         return [

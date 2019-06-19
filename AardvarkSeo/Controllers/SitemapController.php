@@ -142,17 +142,17 @@ class SitemapController extends Controller
     public static function clearCacheBasedOnDataObject($content)
     {
         switch ($content->contentType()) {
-        case 'page':
-            $handle = 'pages';
-            break;
-        case 'entry':
-            $handle = $content->collectionName();
-            break;
-        case 'term':
-            $handle = $content->taxonomyName();
-            break;
-        default:
-            $handle = 'pages';
+            case 'page':
+                $handle = 'pages';
+                break;
+            case 'entry':
+                $handle = $content->collectionName();
+                break;
+            case 'term':
+                $handle = $content->taxonomyName();
+                break;
+            default:
+                $handle = 'pages';
         }
 
         return self::clearCacheByHandle($handle);
