@@ -15,7 +15,7 @@ class SitemapItem
     public function __construct(\Statamic\Data\Content\Content $content)
     {
         $this->data_object = $content;
-        $this->data = collect($this->data_object->data());
+        $this->data = collect($this->data_object->dataForLocale(site_locale()));
     }
 
     /**
