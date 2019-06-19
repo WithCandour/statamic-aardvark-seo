@@ -132,8 +132,8 @@ class SitemapController extends Controller
     public static function clearCacheByHandle($handle, $locales)
     {
         self::clearIndexCache();
-        foreach($locales as $locale) {
-          Cache::forget("sitemap.{$handle}.{$locale}");
+        foreach ($locales as $locale) {
+            Cache::forget("sitemap.{$handle}.{$locale}");
         }
         return true;
     }
@@ -146,17 +146,17 @@ class SitemapController extends Controller
     public static function clearCacheBasedOnDataObject($content)
     {
         switch ($content->contentType()) {
-        case 'page':
-            $handle = 'pages';
-            break;
-        case 'entry':
-            $handle = $content->collectionName();
-            break;
-        case 'term':
-            $handle = $content->taxonomyName();
-            break;
-        default:
-            $handle = 'pages';
+            case 'page':
+                $handle = 'pages';
+                break;
+            case 'entry':
+                $handle = $content->collectionName();
+                break;
+            case 'term':
+                $handle = $content->taxonomyName();
+                break;
+            default:
+                $handle = 'pages';
         }
 
         $locales = $content->locales();

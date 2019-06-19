@@ -36,14 +36,14 @@ class Sitemap
     public function getSitemapItems()
     {
         switch ($this->type) {
-        case 'collection':
-            $items = Collection::whereHandle($this->handle)->entries();
-            break;
-        case 'taxonomy':
-            $items = Taxonomy::whereHandle($this->handle)->terms();
-            break;
-        default:
-            $items = Page::all();
+            case 'collection':
+                $items = Collection::whereHandle($this->handle)->entries();
+                break;
+            case 'taxonomy':
+                $items = Taxonomy::whereHandle($this->handle)->terms();
+                break;
+            default:
+                $items = Page::all();
         }
 
         $items = $items->filter(function ($item) {
