@@ -38,6 +38,17 @@ A new 'SEO' section will be added to the editor screen for any Pages, Collection
 
 Special fields for the meta title and description will give you hints about the length of the content enabling you to optimize your metadata for search engines - a google search preview will help to visualise this.
 
+### Disable
+You can disable the SEO tab on a per-fieldset basis, simply add a `hide_aardvark_seo` key to your `[fieldset].yaml` file.
+
+Example:
+```yaml
+title: Page
+create_title: 'Create a new page'
+taxonomies: true
+hide_aardvark_seo: true
+```
+
 ## Indexing
 
 Site indexing can be controlled either at the site-level (crawlers will not index any page) or on a per-page basis. On every page there is a toggle, when enabled the page will no longer get indexed. In addition there is a separate option for controlling whether on-page links should get followed by crawlers.
