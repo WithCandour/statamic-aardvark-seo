@@ -65,13 +65,17 @@ class AardvarkSeoListener extends Listener
             return;
         }
 
+        $fieldset = $event->fieldset;
+        $hidden = collect($fieldset->toArray())->get('hide_aardvark_seo');
+        if ($hidden) {
+            return;
+        }
+
         $seoFieldsetContents = File::get($this->getDirectory() . '/fieldsets/onpage-seo.yaml');
         $fields = YAML::parse($seoFieldsetContents)['fields'];
         $assetContainer = $this->getConfig('asset_container') ?: 'main';
-
         $processedFields = $this->transformAssetsFields($fields, $assetContainer);
 
-        $fieldset = $event->fieldset;
         $fieldsetSections = $fieldset->sections();
 
         $fieldsetSections['SEO'] = [
