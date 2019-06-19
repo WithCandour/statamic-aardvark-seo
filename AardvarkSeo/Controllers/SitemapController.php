@@ -66,12 +66,13 @@ class SitemapController extends Controller
     public function renderSingleSitemap($handle)
     {
         $sitemap = Sitemap::whereHandle($handle);
+        $locale = site_locale();
 
         if (!$sitemap) {
             abort(404);
         }
 
-        $view = Cache::remember("sitemap.{$handle}", $this->getCacheExpiration(), function () use ($sitemap) {
+        $view = Cache::remember("sitemap.{$handle}.{$locale}", $this->getCacheExpiration(), function () use ($sitemap) {
             return $this->view('sitemap_single', [
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
                 'xslLink' => '<?xml-stylesheet type="text/xsl" href="/seo-sitemap.xsl"?>',
@@ -128,10 +129,13 @@ class SitemapController extends Controller
      *
      * @param string $handle
      */
-    public static function clearCacheByHandle($handle)
+    public static function clearCacheByHandle($handle, $locales)
     {
         self::clearIndexCache();
-        return Cache::forget("sitemap.{$handle}");
+        foreach($locales as $locale) {
+          Cache::forget("sitemap.{$handle}.{$locale}");
+        }
+        return true;
     }
 
     /**
@@ -155,6 +159,8 @@ class SitemapController extends Controller
             $handle = 'pages';
         }
 
-        return self::clearCacheByHandle($handle);
+        $locales = $content->locales();
+
+        return self::clearCacheByHandle($handle, $locales);
     }
 }

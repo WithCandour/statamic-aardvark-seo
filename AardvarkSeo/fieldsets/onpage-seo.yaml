@@ -34,7 +34,7 @@ fields:
         display: URL
         type: text
         placeholder: 'mysite.com/fr/'
-  localizable: true
+    localizable: true
   indexing_section:
     type: section
     display: Indexing and Sitemaps
@@ -68,6 +68,7 @@ fields:
       - '0.8'
       - '0.9'
       - '1.0'
+    localizable: true
   sitemap_changefreq:
     type: select
     display: Change frequency
@@ -82,6 +83,7 @@ fields:
       - "monthly"
       - "yearly"
       - "never"
+    localizable: true
   share_section_facebook:
     type: section
     display: 'Facebook sharing data'
