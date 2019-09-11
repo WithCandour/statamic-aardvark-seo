@@ -161,12 +161,14 @@ class AardvarkSeoTags extends Tags
     {
         $data_id = $this->context['id'];
         $data_object = Data::find($data_id);
-        if(!$data_object) return [];
+        if (!$data_object) {
+            return [];
+        }
         $alternate_locales = array_diff($data_object->locales(), [site_locale()]); // Remove the current locale
-        return collect(array_values($alternate_locales))->map(function($locale) use ($data_object) {
+        return collect(array_values($alternate_locales))->map(function ($locale) use ($data_object) {
             return [
                 'locale' => Config::getShortLocale($locale),
-                'url' => $data_object->in($locale)->absoluteUrl()
+                'url' => $data_object->in($locale)->absoluteUrl(),
             ];
         })->all();
     }
