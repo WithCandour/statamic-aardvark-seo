@@ -20,7 +20,6 @@
 {{# General default meta tags #}}
 <title>{{ meta_title or calculated_title }}</title>
 <meta name="description" content="{{ meta_description }}">
-{{ if auto_alternate_locales or localized_urls }}
 <link rel="canonical" href="{{ canonical_url or permalink }}">
 {{ if auto_alternate_locales }}
 {{ auto_alternate_locales }}
@@ -31,7 +30,6 @@
 {{ localized_urls }}
 <link rel="alternate" hreflang="{{ locale }}" href="{{ url }}">
 {{ /localized_urls }}
-{{ /if }}
 {{ /if }}
 
 {{# Favicon tag #}}
