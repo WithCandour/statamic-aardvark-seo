@@ -21,9 +21,16 @@
 <title>{{ meta_title or calculated_title }}</title>
 <meta name="description" content="{{ meta_description }}">
 <link rel="canonical" href="{{ canonical_url or permalink }}">
+{{ if auto_alternate_locales }}
+{{ auto_alternate_locales }}
+<link rel="alternate" hreflang="{{ locale }}" href="{{ url }}">
+{{ /auto_alternate_locales }}
+{{ /if }}
+{{ if localized_urls }}
 {{ localized_urls }}
 <link rel="alternate" hreflang="{{ locale }}" href="{{ url }}">
 {{ /localized_urls }}
+{{ /if }}
 
 {{# Favicon tag #}}
 {{ if global_favicon }}
