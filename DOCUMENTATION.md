@@ -76,3 +76,6 @@ The social media data can be accessed on the frontend through the `{{ aardvark-s
     {{ /aardvark-seo:socials }}
 </ul>
 ```
+
+## Localization / Hreflang
+Aardvark SEO will automatically generate a list of `<link rel="alternate" hreflang="x">` tags for sites that are running multiple locales. Additionally you can manually configure alternate urls using the 'Alternate URLs' table in the on-page SEO settings.
