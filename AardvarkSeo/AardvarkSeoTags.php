@@ -160,7 +160,7 @@ class AardvarkSeoTags extends Tags
     private function getAlternateLocales()
     {
         // Error pages
-        if(!array_key_exists('id', $this->context)) {
+        if (!array_key_exists('id', $this->context)) {
             return [];
         }
         $data_id = $this->context['id'];
