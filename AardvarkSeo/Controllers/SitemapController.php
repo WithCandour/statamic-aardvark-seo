@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Statamic\Addons\AardvarkSeo\Sitemaps\Sitemap;
 use Statamic\API\Content;
 use Statamic\API\File;
+use Statamic\API\Config;
 use Statamic\CP\Publish\ProcessesFields;
 
 class SitemapController extends Controller
@@ -46,9 +47,10 @@ class SitemapController extends Controller
     public function renderSitemapIndex()
     {
         $view = Cache::remember('sitemap.index', $this->getCacheExpiration(), function () {
+            $siteUrl = Config::getSiteUrl();
             return $this->view('sitemap_index', [
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
-                'xslLink' => '<?xml-stylesheet type="text/xsl" href="/seo-sitemap.xsl"?>',
+                'xslLink' => '<?xml-stylesheet type="text/xsl" href="'.$siteUrl.'/seo-sitemap.xsl"?>',
                 'sitemaps' => Sitemap::all(),
             ])->render();
         });
@@ -73,9 +75,10 @@ class SitemapController extends Controller
         }
 
         $view = Cache::remember("sitemap.{$handle}.{$locale}", $this->getCacheExpiration(), function () use ($sitemap) {
+            $siteUrl = Config::getSiteUrl();
             return $this->view('sitemap_single', [
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
-                'xslLink' => '<?xml-stylesheet type="text/xsl" href="/seo-sitemap.xsl"?>',
+                'xslLink' => '<?xml-stylesheet type="text/xsl" href="'.$siteUrl.'/seo-sitemap.xsl"?>',
                 'data' => $sitemap->getSitemapItems(),
             ])->render();
         });
