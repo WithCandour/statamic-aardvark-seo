@@ -60,7 +60,7 @@ class Controller extends StatamicController
             'title' => $options['title'],
             'fieldset' => $fieldset->toPublishArray(),
             'submitUrl' => route($options['submitRoute']),
-            'aardvarkErrors' => $errors
+            'aardvarkErrors' => $errors,
         ]);
     }
 
@@ -114,15 +114,15 @@ class Controller extends StatamicController
 
         // Check for a site url
         $siteUrl = Config::getSiteUrl();
-        if(empty($siteUrl)) {
+        if (empty($siteUrl)) {
             $errors[] = [
                 'level' => 'bad',
-                'message' => 'A site url needs to be set in your <a class="text-white underline" href="/admin/settings">settings</a>'
+                'message' => 'A site url needs to be set in your <a class="text-white underline" href="/admin/settings">settings</a>',
             ];
-        } elseif(substr($siteUrl, 0, 1) === '/') {
+        } elseif (substr($siteUrl, 0, 1) === '/') {
             $errors[] = [
                 'level' => 'bad',
-                'message' => 'Your site url should be a full URL in order to generate absolute links, set it in your <a class="text-white underline" href="/admin/settings">settings</a>'
+                'message' => 'Your site url should be a full URL in order to generate absolute links, set it in your <a class="text-white underline" href="/admin/settings">settings</a>',
             ];
         }
 

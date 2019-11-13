@@ -45,7 +45,7 @@ class AardvarkSeoListener extends Listener
         $seo_section = Nav::item('aardvark-seo')->title('SEO')->route('aardvark-seo')->icon('line-graph');
 
         $errors = AardvarkController::getErrors();
-        if(count($errors)) {
+        if (count($errors)) {
             $seo_section->badge(count($errors));
         }
 
