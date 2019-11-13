@@ -9,6 +9,16 @@ fields:
   meta_description:
     type: aardvark_seo.valid_meta_description
     localizable: true
+  use_meta_keywords:
+    type: toggle
+    display: Use Meta Keywords
+    instructions: You may toggle this field to use meta keywords on the page, however you should focus on creating quality content rather than using keywords
+  meta_keywords:
+    type: tags
+    instructions: Press enter to add a new keyword
+    show_when:
+      use_meta_keywords:
+        - true
   meta_preview:
     display: Google search preview
     type: aardvark_seo.meta_preview

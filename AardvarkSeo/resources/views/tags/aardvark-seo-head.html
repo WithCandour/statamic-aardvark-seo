@@ -20,6 +20,9 @@
 {{# General default meta tags #}}
 <title>{{ meta_title or calculated_title }}</title>
 <meta name="description" content="{{ meta_description }}">
+{{ if use_meta_keywords }}
+<meta name="keywords" content="{{ meta_keywords join=', ' }}">
+{{ /if }}
 <link rel="canonical" href="{{ canonical_url or permalink }}">
 {{ if auto_alternate_locales }}
 {{ auto_alternate_locales }}
