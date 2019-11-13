@@ -24,9 +24,16 @@
 <meta name="keywords" content="{{ meta_keywords join=', ' }}">
 {{ /if }}
 <link rel="canonical" href="{{ canonical_url or permalink }}">
+{{ if auto_alternate_locales }}
+{{ auto_alternate_locales }}
+<link rel="alternate" hreflang="{{ locale }}" href="{{ url }}">
+{{ /auto_alternate_locales }}
+{{ /if }}
+{{ if localized_urls }}
 {{ localized_urls }}
 <link rel="alternate" hreflang="{{ locale }}" href="{{ url }}">
 {{ /localized_urls }}
+{{ /if }}
 
 {{# Favicon tag #}}
 {{ if global_favicon }}
