@@ -94,7 +94,7 @@ Vue.component("aardvark_seo-valid_meta_title-fieldtype", {
       return validation;
     },
     _generateDefaultTitle() {
-      const parentTitle = this.$parent.$parent.data.title;
+      const parentTitle = this.$parent.$parent.data.title || '';
       return `${parentTitle} ${this.title_separator} ${this.site_name}`;
     }
   }
@@ -181,7 +181,7 @@ Vue.component("aardvark_seo-meta_preview-fieldtype", {
 
   created: function() {
     metaBus.$watch("title", title => {
-      this.metaTitle = title;
+      this.metaTitle = title.trim();
     });
     metaBus.$watch("loading", loading => {
       this.loading = loading;
