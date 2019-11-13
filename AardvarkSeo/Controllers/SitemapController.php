@@ -45,7 +45,8 @@ class SitemapController extends Controller
      */
     public function renderSitemapIndex()
     {
-        $view = Cache::remember('sitemap.index', $this->getCacheExpiration(), function () {
+        $locale = site_locale();
+        $view = Cache::remember("sitemap.index.{$locale}", $this->getCacheExpiration(), function () {
             return $this->view('sitemap_index', [
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
                 'xslLink' => '<?xml-stylesheet type="text/xsl" href="/seo-sitemap.xsl"?>',

@@ -81,7 +81,7 @@ class Sitemap
     {
         $handle = $this->handle ?: 'pages';
         $this->route = sprintf('%s_%s.xml', self::FILENAME_PREFIX, $handle);
-        $this->url = Config::getSiteUrl() . $this->route;
+        $this->url = Config::getSiteUrl(site_locale()) . $this->route;
         return $this->url;
     }
 
