@@ -112,3 +112,8 @@
   font-size: 13px;
   color: #545454;
 }
+
+/* ----------- aardvark errors ----------- */
+.aardvark-notice--bad {
+  background-color: #e53739;
+}

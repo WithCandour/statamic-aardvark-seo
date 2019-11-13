@@ -4,6 +4,7 @@ namespace Statamic\Addons\AardvarkSeo\Controllers;
 
 use Illuminate\Http\Request;
 use Statamic\Addons\AardvarkSeo\Traits\TransformsAssetsFieldtypes;
+use Statamic\API\Config;
 use Statamic\API\Fieldset;
 use Statamic\API\File;
 use Statamic\API\Yaml;
@@ -51,12 +52,15 @@ class Controller extends StatamicController
             $this->storage->getYAML($storageKey)
         );
 
+        $errors = $this->getErrors();
+
         return $this->view('cp', [
             'id' => null,
             'data' => $data,
             'title' => $options['title'],
             'fieldset' => $fieldset->toPublishArray(),
             'submitUrl' => route($options['submitRoute']),
+            'aardvarkErrors' => $errors,
         ]);
     }
 
@@ -97,5 +101,31 @@ class Controller extends StatamicController
             'redirect' => route($route),
             'message' => $message,
         ];
+    }
+
+    /**
+     * Return a list of errors to flag in the CP
+     *
+     * @return array
+     */
+    public static function getErrors()
+    {
+        $errors = [];
+
+        // Check for a site url
+        $siteUrl = Config::getSiteUrl();
+        if (empty($siteUrl)) {
+            $errors[] = [
+                'level' => 'bad',
+                'message' => 'A site url needs to be set in your <a class="text-white underline" href="/admin/settings">site settings</a>',
+            ];
+        } elseif (substr($siteUrl, 0, 1) === '/') {
+            $errors[] = [
+                'level' => 'bad',
+                'message' => 'Your site URL should be a full URL in order to generate absolute links, you may set it in your <a class="text-white underline" href="/admin/settings">site settings</a>',
+            ];
+        }
+
+        return $errors;
     }
 }
