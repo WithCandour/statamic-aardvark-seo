@@ -3,6 +3,7 @@
 namespace Statamic\Addons\AardvarkSeo;
 
 use Stataimc\Events\Event;
+use Statamic\Addons\AardvarkSeo\Controllers\Controller as AardvarkController;
 use Statamic\Addons\AardvarkSeo\Controllers\RedirectsController;
 use Statamic\Addons\AardvarkSeo\Controllers\SitemapController;
 use Statamic\Addons\AardvarkSeo\Sitemaps\Sitemap;
@@ -42,6 +43,11 @@ class AardvarkSeoListener extends Listener
     public function addSeoNavItems($nav)
     {
         $seo_section = Nav::item('aardvark-seo')->title('SEO')->route('aardvark-seo')->icon('line-graph');
+
+        $errors = AardvarkController::getErrors();
+        if(count($errors)) {
+            $seo_section->badge(count($errors));
+        }
 
         $seo_section->add(function ($item) {
             $item->add(Nav::item('General')->route('aardvark-seo.general'));
