@@ -50,7 +50,7 @@ class SitemapController extends Controller
             $siteUrl = Config::getSiteUrl();
             return $this->view('sitemap_index', [
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
-                'xslLink' => '<?xml-stylesheet type="text/xsl" href="'.$siteUrl.'/seo-sitemap.xsl"?>',
+                'xslLink' => '<?xml-stylesheet type="text/xsl" href="' . $siteUrl . '/seo-sitemap.xsl"?>',
                 'sitemaps' => Sitemap::all(),
             ])->render();
         });
@@ -78,7 +78,7 @@ class SitemapController extends Controller
             $siteUrl = Config::getSiteUrl();
             return $this->view('sitemap_single', [
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
-                'xslLink' => '<?xml-stylesheet type="text/xsl" href="'.$siteUrl.'/seo-sitemap.xsl"?>',
+                'xslLink' => '<?xml-stylesheet type="text/xsl" href="' . $siteUrl . '/seo-sitemap.xsl"?>',
                 'data' => $sitemap->getSitemapItems(),
             ])->render();
         });
