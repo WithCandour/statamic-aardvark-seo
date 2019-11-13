@@ -117,12 +117,12 @@ class Controller extends StatamicController
         if (empty($siteUrl)) {
             $errors[] = [
                 'level' => 'bad',
-                'message' => 'A site url needs to be set in your <a class="text-white underline" href="/admin/settings">settings</a>',
+                'message' => 'A site url needs to be set in your <a class="text-white underline" href="/admin/settings">site settings</a>',
             ];
         } elseif (substr($siteUrl, 0, 1) === '/') {
             $errors[] = [
                 'level' => 'bad',
-                'message' => 'Your site url should be a full URL in order to generate absolute links, set it in your <a class="text-white underline" href="/admin/settings">settings</a>',
+                'message' => 'Your site URL should be a full URL in order to generate absolute links, you may set it in your <a class="text-white underline" href="/admin/settings">site settings</a>',
             ];
         }
 
