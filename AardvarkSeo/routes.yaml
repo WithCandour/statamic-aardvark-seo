@@ -5,6 +5,15 @@ routes:
   general:
     uses: getGeneralForm
     as: aardvark-seo.general
+  defaults:
+    uses: DefaultsController@index
+    as: aardvark-seo.defaults
+  defaults/{content}/{slug}:
+    uses: DefaultsController@single
+    as: aardvark-seo.defaults.single
+  post@defaults/{content}/{slug}:
+    uses: DefaultsController@save
+    as: aardvark-seo.defaults.save
   marketing:
     uses: getMarketingForm
     as: aardvark-seo.marketing
