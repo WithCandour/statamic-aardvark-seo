@@ -88,7 +88,7 @@ class Controller extends StatamicController
      * @param string $message The message to put inside the success box
      * @param string $route   The route to redirect back to
      */
-    private function successResponse($route)
+    protected function successResponse($route)
     {
         $message = 'SEO Settings Updated!';
 

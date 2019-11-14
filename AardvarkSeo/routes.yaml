@@ -8,10 +8,10 @@ routes:
   defaults:
     uses: DefaultsController@index
     as: aardvark-seo.defaults
-  defaults/{content}/{slug}:
+  defaults/{type}/{slug}:
     uses: DefaultsController@single
     as: aardvark-seo.defaults.single
-  post@defaults/{content}/{slug}:
+  post@defaults/{type}/{slug}:
     uses: DefaultsController@save
     as: aardvark-seo.defaults.save
   marketing:

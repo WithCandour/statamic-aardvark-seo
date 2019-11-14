@@ -4,9 +4,12 @@ namespace Statamic\Addons\AardvarkSeo;
 
 use Statamic\Addons\AardvarkSeo\Controllers\AardvarkSeoController;
 use Statamic\API\Config;
+use Statamic\API\Collection;
 use Statamic\API\Data;
 use Statamic\API\File;
 use Statamic\API\Parse;
+use Statamic\API\PageFolder;
+use Statamic\API\Taxonomy;
 use Statamic\Extend\Tags;
 
 class AardvarkSeoTags extends Tags
@@ -79,7 +82,14 @@ class AardvarkSeoTags extends Tags
     private function getData()
     {
         $ctx = collect($this->context);
-        $combinedData = collect($this->storage->getYAML(AardvarkSeoController::STORAGE_KEY))->merge($ctx);
+
+        $base = collect($this->storage->getYAML(AardvarkSeoController::STORAGE_KEY));
+        $defaults = collect($this->getDefaults($ctx, Config::getDefaultLocale()));
+        $localisedDefaults = $defaults->merge($this->getDefaults($ctx, site_locale()));
+
+        $defaultData = $base->merge($localisedDefaults);
+        $combinedData = $defaultData->merge($ctx);
+
         $this->rawData = $combinedData;
         return $this->parseData()->all();
     }
@@ -175,5 +185,31 @@ class AardvarkSeoTags extends Tags
                 'url' => $data_object->in($locale)->absoluteUrl(),
             ];
         })->all();
+    }
+
+    /**
+     * Return the default SEO values for the data described
+     * in the current context
+     *
+     * @param array $context
+     *
+     * @return array
+     */
+    private function getDefaults($ctx, $locale)
+    {
+        $class = (new \ReflectionClass($ctx->get('page_object')))->getShortName();
+        switch($class) {
+            case 'Entry':
+                $object = Collection::whereHandle($ctx->get('collection', ''));
+                break;
+            case 'Term':
+                $object = Taxonomy::whereHandle($ctx->get('taxonomy', ''));
+                break;
+            case 'Page':
+                $object = PageFolder::whereHandle('/') ?: PageFolder::create();
+                $object->path('/');
+                break;
+        };
+        return $object->get('aardvark_' . $locale, []);
     }
 }

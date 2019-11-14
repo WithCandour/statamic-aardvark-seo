@@ -51,7 +51,7 @@ class AardvarkSeoListener extends Listener
 
         $seo_section->add(function ($item) {
             $item->add(Nav::item('General')->route('aardvark-seo.general'));
-            $item->add(Nav::item('Content Defaults')->route('aardvark-seo.defaults'));
+            $item->add(Nav::item('Content defaults')->route('aardvark-seo.defaults'));
             $item->add(Nav::item('Marketing')->route('aardvark-seo.marketing'));
             $item->add(Nav::item('Social')->route('aardvark-seo.social'));
             $item->add(Nav::item('Redirects')->route('aardvark-seo.redirects')->badge('BETA'));
