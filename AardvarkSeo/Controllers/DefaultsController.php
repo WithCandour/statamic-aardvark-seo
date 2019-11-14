@@ -31,7 +31,7 @@ class DefaultsController extends Controller
     public function single(Request $request, $type, $slug)
     {
         $object = $this->getDataObject($type, $slug);
-        switch($type) {
+        switch ($type) {
             case 'collections':
                 $title = 'Collection: ' . $object->title();
                 break;
@@ -81,7 +81,7 @@ class DefaultsController extends Controller
         $object->set('aardvark_' . $request->locale, $data);
         $object->save();
 
-        switch($type) {
+        switch ($type) {
             case 'collections':
                 event(new CollectionSaved($object));
                 break;
@@ -107,7 +107,7 @@ class DefaultsController extends Controller
      */
     private function getDataObject($type, $slug)
     {
-        switch($type) {
+        switch ($type) {
             case 'collections':
                 $object = Collection::whereHandle($slug);
                 break;
@@ -134,14 +134,14 @@ class DefaultsController extends Controller
                 [
                     'count' => Page::all()->count(),
                     'slug' => 'pages',
-                    'title' => 'Pages'
+                    'title' => 'Pages',
                 ],
             ]),
         ];
 
         $collections = [
             'title' => 'Collections',
-            'items' => Collection::all()->map(function($collection) {
+            'items' => Collection::all()->map(function ($collection) {
                 return [
                     'count' => $collection->count(),
                     'slug' => $collection->path(),
@@ -152,7 +152,7 @@ class DefaultsController extends Controller
 
         $taxonomies = [
             'title' => 'Taxonomies',
-            'items' => Taxonomy::all()->map(function($taxonomy) {
+            'items' => Taxonomy::all()->map(function ($taxonomy) {
                 return [
                     'count' => $taxonomy->count(),
                     'slug' => $taxonomy->path(),
@@ -164,7 +164,7 @@ class DefaultsController extends Controller
         return compact('pages', 'collections', 'taxonomies');
     }
 
-     /**
+    /**
      * Get locales and their links
      *
      * @return array
@@ -181,12 +181,12 @@ class DefaultsController extends Controller
             }
 
             $locales[] = [
-                'name'        => $locale,
-                'label'       => Config::getLocaleName($locale),
-                'url'         => $url,
-                'is_active'   => $locale === app('request')->query('locale', Config::getDefaultLocale()),
+                'name' => $locale,
+                'label' => Config::getLocaleName($locale),
+                'url' => $url,
+                'is_active' => $locale === app('request')->query('locale', Config::getDefaultLocale()),
                 'has_content' => true,
-                'is_published'=> true
+                'is_published' => true,
             ];
         }
 

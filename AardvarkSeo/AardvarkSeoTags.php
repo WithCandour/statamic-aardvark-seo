@@ -198,7 +198,7 @@ class AardvarkSeoTags extends Tags
     private function getDefaults($ctx, $locale)
     {
         $class = (new \ReflectionClass($ctx->get('page_object')))->getShortName();
-        switch($class) {
+        switch ($class) {
             case 'Entry':
                 $object = Collection::whereHandle($ctx->get('collection', ''));
                 break;
@@ -209,7 +209,7 @@ class AardvarkSeoTags extends Tags
                 $object = PageFolder::whereHandle('/') ?: PageFolder::create();
                 $object->path('/');
                 break;
-        };
+        }
         return $object->get('aardvark_' . $locale, []);
     }
 }
