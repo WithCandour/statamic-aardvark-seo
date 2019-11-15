@@ -3,6 +3,7 @@
 namespace Statamic\Addons\AardvarkSeo;
 
 use Statamic\Addons\AardvarkSeo\Controllers\AardvarkSeoController;
+use Statamic\Addons\AardvarkSeo\Controllers\DefaultsController;
 use Statamic\API\Config;
 use Statamic\API\Collection;
 use Statamic\API\Data;
@@ -188,28 +189,15 @@ class AardvarkSeoTags extends Tags
     }
 
     /**
-     * Return the default SEO values for the data described
-     * in the current context
+     * Forward a call to the defaults controller getDefaults method
      *
-     * @param array $context
+     * @param array $ctx
+     * @param string $locale
      *
      * @return array
      */
     private function getDefaults($ctx, $locale)
     {
-        $class = (new \ReflectionClass($ctx->get('page_object')))->getShortName();
-        switch ($class) {
-            case 'Entry':
-                $object = Collection::whereHandle($ctx->get('collection', ''));
-                break;
-            case 'Term':
-                $object = Taxonomy::whereHandle($ctx->get('taxonomy', ''));
-                break;
-            case 'Page':
-                $object = PageFolder::whereHandle('/') ?: PageFolder::create();
-                $object->path('/');
-                break;
-        }
-        return $object->get('aardvark_' . $locale, []);
+        return DefaultsController::getDefaults($ctx, $locale);
     }
 }

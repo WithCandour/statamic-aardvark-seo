@@ -192,4 +192,31 @@ class DefaultsController extends Controller
 
         return $locales;
     }
+
+    /**
+     * Return the default SEO values for the data described
+     * in the current context
+     *
+     * @param array $context
+     * @param string $locale
+     *
+     * @return array
+     */
+    public static function getDefaults($ctx, $locale)
+    {
+        $class = (new \ReflectionClass($ctx->get('page_object')))->getShortName();
+        switch ($class) {
+            case 'Entry':
+                $object = Collection::whereHandle($ctx->get('collection', ''));
+                break;
+            case 'Term':
+                $object = Taxonomy::whereHandle($ctx->get('taxonomy', ''));
+                break;
+            case 'Page':
+                $object = PageFolder::whereHandle('/') ?: PageFolder::create();
+                $object->path('/');
+                break;
+        }
+        return $object->get('aardvark_' . $locale, []);
+    }
 }
