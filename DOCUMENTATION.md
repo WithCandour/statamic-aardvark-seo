@@ -79,3 +79,6 @@ The social media data can be accessed on the frontend through the `{{ aardvark-s
 
 ## Localization / Hreflang
 Aardvark SEO will automatically generate a list of `<link rel="alternate" hreflang="x">` tags for sites that are running multiple locales. Additionally you can manually configure alternate urls using the 'Alternate URLs' table in the on-page SEO settings.
+
+## Content defaults
+You can set default SEO options on a per-content option. For example, SEO options can be set at the collection level, allowing for section-specific values for fields like the OpenGraph share image etc. To control the defaults head to SEO > Content Defaults in the menu and click through to each collection / taxonomy individually.
