@@ -21,32 +21,6 @@ fields:
       use_meta_keywords:
         - true
     localizable: true
-  meta_preview:
-    display: Google search preview
-    type: aardvark_seo.meta_preview
-    localizable: true
-  urls_section:
-    type: section
-    display: URL Options
-  canonical_url:
-    display: 'Canonical URL'
-    type: text
-    localizable: true
-  localized_urls:
-    display: Alternate URLs
-    instructions: Create a list of urls for alternate locales
-    type: grid
-    add_row: Add a new locale
-    fields:
-      locale:
-        type: text
-        width: 30
-        placeholder: 'fr-fr'
-      url:
-        display: URL
-        type: text
-        placeholder: 'mysite.com/fr/'
-    localizable: true
   indexing_section:
     type: section
     display: Indexing and Sitemaps
@@ -61,40 +35,6 @@ fields:
     display: 'Nofollow links'
     instructions: 'Enabling this will prevent site crawlers from following on-page links'
     width: 50
-    localizable: true
-  sitemap_priority:
-    type: select
-    display: Sitemap priority
-    instructions: Set the priorty of this page in the sitemap (1.0 being the most important)
-    default: '0.5'
-    width: 50
-    options:
-      - '0.0'
-      - '0.1'
-      - '0.2'
-      - '0.3'
-      - '0.4'
-      - '0.5'
-      - '0.6'
-      - '0.7'
-      - '0.8'
-      - '0.9'
-      - '1.0'
-    localizable: true
-  sitemap_changefreq:
-    type: select
-    display: Change frequency
-    instructions: Set how often this page will change for the sitemap
-    width: 50
-    default: 'daily'
-    options:
-      - "always"
-      - "hourly"
-      - "daily"
-      - "weekly"
-      - "monthly"
-      - "yearly"
-      - "never"
     localizable: true
   share_section_facebook:
     type: section

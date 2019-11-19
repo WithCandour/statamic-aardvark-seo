@@ -3,10 +3,14 @@
 namespace Statamic\Addons\AardvarkSeo;
 
 use Statamic\Addons\AardvarkSeo\Controllers\AardvarkSeoController;
+use Statamic\Addons\AardvarkSeo\Controllers\DefaultsController;
 use Statamic\API\Config;
+use Statamic\API\Collection;
 use Statamic\API\Data;
 use Statamic\API\File;
 use Statamic\API\Parse;
+use Statamic\API\PageFolder;
+use Statamic\API\Taxonomy;
 use Statamic\Extend\Tags;
 
 class AardvarkSeoTags extends Tags
@@ -79,7 +83,14 @@ class AardvarkSeoTags extends Tags
     private function getData()
     {
         $ctx = collect($this->context);
-        $combinedData = collect($this->storage->getYAML(AardvarkSeoController::STORAGE_KEY))->merge($ctx);
+
+        $base = collect($this->storage->getYAML(AardvarkSeoController::STORAGE_KEY));
+        $defaults = collect($this->getDefaults($ctx, Config::getDefaultLocale()));
+        $localisedDefaults = $defaults->merge($this->getDefaults($ctx, site_locale()));
+
+        $defaultData = $base->merge($localisedDefaults);
+        $combinedData = $defaultData->merge($ctx);
+
         $this->rawData = $combinedData;
         return $this->parseData()->all();
     }
@@ -175,5 +186,18 @@ class AardvarkSeoTags extends Tags
                 'url' => $data_object->in($locale)->absoluteUrl(),
             ];
         })->all();
+    }
+
+    /**
+     * Forward a call to the defaults controller getDefaults method
+     *
+     * @param array $ctx
+     * @param string $locale
+     *
+     * @return array
+     */
+    private function getDefaults($ctx, $locale)
+    {
+        return DefaultsController::getDefaults($ctx, $locale);
     }
 }
