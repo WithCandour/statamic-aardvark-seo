@@ -89,15 +89,17 @@ class AardvarkSeoListener extends Listener
             'page_object' => $event->data,
         ];
 
-        switch ($event->type) {
-            case 'entry':
-                $collection = $event->data->collection();
-                $ctx['collection'] = $collection->path();
-                break;
-            case 'term':
-                $taxonomy = $event->data->taxonomy();
-                $ctx['taxonomy'] = $taxonomy->path();
-                break;
+        if($event->data) {
+            switch ($event->type) {
+                case 'entry':
+                    $collection = $event->data->collection();
+                    $ctx['collection'] = $collection->path();
+                    break;
+                case 'term':
+                    $taxonomy = $event->data->taxonomy();
+                    $ctx['taxonomy'] = $taxonomy->path();
+                    break;
+            }
         }
 
         $defaults = collect($this->getDefaults(collect($ctx), Config::getDefaultLocale()));

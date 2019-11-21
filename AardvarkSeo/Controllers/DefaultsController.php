@@ -204,6 +204,10 @@ class DefaultsController extends Controller
      */
     public static function getDefaults($ctx, $locale)
     {
+		if(!$ctx->get('page_object')) {
+            return [];
+		}
+
         $class = (new \ReflectionClass($ctx->get('page_object')))->getShortName();
         switch ($class) {
             case 'Entry':
