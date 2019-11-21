@@ -89,7 +89,7 @@ class AardvarkSeoListener extends Listener
             'page_object' => $event->data,
         ];
 
-        if($event->data) {
+        if ($event->data) {
             switch ($event->type) {
                 case 'entry':
                     $collection = $event->data->collection();
