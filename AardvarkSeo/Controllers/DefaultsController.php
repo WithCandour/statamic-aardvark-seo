@@ -217,10 +217,16 @@ class DefaultsController extends Controller
                 $object = Taxonomy::whereHandle($ctx->get('taxonomy', ''));
                 break;
             case 'Page':
+            case 'ExceptionRoute':
                 $object = PageFolder::whereHandle('/') ?: PageFolder::create();
                 $object->path('/');
                 break;
         }
+
+        if (empty($object)) {
+            return [];
+        }
+
         return $object->get('aardvark_' . $locale, []);
     }
 }
