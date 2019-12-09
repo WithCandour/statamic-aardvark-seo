@@ -13,6 +13,7 @@ use Statamic\API\File;
 use Statamic\API\Nav;
 use Statamic\API\YAML;
 use Statamic\API\Config;
+use Statamic\API\User;
 use Statamic\Extend\Listener;
 
 /**
