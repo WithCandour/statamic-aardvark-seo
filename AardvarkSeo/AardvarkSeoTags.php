@@ -64,6 +64,23 @@ class AardvarkSeoTags extends Tags
     }
 
     /**
+     * Return a generated canonical URL - this should contain pagination vars
+     * if any are set
+     *
+     * @return string
+     */
+    public function generatedCanonical()
+    {
+        $data = collect($this->getData());
+        $vars = $data->get('get');
+        $current_url = $data->get('current_url');
+        if ($vars && $page = collect($vars)->get('page')) {
+            $current_url .= '?page=' . urlencode($page);
+        }
+        return $current_url;
+    }
+
+    /**
      * Return a template file from this addon.
      *
      * @param string $name The name of the html view file
