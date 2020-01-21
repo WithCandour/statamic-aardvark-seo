@@ -36,10 +36,24 @@
 {{ /if }}
 
 {{# Favicon tag #}}
-{{ if global_favicon }}
+{{ if favicon_type === 'global' && global_favicon }}
   {{ asset:global_favicon }}
     <link rel="shortcut icon" href="{{ permalink }}">
   {{ /asset:global_favicon }}
+{{ elseif favicon_type === 'themed' }}
+  {{ if favicon_light_mode }}
+    {{ asset:favicon_light_mode }}
+      <link rel="shortcut icon" type="image/png" media="(prefers-color-scheme:light)" href="{{ permalink }}">
+    {{ /asset:favicon_light_mode }}
+  {{ /if }}
+  {{ if favicon_dark_mode }}
+    {{ asset:favicon_dark_mode }}
+      <link rel="shortcut icon" type="image/png" media="(prefers-color-scheme:dark)" href="{{ permalink }}">
+    {{ /asset:favicon_dark_mode }}
+  {{ /if }}
+  {{ if favicon_light_mode && favicon_dark_mode }}
+    <script src="https://unpkg.com/favicon-switcher@1.2.2/dist/index.js" crossorigin="anonymous" type="application/javascript"></script>
+  {{ /if }}
 {{ /if }}
 
 {{# Facebook OG tags #}}
