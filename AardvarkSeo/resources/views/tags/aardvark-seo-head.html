@@ -20,10 +20,18 @@
 {{# General default meta tags #}}
 <title>{{ meta_title or calculated_title }}</title>
 <meta name="description" content="{{ meta_description }}">
+
+{{ if canonical_url }}
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:url" content="{{ canonical_url }}">
+{{ else }}
+<link rel="canonical" href="{{ aardvark_seo:generated_canonical }}">
+<meta property="og:url" content="{{ aardvark_seo:generated_canonical }}">
+{{ /if }}
+
 {{ if use_meta_keywords }}
 <meta name="keywords" content="{{ meta_keywords join=', ' }}">
 {{ /if }}
-<link rel="canonical" href="{{ canonical_url or permalink }}">
 {{ if auto_alternate_locales }}
 {{ auto_alternate_locales }}
 <link rel="alternate" hreflang="{{ locale }}" href="{{ url }}">
@@ -48,7 +56,6 @@
 <meta property="og:description" content="{{ facebook_description or meta_description }}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="{{ locale }}">
-<meta property="og:url" content="{{ canonical_url or permalink }}">
 {{ if calculated_facebook_image }}
 {{ asset:calculated_facebook_image }}
 <meta property="og:image" content="{{ permalink }}">
