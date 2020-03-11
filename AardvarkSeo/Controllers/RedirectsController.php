@@ -82,7 +82,8 @@ class RedirectsController extends Controller
         $routes = ['redirect' => [], 'vanity' => []];
         foreach ($data as $key => $redirect) {
             $type = $redirect['status_code'] === '301' ? 'redirect' : 'vanity';
-            $routes[$type][$redirect['source']] = $redirect['target'];
+            $source = preg_replace('/\/$/', '', $redirect['source']);
+            $routes[$type][$source] = $redirect['target'];
         }
         return $routes;
     }
