@@ -106,7 +106,21 @@ class AardvarkSeoTags extends Tags
         $localisedDefaults = $defaults->merge($this->getDefaults($ctx, site_locale()));
 
         $defaultData = $base->merge($localisedDefaults);
-        $combinedData = $defaultData->merge($ctx);
+
+        $ctx = $defaultData->merge($ctx);
+
+        $booleanFields = [
+            'page_no_index',
+            'no_follow_links',
+            'use_meta_keywords',
+        ];
+
+        $combinedData = $ctx->mapWithKeys(function ($field, $fieldName) use ($defaultData, $booleanFields) {
+            if (in_array($fieldName, $booleanFields) && $defaultData->get($fieldName)) {
+                return [$fieldName => true];
+            }
+            return [$fieldName => $field];
+        });
 
         $this->rawData = $combinedData;
         return $this->parseData()->all();
