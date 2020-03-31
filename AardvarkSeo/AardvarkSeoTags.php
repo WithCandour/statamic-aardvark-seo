@@ -112,10 +112,10 @@ class AardvarkSeoTags extends Tags
         $booleanFields = [
             'page_no_index',
             'no_follow_links',
-            'use_meta_keywords'
+            'use_meta_keywords',
         ];
 
-        $combinedData = $ctx->mapWithKeys(function($field, $fieldName) use ($defaultData, $booleanFields) {
+        $combinedData = $ctx->mapWithKeys(function ($field, $fieldName) use ($defaultData, $booleanFields) {
             if (in_array($fieldName, $booleanFields) && $defaultData->get($fieldName)) {
                 return [$fieldName => true];
             }
