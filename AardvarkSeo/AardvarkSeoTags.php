@@ -11,6 +11,7 @@ use Statamic\API\File;
 use Statamic\API\Parse;
 use Statamic\API\PageFolder;
 use Statamic\API\Taxonomy;
+use Statamic\API\URL;
 use Statamic\Extend\Tags;
 
 class AardvarkSeoTags extends Tags
@@ -78,6 +79,18 @@ class AardvarkSeoTags extends Tags
             $current_url .= '?page=' . urlencode($page);
         }
         return $current_url;
+    }
+
+    /**
+     * Return an 'un-localised' version of a URL
+     *
+     * @return string
+     */
+    public function unlocalise()
+    {
+        $url = $this->get('url');
+        $default_locale = Config::getDefaultLocale();
+        return URL::makeAbsolute($url, $default_locale);
     }
 
     /**
