@@ -65,6 +65,8 @@ Another json-ld attribute that will get automatically generated is the breadcrum
 
 Aardvark provides you with full control over how your site looks when shared on social media through generating data and filling opengraph and twitter meta tags. In addition you can set links to each of your social media profiles in the SEO > Social menu.
 
+We have a list of default social types but you may define your own in the addon settings, use the grid to add items to the 'Social Icon' dropdown.
+
 The social media data can be accessed on the frontend through the `{{ aardvark-seo:socials }}` tag, use it to loop through the provided social media links.
 
 ### Socials tag example
