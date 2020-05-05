@@ -6,7 +6,6 @@ use Statamic\Addons\Suggest\Modes\AbstractMode;
 
 class SocialIconSuggestMode extends AbstractMode
 {
-
     public $default_socials = [
         ['value' => 'amazon', 'text' => 'Amazon'],
         ['value' => 'android', 'text' => 'Android'],
