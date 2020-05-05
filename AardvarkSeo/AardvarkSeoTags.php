@@ -83,6 +83,8 @@ class AardvarkSeoTags extends Tags
 
     /**
      * Return an 'un-localised' version of a URL
+     *
+     * @return string
      */
     public function unlocalise()
     {

@@ -115,7 +115,7 @@
     "url": "{{ site_url }}",
     "name": "{{ if company_or_person === 'company' }}{{ company_name}}{{ else }}{{ your_name }}{{ /if }}",
     {{ if company_or_person === 'company' && company_logo != '' }}
-    "logo": "{{ asset:company_logo }}{{ permalink }}{{ /asset:company_logo}}",
+    "logo": "{{ asset:company_logo }}{{ aardvark_seo:unlocalise :url='url' }}{{ /asset:company_logo }}",
     {{ /if }}
     "sameAs": [
       {{ social_links }}"{{ url}}"{{ if !last }},
