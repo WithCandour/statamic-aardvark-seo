@@ -45,15 +45,13 @@ class SocialIconSuggestMode extends AbstractMode
      */
     public function suggestions()
     {
-
         $custom_socials = collect($this->getConfig('custom_socials'))->map(function ($social) {
             return [
                 'value' => $social['social'],
-                'text' => $social['label']
+                'text' => $social['label'],
             ];
         });
 
         return collect($this->default_socials)->merge($custom_socials)->sortBy('text')->values();
-
     }
 }
