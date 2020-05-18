@@ -108,9 +108,11 @@ class Sitemap
                 return !is_null($collection->route());
             })
             ->map(function ($collection) {
+                $aardvark_data = $collection->get('aardvark_' . site_locale(), null);
                 return [
                     'type' => 'collection',
                     'handle' => $collection->path(),
+                    'indexable' => $aardvark_data ? !collect($aardvark_data)->get('page_no_index', false) : true,
                 ];
             });
         $taxonomies = collect(Taxonomy::all())
@@ -118,16 +120,22 @@ class Sitemap
                 return !is_null($taxonomy->route());
             })
             ->map(function ($taxonomy) {
+                $aardvark_data = $taxonomy->get('aardvark_' . site_locale(), null);
                 return [
                     'type' => 'taxonomy',
                     'handle' => $taxonomy->path(),
+                    'indexable' => $aardvark_data ? !collect($aardvark_data)->get('page_no_index', false) : true,
                 ];
             });
-        $pages = [['type' => 'pages', 'handle' => 'pages']];
+        $pages = [['type' => 'pages', 'handle' => 'pages', 'indexable' => true]];
 
         $sitemaps = collect([$collections, $taxonomies, $pages])->collapse();
 
-        $sitemap_objects = $sitemaps->map(function ($sitemap) {
+        $filtered_sitemaps = $sitemaps->filter(function($content_type) {
+            return $content_type['indexable'];
+        });
+
+        $sitemap_objects = $filtered_sitemaps->map(function ($sitemap) {
             $data = collect($sitemap);
             return new Sitemap($data->get('type'), $data->get('handle'));
         });

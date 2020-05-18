@@ -123,9 +123,10 @@ class SitemapController extends Controller
      * Clear the sitemap index cache - this should be
      * called in parallel to clearing any of the 'sub-sitemaps'.
      */
-    public static function clearIndexCache()
+    public static function clearIndexCache($locale)
     {
-        return Cache::forget('sitemap.index');
+        $clearLocale = $locale ?: site_locale();
+        return Cache::forget('sitemap.index.' . $clearLocale);
     }
 
     /**
