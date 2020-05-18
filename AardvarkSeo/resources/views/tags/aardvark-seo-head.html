@@ -108,6 +108,7 @@
 {{ if baidu_verification_code }}<meta name="baidu-site-verification" content="{{ baidu_verification_code }}">{{ /if }}
 
 {{# Top level schema #}}
+{{ if permalink === homepage }}
 <script type="application/ld+json" id="schema">
   {
     "@context": "http://schema.org",
@@ -123,6 +124,7 @@
     ]
   }
 </script>
+{{ /if }}
 
 {{# Breadcrumbs trail #}}
 {{ if enable_breadcrumbs && permalink !== homepage }}
