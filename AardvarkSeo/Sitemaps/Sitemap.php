@@ -131,7 +131,7 @@ class Sitemap
 
         $sitemaps = collect([$collections, $taxonomies, $pages])->collapse();
 
-        $filtered_sitemaps = $sitemaps->filter(function($content_type) {
+        $filtered_sitemaps = $sitemaps->filter(function ($content_type) {
             return $content_type['indexable'];
         });
 
