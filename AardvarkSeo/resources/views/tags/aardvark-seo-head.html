@@ -63,8 +63,8 @@
 <meta property="og:image:height" content="{{ height }}">
 <meta property="og:image:alt" content="{{ alt }}">
 {{ /asset:calculated_facebook_image }}
-{{ else }}
-<meta property="og:image" content="{{ site_url ensure_right='apple-touch-icon.png' }}">
+{{ elseif og_fallback_field }}
+<meta property="og:image" content="{{ page:{{ og_fallback_field }} }}">
 {{ /if }}
 
 <meta name="twitter:card" content="{{ calculated_twitter_card_type }}">
