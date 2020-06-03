@@ -74,7 +74,7 @@ class AardvarkSeoTags extends Tags
     {
         $data = collect($this->getData());
         $vars = $data->get('get');
-        $current_url = $data->get('current_url');
+        $current_url = $data->get('permalink');
         if ($vars && $page = collect($vars)->get('page')) {
             $current_url .= '?page=' . urlencode($page);
         }
