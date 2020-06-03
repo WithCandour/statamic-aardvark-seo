@@ -28,6 +28,9 @@ sections:
         type: assets
         max_files: 1
         folder: seo
+      og_fallback_field:
+        type: text
+        display: Image fallback field
   twitter:
     fields:
       twitter_username:
