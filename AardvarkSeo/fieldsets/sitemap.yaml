@@ -27,3 +27,11 @@ fields:
       483840: '1 Year'
     show_when:
       enable_sitemap: true
+  exclude_section:
+    type: section
+    display: Exclude content
+  exclude_collections:
+    type: collections
+  exclude_pages:
+    type: pages
+    instructions: Child pages will also be excluded from the sitemap.

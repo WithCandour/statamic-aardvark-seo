@@ -3,6 +3,7 @@
 namespace Statamic\Addons\AardvarkSeo\Sitemaps;
 
 use Statamic\Addons\AardvarkSeo\Sitemaps\SitemapItem;
+use Statamic\Addons\AardvarkSeo\Controllers\SitemapController;
 use Statamic\API\Collection;
 use Statamic\API\Config;
 use Statamic\API\Page;
@@ -29,12 +30,48 @@ class Sitemap
     }
 
     /**
+     * Return the storage data for the sitemap module.
+     *
+     * @return Illuminate\Support\Collection
+     */
+    private function getStore()
+    {
+        return collect($this->storage->getYAML(SitemapController::STORAGE_KEY));
+    }
+
+    /**
+     * Get pages that are allowed in the main sitemap
+     */
+    private function getPageObjects()
+    {
+        $excludedPages = $this->getStore()->get('exclude_pages');
+        return Page::all()->filter(function ($page) use ($excludedPages) {
+            if (in_array ($page->id(), $excludedPages) ) {
+                return false;
+            }
+
+            $excluded = false;
+            $segments = explode('/', $page->url());
+
+            while (array_pop($segments) && !$excluded) {
+                $toCheck = Page::whereUri(implode('/', $segments));
+                if($toCheck && in_array($toCheck->id(), $excludedPages)) {
+                    $excluded = true;
+                }
+            }
+
+            return !$excluded;
+        });
+    }
+
+    /**
      * Return a list of entries for the sitemap to display.
      *
      * @return array
      */
     public function getSitemapItems()
     {
+
         switch ($this->type) {
             case 'collection':
                 $items = Collection::whereHandle($this->handle)->entries();
@@ -43,7 +80,7 @@ class Sitemap
                 $items = Taxonomy::whereHandle($this->handle)->terms();
                 break;
             default:
-                $items = Page::all();
+                $items = $this->getPageObjects();
         }
 
         $items = $items->filter(function ($item) {

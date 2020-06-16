@@ -49,10 +49,20 @@ class SitemapController extends Controller
         $locale = site_locale();
         $view = Cache::remember("sitemap.index.{$locale}", $this->getCacheExpiration(), function () {
             $siteUrl = Config::getSiteUrl();
+
+            // Exclude collections from the index
+            $excludedCollections = $this->getStore()->get('exclude_collections');
+            $allSitemaps = collect(Sitemap::all())->filter(function ($sitemap) use ($excludedCollections) {
+                if ($sitemap->type === 'collection' && in_array($sitemap->handle, $excludedCollections)) {
+                    return false;
+                }
+                return true;
+            });
+
             return $this->view('sitemap_index', [
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
                 'xslLink' => '<?xml-stylesheet type="text/xsl" href="' . $siteUrl . '/seo-sitemap.xsl"?>',
-                'sitemaps' => Sitemap::all(),
+                'sitemaps' => $allSitemaps->toArray(),
             ])->render();
         });
 
