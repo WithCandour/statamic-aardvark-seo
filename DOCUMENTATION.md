@@ -22,6 +22,11 @@ XML Sitemaps will get automatically generated for your site, the default url for
 
 The priority and change frequency can be configured on a per-page basis under the 'SEO' section.
 
+### Excluding content
+Head to the sitemap settings in the CMS (seo -> sitemap) to exclude single collections or pages from appearing in the sitemap.
+
+Child pages of excluded pages will also be excluded from the sitemap. To exclude a page without excluding it's children you can set it to noindex in the on-page settings which will prevent it from appearing in the pages sitemap.
+
 ## Redirects
 
 You can manage the list of redirects for your site from within the control panel, the SEO > Redirects page is the place to go for this feature.
