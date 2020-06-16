@@ -46,7 +46,7 @@ class Sitemap
     {
         $excludedPages = $this->getStore()->get('exclude_pages');
         return Page::all()->filter(function ($page) use ($excludedPages) {
-            if (in_array ($page->id(), $excludedPages) ) {
+            if (in_array($page->id(), $excludedPages)) {
                 return false;
             }
 
@@ -55,7 +55,7 @@ class Sitemap
 
             while (array_pop($segments) && !$excluded) {
                 $toCheck = Page::whereUri(implode('/', $segments));
-                if($toCheck && in_array($toCheck->id(), $excludedPages)) {
+                if ($toCheck && in_array($toCheck->id(), $excludedPages)) {
                     $excluded = true;
                 }
             }
@@ -71,7 +71,6 @@ class Sitemap
      */
     public function getSitemapItems()
     {
-
         switch ($this->type) {
             case 'collection':
                 $items = Collection::whereHandle($this->handle)->entries();
