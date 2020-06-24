@@ -1,0 +1,20 @@
+{
+    "name": "withcandour/aardvark-seo",
+    "type": "statamic-addon",
+    "autoload": {
+        "psr-4": {
+            "WithCandour\\AardvarkSeo\\": "src"
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Aardvark SEO",
+            "description": "Aardvark SEO addon"
+        },
+        "laravel": {
+            "providers": [
+                "WithCandour\\AardvarkSeo\\ServiceProvider"
+            ]
+        }
+    }
+}
