@@ -11,6 +11,8 @@ class SitemapController extends Controller implements Publishable
 {
     public function index()
     {
+        $this->authorize('view aardvark sitemap settings');
+
         $data = $this->getData();
 
         $blueprint = $this->getBlueprint();
@@ -32,6 +34,8 @@ class SitemapController extends Controller implements Publishable
 
     public function store(\Illuminate\Http\Request $request)
     {
+        $this->authorize('update aardvark sitemap settings');
+
         $blueprint = $this->getBlueprint();
 
         $fields = $blueprint->fields()->addValues($request->all());
