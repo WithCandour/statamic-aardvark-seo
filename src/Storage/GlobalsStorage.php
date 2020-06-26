@@ -13,17 +13,24 @@ class GlobalsStorage implements Storage
      * Retrieve YAML data from storage
      *
      * @param string $handle
+     * @param bool $returnCollection
      *
      * @return array
      */
-    public static function getYaml(string $handle)
+    public static function getYaml(string $handle, bool $returnCollection = false)
     {
         $path = storage_path(implode("/", [
             'statamic/addons/aardvark-seo',
             self::prefix . '_' . "{$handle}.yaml"
         ]));
 
-        return YAML::parse(File::get($path));
+        $data = YAML::parse(File::get($path));
+
+        if ($returnCollection) {
+            return collect($data);
+        }
+
+        return $data;
     }
 
     /**

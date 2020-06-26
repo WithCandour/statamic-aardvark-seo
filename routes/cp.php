@@ -16,6 +16,15 @@ Route::namespace('\WithCandour\AardvarkSeo\Http\Controllers\CP')
         Route::resource('sitemap', 'SitemapController')->only([
             'index', 'store'
         ]);
+
+        Route::resource('marketing', 'MarketingController')->only([
+            'index', 'store'
+        ]);
+
+        Route::resource('blueprints', 'BlueprintsController')->only([
+            'index', 'store'
+        ]);
+
     });
 
 

@@ -5,9 +5,18 @@ namespace WithCandour\AardvarkSeo;
 use Statamic\Providers\AddonServiceProvider;
 use Statamic\Facades\CP\Nav;
 use Illuminate\Support\Facades\Route;
+use Statamic\Events\Data\PublishBlueprintFound;
+use Statamic\Events\Data\BlueprintFoundOnFile;
+use WithCandour\AardvarkSeo\Listeners\AppendSeoFieldsListener;
+use WithCandour\AardvarkSeo\Console\Commands\BlueprintsUpdate;
 
 class ServiceProvider extends AddonServiceProvider
 {
+
+    protected $commands = [
+        BlueprintsUpdate::class
+    ];
+
     protected $tags = [
         \WithCandour\AardvarkSeo\Tags\AardvarkSeoTags::class
     ];
@@ -16,6 +25,18 @@ class ServiceProvider extends AddonServiceProvider
         'cp'  => __DIR__ . '/../routes/cp.php',
         'web' => __DIR__ . '/../routes/web.php'
     ];
+
+    /**
+     * We're manually adding the fields to blueprints at the mo' as there's no way
+     * to save the custom data against the entry
+     *
+     * https://github.com/statamic/cms/pull/1990/files
+     */
+    // protected $listen = [
+    //     PublishBlueprintFound::class => [
+    //         AppendSeoFieldsListener::class
+    //     ]
+    // ];
 
     public function boot()
     {
@@ -49,7 +70,9 @@ class ServiceProvider extends AddonServiceProvider
                 ->children([
                     // Settings categories
                     $nav->item(__('aardvark-seo::general.index'))->route('aardvark-seo.general.index'),
-                    $nav->item(__('aardvark-seo::sitemap.singular'))->route('aardvark-seo.sitemap.index')
+                    $nav->item(__('aardvark-seo::marketing.singular'))->route('aardvark-seo.marketing.index'),
+                    $nav->item(__('aardvark-seo::sitemap.singular'))->route('aardvark-seo.sitemap.index'),
+                    $nav->item(__('aardvark-seo::blueprint.plural'))->route('aardvark-seo.blueprints.index'),
                 ]);
 
         });
