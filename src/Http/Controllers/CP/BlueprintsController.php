@@ -21,7 +21,7 @@ class BlueprintsController extends Controller implements Publishable
 
         $crumbs = Breadcrumbs::make([
             ['text' => 'Aardvark SEO', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings')],
-            ['text' => 'Content Defaults', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings/blueprints')],
+            ['text' => 'Blueprints Settings', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings/blueprints')],
         ]);
 
         return view('aardvark-seo::cp.settings.blueprints', [

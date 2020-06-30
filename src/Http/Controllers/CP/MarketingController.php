@@ -21,7 +21,7 @@ class MarketingController extends Controller implements Publishable
 
         $crumbs = Breadcrumbs::make([
             ['text' => 'Aardvark SEO', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings')],
-            ['text' => 'Content Defaults', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings/marketing')],
+            ['text' => 'Marketing Settings', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings/marketing')],
         ]);
 
         return view('aardvark-seo::cp.settings.marketing', [

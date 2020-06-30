@@ -22,7 +22,7 @@ class GeneralController extends Controller implements Publishable
 
         $crumbs = Breadcrumbs::make([
             ['text' => 'Aardvark SEO', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings')],
-            ['text' => 'Content Defaults', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings/general')],
+            ['text' => 'General Settings', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings/general')],
         ]);
 
         return view('aardvark-seo::cp.settings.general', [

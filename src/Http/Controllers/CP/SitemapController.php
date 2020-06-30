@@ -21,7 +21,7 @@ class SitemapController extends Controller implements Publishable
 
         $crumbs = Breadcrumbs::make([
             ['text' => 'Aardvark SEO', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings')],
-            ['text' => 'Content Defaults', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings/sitemap')],
+            ['text' => 'Sitemap Settings', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings/sitemap')],
         ]);
 
         return view('aardvark-seo::cp.settings.sitemap', [
