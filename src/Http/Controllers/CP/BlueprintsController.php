@@ -3,6 +3,7 @@
 namespace WithCandour\AardvarkSeo\Http\Controllers\CP;
 
 use Statamic\CP\Breadcrumbs;
+use Statamic\Facades\Site;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Interfaces\Publishable;
 use WithCandour\AardvarkSeo\Blueprints\CP\BlueprintsSettingsBlueprint;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
@@ -19,8 +20,8 @@ class BlueprintsController extends Controller implements Publishable
         $fields = $blueprint->fields()->addValues($data)->preProcess();
 
         $crumbs = Breadcrumbs::make([
-            ['text' => 'Aardvark SEO', 'url' => '/cp/aardvark-seo/settings'],
-            ['text' => 'Blueprint Settings', 'url' => '/blueprints'],
+            ['text' => 'Aardvark SEO', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings')],
+            ['text' => 'Content Defaults', 'url' => url(config('statamic.cp.route') . '/aardvark-seo/settings/blueprints')],
         ]);
 
         return view('aardvark-seo::cp.settings.blueprints', [
@@ -57,7 +58,7 @@ class BlueprintsController extends Controller implements Publishable
      */
     public function getData()
     {
-        return AardvarkStorage::getYaml('blueprints');
+        return AardvarkStorage::getYaml('blueprints', Site::selected());
     }
 
     /**
@@ -65,6 +66,6 @@ class BlueprintsController extends Controller implements Publishable
      */
     public function putData($data)
     {
-        return AardvarkStorage::putYaml('blueprints', $data);
+        return AardvarkStorage::putYaml('blueprints', Site::selected(), $data);
     }
 }

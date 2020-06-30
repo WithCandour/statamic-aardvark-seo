@@ -25,7 +25,9 @@ Route::namespace('\WithCandour\AardvarkSeo\Http\Controllers\CP')
             'index', 'store'
         ]);
 
-    });
+        Route::resource('defaults', 'DefaultsController')->only([
+            'index', 'edit', 'update'
+        ]);
 
-
     });
+});

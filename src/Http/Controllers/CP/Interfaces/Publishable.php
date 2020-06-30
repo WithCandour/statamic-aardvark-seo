@@ -4,6 +4,19 @@ namespace WithCandour\AardvarkSeo\Http\Controllers\CP\Interfaces;
 
 interface Publishable
 {
+
+    /**
+     * Return the view for the publish form
+     */
+    public function index();
+
+    /**
+     * Store the data from the publish form
+     *
+     * @param \Illuminate\Http\Request $request
+     */
+    public function store(\Illuminate\Http\Request $request);
+
     /**
      * Return the Statamic blueprint which this form uses
      *
@@ -17,4 +30,11 @@ interface Publishable
      * @return array
      */
     public function getData();
+
+    /**
+     * Store the data using our Storage API
+     *
+     * @param array $data
+     */
+    public function putData(array $data);
 }

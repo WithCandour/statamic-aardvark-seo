@@ -89,6 +89,9 @@ class ServiceProvider extends AddonServiceProvider
                     $nav->item(__('aardvark-seo::general.index'))
                         ->route('aardvark-seo.general.index')
                         ->can('view aardvark general settings'),
+                    $nav->item(__('aardvark-seo::defaults.index'))
+                        ->route('aardvark-seo.defaults.index')
+                        ->can('view aardvark defaults settings'),
                     $nav->item(__('aardvark-seo::marketing.singular'))
                         ->route('aardvark-seo.marketing.index')
                         ->can('view aardvark marketing settings'),
@@ -122,6 +125,10 @@ class ServiceProvider extends AddonServiceProvider
             [
                 'value' => 'sitemap',
                 'label' => 'Sitemap'
+            ],
+            [
+                'value' => 'defaults',
+                'label' => 'Defaults'
             ],
             [
                 'value' => 'blueprints',

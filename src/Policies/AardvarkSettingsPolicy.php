@@ -9,7 +9,7 @@ class AardvarkSettingsPolicy
 {
     use HandlesAuthorization;
 
-    public function index(User $user, $test)
+    public function index(User $user, string $handle = 'general')
     {
         return $user->hasPermission("view aardvark {$handle} settings");
     }

@@ -43,6 +43,22 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                                     '483840' => '1 Year'
                                 ],
                             ]
+                        ],
+                        [
+                            'handle' => 'exclude_content_section',
+                            'field' => [
+                                'type' => 'section',
+                                'display' => 'Exclude Content',
+                                'listable' => 'hidden'
+                            ]
+                        ],
+                        [
+                            'handle' => 'exclude_collections',
+                            'field' => [
+                                'type' => 'collections',
+                                'display' => 'Exclude Collections',
+                                'instructions' => 'Select collections which you would like to exclude from the sitemap.'
+                            ]
                         ]
                     ]
                 ]
