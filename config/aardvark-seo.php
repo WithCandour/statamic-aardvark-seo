@@ -2,5 +2,6 @@
 
 return [
     'asset_container' => 'assets',
-    'asset_folder' => 'seo'
+    'asset_folder' => 'seo',
+    'custom_socials' => []
 ];

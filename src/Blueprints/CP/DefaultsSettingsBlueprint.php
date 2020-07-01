@@ -92,50 +92,6 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                             ]
                         ],
                         [
-                            'handle' => 'sitemap_priority',
-                            'field' => [
-                                'type' => 'select',
-                                'display' => __('aardvark-seo::onpage.fields.sitemap_priority.display'),
-                                'instructions' => __('aardvark-seo::onpage.fields.sitemap_priority.instruct'),
-                                'default' => '0.5',
-                                'width' => 50,
-                                'localizable' => true,
-                                'options' => [
-                                    '0.0',
-                                    '0.1',
-                                    '0.2',
-                                    '0.3',
-                                    '0.4',
-                                    '0.5',
-                                    '0.6',
-                                    '0.7',
-                                    '0.8',
-                                    '0.9',
-                                    '1.0'
-                                ]
-                            ]
-                        ],
-                        [
-                            'handle' => 'sitemap_changefreq',
-                            'field' => [
-                                'type' => 'select',
-                                'display' => __('aardvark-seo::onpage.fields.sitemap_changefreq.display'),
-                                'instructions' => __('aardvark-seo::onpage.fields.sitemap_changefreq.instruct'),
-                                'default' => 'daily',
-                                'width' => 50,
-                                'localizable' => true,
-                                'options' => [
-                                    'always',
-                                    'hourly',
-                                    'daily',
-                                    'weekly',
-                                    'monthly',
-                                    'yearly',
-                                    'never'
-                                ]
-                            ]
-                        ],
-                        [
                             'handle' => 'share_section_og',
                             'field' => [
                                 'type' => 'section',
@@ -181,11 +137,22 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                             ]
                         ],
                         [
+                            'handle' => 'override_twitter_settings',
+                            'field' => [
+                                'type' => 'toggle',
+                                'display' => 'Override the twitter share settings for this content',
+                                'localizable' => true
+                            ]
+                        ],
+                        [
                             'handle' => 'twitter_title',
                             'field' => [
                                 'type' => 'text',
                                 'display' => __('aardvark-seo::onpage.fields.twitter_title.display'),
-                                'localizable' => true
+                                'localizable' => true,
+                                'if' => [
+                                    'override_twitter_settings' => 'equals true'
+                                ]
                             ]
                         ],
                         [
@@ -193,6 +160,9 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                             'field' => [
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.twitter_description.display'),
+                                'if' => [
+                                    'override_twitter_settings' => 'equals true'
+                                ],
                             ]
                         ],
                         [
@@ -207,6 +177,9 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'options' => [
                                     'summary' => 'Summary Card',
                                     'summary_large_image' => 'Summary Card with Large Image'
+                                ],
+                                'if' => [
+                                    'override_twitter_settings' => 'equals true'
                                 ]
                             ]
                         ],
@@ -222,6 +195,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'folder' => config('aardvark-seo.asset_folder'),
                                 'localizable' => true,
                                 'if' => [
+                                    'override_twitter_settings' => 'equals true',
                                     'twitter_card_type_page' => 'equals summary'
                                 ]
                             ]
@@ -238,6 +212,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'folder' => config('aardvark-seo.asset_folder'),
                                 'localizable' => true,
                                 'if' => [
+                                    'override_twitter_settings' => 'equals true',
                                     'twitter_card_type_page' => 'equals summary_large_image'
                                 ]
                             ]

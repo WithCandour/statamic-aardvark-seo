@@ -58,6 +58,9 @@ class ServiceProvider extends AddonServiceProvider
 
         // Load in custom addon config
         $this->mergeConfigFrom(__DIR__ . '/../config/aardvark-seo.php', 'aardvark-seo');
+        $this->publishes([
+            __DIR__ . '/../config/aardvark-seo.php' => config_path('aardvark-seo.php')
+        ], 'config');
 
         // Set up permissions
         $this->bootPermissions();
@@ -95,6 +98,9 @@ class ServiceProvider extends AddonServiceProvider
                     $nav->item(__('aardvark-seo::marketing.singular'))
                         ->route('aardvark-seo.marketing.index')
                         ->can('view aardvark marketing settings'),
+                    $nav->item(__('aardvark-seo::social.singular'))
+                        ->route('aardvark-seo.social.index')
+                        ->can('view aardvark social settings'),
                     $nav->item(__('aardvark-seo::sitemap.singular'))
                         ->route('aardvark-seo.sitemap.index')
                         ->can('view aardvark sitemap settings'),

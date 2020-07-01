@@ -5,6 +5,7 @@ namespace WithCandour\AardvarkSeo\Console\Commands;
 use Illuminate\Console\Command;
 use Statamic\Console\RunsInPlease;
 use Statamic\Facades\Blueprint;
+use Statamic\Facades\Site;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
 use WithCandour\AardvarkSeo\Blueprints\CP\OnPageSeoBlueprint;
 
@@ -18,7 +19,7 @@ class BlueprintsUpdate extends Command
 
     public function handle()
     {
-        $settings = AardvarkStorage::getYaml('blueprints', true);
+        $settings = AardvarkStorage::getYaml('blueprints', Site::current(), true);
         $excluded = $settings->get('exclude_blueprints', ['asset', 'user']);
 
         $all = Blueprint::all();

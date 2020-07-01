@@ -227,11 +227,22 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                             ]
                         ],
                         [
+                            'handle' => 'override_twitter_settings',
+                            'field' => [
+                                'type' => 'toggle',
+                                'display' => 'Override the twitter share settings for this page',
+                                'localizable' => true
+                            ]
+                        ],
+                        [
                             'handle' => 'twitter_title',
                             'field' => [
                                 'type' => 'text',
                                 'display' => __('aardvark-seo::onpage.fields.twitter_title.display'),
-                                'localizable' => true
+                                'localizable' => true,
+                                'if' => [
+                                    'override_twitter_settings' => 'equals true'
+                                ]
                             ]
                         ],
                         [
@@ -239,6 +250,20 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                             'field' => [
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.twitter_description.display'),
+                                'if' => [
+                                    'override_twitter_settings' => 'equals true'
+                                ]
+                            ]
+                        ],
+                        [
+                            'handle' => 'override_twitter_card_settings',
+                            'field' => [
+                                'type' => 'toggle',
+                                'display' => 'Override the twitter card settings for this page',
+                                'localizable' => true,
+                                'if' => [
+                                    'override_twitter_settings' => 'equals true'
+                                ]
                             ]
                         ],
                         [
@@ -253,6 +278,10 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                                 'options' => [
                                     'summary' => 'Summary Card',
                                     'summary_large_image' => 'Summary Card with Large Image'
+                                ],
+                                'if' => [
+                                    'override_twitter_card_settings' => 'equals true',
+                                    'override_twitter_settings' => 'equals true'
                                 ]
                             ]
                         ],
@@ -268,6 +297,8 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                                 'folder' => config('aardvark-seo.asset_folder'),
                                 'localizable' => true,
                                 'if' => [
+                                    'override_twitter_settings' => 'equals true',
+                                    'override_twitter_card_settings' => 'equals true',
                                     'twitter_card_type_page' => 'equals summary'
                                 ]
                             ]
@@ -284,6 +315,8 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                                 'folder' => config('aardvark-seo.asset_folder'),
                                 'localizable' => true,
                                 'if' => [
+                                    'override_twitter_settings' => 'equals true',
+                                    'override_twitter_card_settings' => 'equals true',
                                     'twitter_card_type_page' => 'equals summary_large_image'
                                 ]
                             ]

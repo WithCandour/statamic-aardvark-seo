@@ -21,6 +21,10 @@ Route::namespace('\WithCandour\AardvarkSeo\Http\Controllers\CP')
             'index', 'store'
         ]);
 
+        Route::resource('social', 'SocialController')->only([
+            'index', 'store'
+        ]);
+
         Route::resource('blueprints', 'BlueprintsController')->only([
             'index', 'store'
         ]);

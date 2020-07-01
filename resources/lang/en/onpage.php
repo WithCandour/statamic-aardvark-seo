@@ -76,7 +76,7 @@ return [
             'instruct' => 'Control how this page looks when shared on Twitter, this data will automatically get inherited from the OG data but you may use the following fields to override for Twitter.',
         ],
         'twitter_title' => [
-            'display' => 'Twitter Tile',
+            'display' => 'Twitter Title',
         ],
         'twitter_description' => [
             'display' => 'Twitter Description',
