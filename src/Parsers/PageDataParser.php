@@ -40,9 +40,9 @@ class PageDataParser
             if($bp_field = $fields_to_map->get($field)) {
                 switch($bp_field['type']) {
                     case 'toggle':
-                        return $defaults->get($field) ?: $value->raw();
+                        return $defaults->get($field) ?: ($value ? $value->raw() : null);
                     default:
-                        return $value->raw() ? $value : $defaults->get($field);
+                        return $value && $value->raw() ? $value : $defaults->get($field);
                 }
             }
             return $value;
@@ -142,7 +142,7 @@ class PageDataParser
      */
     public static function generatePageTitle($data, $ctx)
     {
-        if($data->get('meta_title')->raw()) {
+        if($data->get('meta_title') && $data->get('meta_title')->raw()) {
             return $data->get('meta_title');
         }
 
@@ -166,6 +166,23 @@ class PageDataParser
     private static function getCalculatedOgImage($data, $ctx)
     {
         $storage = self::getSettingsBlueprintWithValues($ctx, 'social', new SocialSettingsBlueprint());
-        return $data->get('og_image')->raw() ? $data->get('og_image') : $storage->get('og_image_site');
+        return $data->get('og_image') && $data->get('og_image')->raw() ? $data->get('og_image') : $storage->get('og_image_site');
+    }
+
+    /**
+     * Return a calculated twitter image
+     *
+     * @param Illuminate\Support\Collection $data
+     * @param Illuminate\Support\Collection $ctx
+     *
+     * @return Statamic\Fields\Value
+     */
+    private static function getCalculatedTwitterImage($data, $ctx, $type)
+    {
+        // Search on the page for if twitter image is overridden
+
+        // Search defaults to see if twiter image is overridden
+
+        // Search the
     }
 }

@@ -2,13 +2,14 @@
 
 namespace WithCandour\AardvarkSeo;
 
+use Illuminate\Support\Facades\Route;
 use Statamic\Providers\AddonServiceProvider;
 use Statamic\Facades\CP\Nav;
 use Statamic\Facades\Permission;
-use Illuminate\Support\Facades\Route;
-use Statamic\Events\Data\PublishBlueprintFound;
-use Statamic\Events\Data\BlueprintFoundOnFile;
-use WithCandour\AardvarkSeo\Listeners\AppendSeoFieldsListener;
+use Statamic\Events\EntryBlueprintFound;
+use Statamic\Events\TermBlueprintFound;
+use WithCandour\AardvarkSeo\Listeners\AppendEntrySeoFieldsListener;
+use WithCandour\AardvarkSeo\Listeners\AppendTermSeoFieldsListener;
 use WithCandour\AardvarkSeo\Console\Commands\BlueprintsUpdate;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsController;
 use WithCandour\AardvarkSeo\Policies\AardvarkSettingsPolicy;
@@ -35,16 +36,16 @@ class ServiceProvider extends AddonServiceProvider
     // ];
 
     /**
-     * We're manually adding the fields to blueprints at the mo' as there's no way
-     * to save the custom data against the entry
-     *
-     * https://github.com/statamic/cms/pull/1990/files
+     * Add our SEO fields to the blueprints
      */
-    // protected $listen = [
-    //     PublishBlueprintFound::class => [
-    //         AppendSeoFieldsListener::class
-    //     ]
-    // ];
+    protected $listen = [
+        EntryBlueprintFound::class => [
+            AppendEntrySeoFieldsListener::class
+        ],
+        TermBlueprintFound::class => [
+            AppendTermSeoFieldsListener::class
+        ]
+    ];
 
     public function boot()
     {
