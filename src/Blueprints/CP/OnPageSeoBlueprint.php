@@ -54,7 +54,7 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                         [
                             'handle' => 'meta_keywords',
                             'field' => [
-                                'type' => 'tags',
+                                'type' => 'taggable',
                                 'display' => __('aardvark-seo::onpage.fields.meta_keywords.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.meta_keywords.instruct'),
                                 'localizable' => true,

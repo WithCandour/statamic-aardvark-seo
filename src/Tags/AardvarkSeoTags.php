@@ -50,7 +50,9 @@ class AardvarkSeoTags extends Tags
         $ctx = collect($this->context);
         $attrs = [];
 
-        if($ctx->get('no_index_page') || $ctx->get('aardvark_general_settings')['no_index_site']) {
+        $global_no_index = $ctx->get('aardvark_general_settings')['no_index_site'];
+
+        if($ctx->get('no_index_page') || $global_no_index->raw()) {
             array_push($attrs, 'noindex', 'noodp');
         }
 

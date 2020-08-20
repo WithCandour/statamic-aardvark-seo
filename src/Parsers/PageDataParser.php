@@ -40,7 +40,10 @@ class PageDataParser
             if($bp_field = $fields_to_map->get($field)) {
                 switch($bp_field['type']) {
                     case 'toggle':
-                        return $defaults->get($field) ?: ($value ? $value->raw() : null);
+                            $defaults = $defaults->get($field) && $defaults->get($field)->raw();
+                            $value = $value && $value->raw();
+                            return $defaults || $value;
+                        return $defaults;
                     default:
                         return $value && $value->raw() ? $value : $defaults->get($field);
                 }
