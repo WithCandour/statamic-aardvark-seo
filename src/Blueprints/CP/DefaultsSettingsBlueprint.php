@@ -166,6 +166,17 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                             ]
                         ],
                         [
+                            'handle' => 'override_twitter_card_settings',
+                            'field' => [
+                                'type' => 'toggle',
+                                'display' => 'Override the twitter card settings for this page',
+                                'localizable' => true,
+                                'if' => [
+                                    'override_twitter_settings' => 'equals true'
+                                ]
+                            ]
+                        ],
+                        [
                             'handle' => 'twitter_card_type_page',
                             'field' => [
                                 'type' => 'select',
@@ -179,7 +190,8 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                     'summary_large_image' => 'Summary Card with Large Image'
                                 ],
                                 'if' => [
-                                    'override_twitter_settings' => 'equals true'
+                                    'override_twitter_settings' => 'equals true',
+                                    'override_twitter_card_settings' => 'equals true'
                                 ]
                             ]
                         ],
@@ -196,6 +208,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'localizable' => true,
                                 'if' => [
                                     'override_twitter_settings' => 'equals true',
+                                    'override_twitter_card_settings' => 'equals true',
                                     'twitter_card_type_page' => 'equals summary'
                                 ]
                             ]
@@ -213,6 +226,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'localizable' => true,
                                 'if' => [
                                     'override_twitter_settings' => 'equals true',
+                                    'override_twitter_card_settings' => 'equals true',
                                     'twitter_card_type_page' => 'equals summary_large_image'
                                 ]
                             ]

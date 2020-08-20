@@ -40,9 +40,9 @@ class PageDataParser
             if($bp_field = $fields_to_map->get($field)) {
                 switch($bp_field['type']) {
                     case 'toggle':
-                            $defaults = $defaults->get($field) && $defaults->get($field)->raw();
-                            $value = $value && $value->raw();
-                            return $defaults || $value;
+                            $default_value = $defaults->get($field) && $defaults->get($field)->raw();
+                            $page_value = $value && $value->raw();
+                            return $default_value || $page_value;
                         return $defaults;
                     default:
                         return $value && $value->raw() ? $value : $defaults->get($field);
@@ -107,8 +107,8 @@ class PageDataParser
         $populated = [
             'calculated_title' => self::generatePageTitle($data, $ctx),
             'calculated_og_image' => self::getCalculatedOgImage($data, $ctx),
-            'calculated_twitter_card_type' => 'test', // TODO
-            'calculated_twitter_image' => 'test', // TODO
+            'calculated_twitter_card_type' => self::getCalculatedTwitterCardType($data, $ctx),
+            'calculated_twitter_image' => self::getCalculatedTwitterImage($data, $ctx),
             'aardvark_general_settings' => self::getSettingsBlueprintWithValues($ctx, 'general', new GeneralSettingsBlueprint()),
             'aardvark_marketing_settings' => self::getSettingsBlueprintWithValues($ctx, 'marketing', new MarketingSettingsBlueprint()),
             'aardvark_social_settings' => self::getSettingsBlueprintWithValues($ctx, 'social', new SocialSettingsBlueprint()),
@@ -173,19 +173,43 @@ class PageDataParser
     }
 
     /**
-     * Return a calculated twitter image
+     * Return a calculated twitter card type
      *
      * @param Illuminate\Support\Collection $data
      * @param Illuminate\Support\Collection $ctx
      *
      * @return Statamic\Fields\Value
      */
-    private static function getCalculatedTwitterImage($data, $ctx, $type)
+    private static function getCalculatedTwitterCardType($data, $ctx)
     {
-        // Search on the page for if twitter image is overridden
+        $override = $data->get('override_twitter_settings') && $data->get('override_twitter_card_settings');
+        if($override) {
+            if($data->get('twitter_card_type_page')) {
+                return $data->get('twitter_card_type_page');
+            }
+        }
 
-        // Search defaults to see if twiter image is overridden
+        $storage = self::getSettingsBlueprintWithValues($ctx, 'social', new SocialSettingsBlueprint());
+        return $storage->get('twitter_card_type_site');
+    }
 
-        // Search the
+    /**
+     * Return a calculated twitter share image
+     */
+    private static function getCalculatedTwitterImage($data, $ctx)
+    {
+        $override = $data->get('override_twitter_settings') && $data->get('override_twitter_card_settings');
+        $type = self::getCalculatedTwitterCardType($data, $ctx)->raw();
+        $field = $type === 'summary_large_image' ? 'twitter_summary_large_image' : 'twitter_summary_image';
+
+        if($override) {
+            $page_value = $data->get($field) && $data->get($field)->raw() ? $data->get($field) : null;
+            if($page_value) {
+                return $page_value;
+            }
+        }
+
+        $storage = self::getSettingsBlueprintWithValues($ctx, 'social', new SocialSettingsBlueprint());
+        return $storage->get("{$field}_site");
     }
 }

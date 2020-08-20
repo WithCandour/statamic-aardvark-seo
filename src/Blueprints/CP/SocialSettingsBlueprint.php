@@ -99,7 +99,7 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                                 'default' => 'summary',
                                 'options' => [
                                     'summary' => 'Summary Card',
-                                    'summary_large_image' => 'Summary car with Large Image'
+                                    'summary_large_image' => 'Summary card with Large Image'
                                 ]
                             ]
                         ],

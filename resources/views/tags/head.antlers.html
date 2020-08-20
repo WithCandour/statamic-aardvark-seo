@@ -46,11 +46,17 @@
 <!-- End OpenGraph content -->
 
 <!-- Start Twitter content -->
-{{ if twitter_title }}
+{{ if override_twitter_settings && twitter_title }}
 <meta name="twitter:title" content="{{ twitter_title }}">
 {{ /if }}
-{{ if twitter_description }}
+{{ if override_twitter_settings && twitter_description }}
 <meta name="twitter:description" content="{{ twitter_description }}">
+{{ /if }}
+<meta name="twitter:card" content="{{ calculated_twitter_card_type }}">
+{{ if calculated_twitter_image }}
+{{ calculated_twitter_image }}
+<meta name="twitter:image" content="{{ permalink }}">
+{{ /calculated_twitter_image }}
 {{ /if }}
 {{ if aardvark_social_settings:twitter_username }}
 <meta name="twitter:site" content="{{ aardvark_social_settings:twitter_username ensure_left='@' }}">
