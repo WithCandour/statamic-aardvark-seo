@@ -3,6 +3,7 @@
 namespace WithCandour\AardvarkSeo\Http\Controllers\Web;
 
 use Illuminate\Routing\Controller as LaravelController;
+use Illuminate\Support\Facades\Cache;
 use Statamic\Facades\Site;
 use WithCandour\AardvarkSeo\Sitemaps\Sitemap;
 use WithCandour\AardvarkSeo\Blueprints\CP\SitemapSettingsBlueprint;
@@ -12,9 +13,42 @@ class SitemapController extends LaravelController
 {
     public function index()
     {
-        $sitemaps = Sitemap::all();
-        die(print_r($sitemaps));
-        return 'Sitemap';
+        $site = Site::current();
+        $siteUrl = $site->url();
+        $view = view('aardvark-seo::sitemaps.index', [
+            'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
+            'xslLink' => '<?xml-stylesheet type="text/xsl" href="' . $siteUrl . '/aardvark-sitemap.xsl"?>',
+            'sitemaps' => Sitemap::all(),
+        ]);
+
+        return response($view)->header('Content-Type', 'text/xml');
+    }
+
+    /**
+     * Render a single sitemap based on a handle.
+     *
+     * @param string $handle
+     *
+     * @return Illuminate\Http\Response
+     */
+    public function single($handle)
+    {
+        $sitemap = Sitemap::findByHandle($handle);
+
+        if (!$sitemap) {
+            abort(404);
+        }
+
+        $site = Site::current();
+        $siteUrl = $site->url();
+
+        $view = view('aardvark-seo::sitemaps.single', [
+            'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
+            'xslLink' => '<?xml-stylesheet type="text/xsl" href="' . $siteUrl . '/aardvark-sitemap.xsl"?>',
+            'data' => $sitemap->getSitemapItems(),
+        ])->render();
+
+        return response($view)->header('Content-Type', 'text/xml');
     }
 
     /**
@@ -24,5 +58,16 @@ class SitemapController extends LaravelController
     {
         $path = __DIR__ . '/../../../../resources/xsl/sitemap.xsl';
         return response(file_get_contents($path))->header('Content-Type', 'text/xsl');
+    }
+
+    /**
+     * Return the user-set value for the sitemap cache expiration.
+     *
+     * @return int
+     */
+    private function getCacheExpiration()
+    {
+        $storage = AardvarkStorage::getYaml('sitemap', Site::current(), true);
+        return $storage->get('sitemap_cache_expiration', 180);
     }
 }

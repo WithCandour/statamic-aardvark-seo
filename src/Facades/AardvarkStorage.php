@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Facade;
 
 class AardvarkStorage extends Facade
 {
+    /**
+     * @inheritDoc
+     */
     protected static function getFacadeAccessor()
     {
         return GlobalsStorage::class;
