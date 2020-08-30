@@ -8,7 +8,7 @@ class DefaultsSitemapCacheInvalidationListener
 {
     public function handle(\WithCandour\AardvarkSeo\Events\AardvarkContentDefaultsSaved $event)
     {
-        $defaults = $event->defaults();
+        $defaults = $event->defaults;
         $site = $defaults->site->handle();
         $handle = $defaults->handle;
 

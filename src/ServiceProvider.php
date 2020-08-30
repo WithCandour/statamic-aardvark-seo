@@ -8,8 +8,10 @@ use Statamic\Facades\CP\Nav;
 use Statamic\Facades\Permission;
 use Statamic\Events\EntryBlueprintFound;
 use Statamic\Events\TermBlueprintFound;
+use WithCandour\AardvarkSeo\Events\AardvarkContentDefaultsSaved;
 use WithCandour\AardvarkSeo\Listeners\AppendEntrySeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\AppendTermSeoFieldsListener;
+use WithCandour\AardvarkSeo\Listeners\DefaultsSitemapCacheInvalidationListener;
 use WithCandour\AardvarkSeo\Listeners\Subscribers\SitemapCacheInvalidationSubscriber;
 use WithCandour\AardvarkSeo\Console\Commands\BlueprintsUpdate;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsController;
@@ -45,6 +47,9 @@ class ServiceProvider extends AddonServiceProvider
         ],
         TermBlueprintFound::class => [
             AppendTermSeoFieldsListener::class
+        ],
+        AardvarkContentDefaultsSaved::class => [
+            DefaultsSitemapCacheInvalidationListener::class
         ]
     ];
 
