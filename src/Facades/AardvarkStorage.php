@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Facade;
 class AardvarkStorage extends Facade
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected static function getFacadeAccessor()
     {

@@ -120,7 +120,7 @@ class PageDataParser
     /**
      *  Return a correctly formatted set of data from addon storage
      * -- This uses the original blueprint so that we can augment the values
-     * -- getting passed to the tempalte (convert them to Statamic\Fields\Value)
+     * -- getting passed to the template (convert them to Statamic\Fields\Value)
      *
      * @param Illuminate\Support\Collection $ctx
      * @param string $type

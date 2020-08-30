@@ -8,14 +8,16 @@ class SitemapItem
     const DEFAULT_PRIORITY = '0.5';
 
     /**
+     * @var
+     */
+    private $data_object;
+
+    /**
      * Create a new sitemap item
-     *
-     * @param \Statamic\Data\Content\Content $content
      */
     public function __construct($content)
     {
         $this->data_object = $content;
-        $this->data = $content;
     }
 
     /**
@@ -46,7 +48,7 @@ class SitemapItem
      */
     public function getChangeFreq()
     {
-        return $this->data->get('sitemap_changefreq') ?: self::DEFAULT_CHANGEFREQ;
+        return $this->data_object->get('sitemap_changefreq') ?: self::DEFAULT_CHANGEFREQ;
     }
 
     /**
@@ -56,6 +58,6 @@ class SitemapItem
      */
     public function getPriority()
     {
-        return $this->data->get('sitemap_priority') ?: self::DEFAULT_PRIORITY;
+        return $this->data_object->get('sitemap_priority') ?: self::DEFAULT_PRIORITY;
     }
 }

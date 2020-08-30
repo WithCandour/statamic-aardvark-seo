@@ -4,6 +4,7 @@ namespace WithCandour\AardvarkSeo\Listeners;
 
 use Statamic\Events\EntryBlueprintFound;
 use WithCandour\AardvarkSeo\Blueprints\CP\OnPageSeoBlueprint;
+use WithCandour\AardvarkSeo\Listeners\Contracts\SeoFieldsListener;
 
 class AppendEntrySeoFieldsListener implements SeoFieldsListener
 {

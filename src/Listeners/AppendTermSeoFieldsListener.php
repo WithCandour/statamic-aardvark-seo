@@ -4,6 +4,7 @@ namespace WithCandour\AardvarkSeo\Listeners;
 
 use Statamic\Events\TermBlueprintFound;
 use WithCandour\AardvarkSeo\Blueprints\CP\OnPageSeoBlueprint;
+use WithCandour\AardvarkSeo\Listeners\Contracts\SeoFieldsListener;
 
 class AppendTermSeoFieldsListener implements SeoFieldsListener
 {

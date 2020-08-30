@@ -1,5 +1,6 @@
 {
     "name": "withcandour/aardvark-seo",
+    "description": "Save time and get your Statamic site to rank better - Candour's SEO addon for Statamic CMS",
     "type": "statamic-addon",
     "autoload": {
         "psr-4": {

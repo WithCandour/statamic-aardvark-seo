@@ -9,6 +9,8 @@ use Statamic\Facades\Site;
 use Statamic\Facades\Taxonomy;
 use WithCandour\AardvarkSeo\Blueprints\CP\DefaultsSettingsBlueprint;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
+use WithCandour\AardvarkSeo\Content\ContentDefaults;
+use WithCandour\AardvarkSeo\Events\AardvarkContentDefaultsSaved;
 
 class DefaultsController extends Controller
 {
@@ -110,6 +112,9 @@ class DefaultsController extends Controller
         $fields->validate();
 
         $this->putData($content_type, $fields->process()->values()->toArray());
+
+        $content_type_parts = explode('_', $content_type, 2);
+        AardvarkContentDefaultsSaved::dispatch(new ContentDefaults($content_type_parts[0], $content_type_parts[1], Site::current()));
     }
 
     public function getBlueprint()

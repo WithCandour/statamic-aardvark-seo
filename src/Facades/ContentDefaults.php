@@ -2,16 +2,16 @@
 
 namespace WithCandour\AardvarkSeo\Facades;
 
-use WithCandour\AardvarkSeo\Parsers\PageDataParser as Parser;
+use WithCandour\AardvarkSeo\Content\ContentDefaultsGetter;
 use Illuminate\Support\Facades\Facade;
 
-class PageDataParser extends Facade
+class ContentDefaults extends Facade
 {
     /**
      * {@inheritDoc}
      */
     protected static function getFacadeAccessor()
     {
-        return Parser::class;
+        return ContentDefaultsGetter::class;
     }
 }

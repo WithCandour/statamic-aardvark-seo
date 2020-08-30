@@ -4,7 +4,7 @@ namespace WithCandour\AardvarkSeo\Http\Controllers\CP;
 
 use Statamic\CP\Breadcrumbs;
 use Statamic\Facades\Site;
-use WithCandour\AardvarkSeo\Http\Controllers\CP\Interfaces\Publishable;
+use WithCandour\AardvarkSeo\Http\Controllers\CP\Contracts\Publishable;
 use WithCandour\AardvarkSeo\Blueprints\CP\SocialSettingsBlueprint;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
 

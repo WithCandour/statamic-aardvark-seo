@@ -9,6 +9,7 @@ use Statamic\Facades\Taxonomy;
 use Statamic\Facades\Term;
 use Statamic\Support\Str;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
+use WithCandour\AardvarkSeo\Facades\ContentDefaults as Defaults;
 
 class Sitemap
 {
@@ -38,7 +39,7 @@ class Sitemap
                 return !is_null($collection->route(Site::current()->handle()));
             })
             ->map(function ($collection) {
-                $indexable = self::getIndexStatusForContent('collections', $collection->path(), Site::current());
+                $indexable = self::getIndexStatusForContent('collections', $collection->handle(), Site::current());
                 return [
                     'type' => 'collection',
                     'handle' => $collection->handle(),
@@ -47,7 +48,7 @@ class Sitemap
             });
         $taxonomies = collect(Taxonomy::all())
             ->map(function ($taxonomy) {
-                $indexable = self::getIndexStatusForContent('taxonomies', $taxonomy->path(), Site::current());
+                $indexable = self::getIndexStatusForContent('taxonomies', $taxonomy->handle(), Site::current());
                 return [
                     'type' => 'taxonomy',
                     'handle' => $taxonomy->handle(),
@@ -78,17 +79,29 @@ class Sitemap
     {
         switch ($this->type) {
             case 'collection':
-                $items = Entry::query()->where('collection', $this->handle)->get();
+                $items = Entry::query()
+                    ->where('collection', $this->handle)
+                    ->where('site', Site::current()->handle())
+                    ->where('no_index_page', false)
+                    ->get();
                 break;
             case 'taxonomy':
-                $items = Term::query()->where('taxonomy', $this->handle)->get();
+                $items = Term::query()
+                    ->where('taxonomy', $this->handle)
+                    ->where('site', Site::current()->handle())
+                    ->where('no_index_page', false)
+                    ->get();
                 break;
             default:
-                $items = Entry::query()->where('collection', 'pages')->get();
+                $items = Entry::query()
+                    ->where('collection', 'pages')
+                    ->where('site', Site::current()->handle())
+                    ->where('no_index_page', false)
+                    ->get();
         }
 
         $items = $items->filter(function ($item) {
-            return $item->published() && !$item->get('no_index_page');
+            return $item->published();
         });
 
         $sitemap_items = collect($items)->map(function ($item) {
@@ -132,11 +145,7 @@ class Sitemap
      */
     public static function getIndexStatusForContent($type = 'collections', $handle = 'pages', $site)
     {
-        $site_handle = $site->handle();
-        $settings = AardvarkStorage::getYaml("defaults/{$type}_{$handle}.yaml", $site, true);
-        $site_settings = collect($settings->get($site_handle));
-
-        $no_indexed = $site_settings->get('no_index_page', 0);
+        $no_indexed = Defaults::get($type, $handle, $site, 'no_index_page', 0);
         return !$no_indexed;
     }
 
