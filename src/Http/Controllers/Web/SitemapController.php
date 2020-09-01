@@ -21,6 +21,7 @@ class SitemapController extends LaravelController
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
                 'xslLink' => '<?xml-stylesheet type="text/xsl" href="' . $siteUrl . '/aardvark-sitemap.xsl"?>',
                 'sitemaps' => Sitemap::all(),
+                'version' => $this->getAddonVersion(),
             ])->render();
         });
 
@@ -50,6 +51,7 @@ class SitemapController extends LaravelController
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
                 'xslLink' => '<?xml-stylesheet type="text/xsl" href="' . $siteUrl . '/aardvark-sitemap.xsl"?>',
                 'data' => $sitemap->getSitemapItems(),
+                'version' => $this->getAddonVersion(),
             ])->render();
         });
 
@@ -74,5 +76,17 @@ class SitemapController extends LaravelController
     {
         $storage = AardvarkStorage::getYaml('sitemap', Site::current(), true);
         return $storage->get('sitemap_cache_expiration', 180);
+    }
+
+    /**
+     * Return the addon version from our composer file
+     *
+     * @return string
+     */
+    private function getAddonVersion()
+    {
+        $path = __DIR__ . '/../../../../composer.json';
+        $contents = file_get_contents($path);
+        return json_decode($contents, true)['version'];
     }
 }
