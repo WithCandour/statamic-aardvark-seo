@@ -114,7 +114,7 @@ class DefaultsController extends Controller
         $this->putData($content_type, $fields->process()->values()->toArray());
 
         $content_type_parts = explode('_', $content_type, 2);
-        AardvarkContentDefaultsSaved::dispatch(new ContentDefaults($content_type_parts[0], $content_type_parts[1], Site::current()));
+        AardvarkContentDefaultsSaved::dispatch(new ContentDefaults($content_type_parts[0], $content_type_parts[1], Site::selected()));
     }
 
     public function getBlueprint()
