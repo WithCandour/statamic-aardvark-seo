@@ -8,6 +8,22 @@ There is only one setting that will need to be configured after installation, we
 
 Once successfully installed a new 'SEO' item will appear in the control panel navigation - under 'Tools'. This is where you can manage most of the global SEO settings for the site.
 
+### Allowing non Super Users to access settings
+
+On installing, any user with edit access to the relevant pages and collections will be able to see and edit the settings for pages and entries under the SEO tab. However, by default, only users with the `Super User` permission will be able to access the SEO settings tab under the Tools submenu. If you wish to give users who need access to the SEO settings page, but do need – or should not have – Super User permissions (for example, members of your SEO team), then you will need to do the following:
+
+1. In the left hand menu of the control panel, click on `Users`.
+2. Click on `User Roles` when it appears.
+3. In the top right hand corner of the screen, click `Create Role`.
+4. In the title field, enter `SEO`.
+5. In slug, enter `seo`.
+6. In the next box, tick `Access Control Panel` under General.
+7. Click `Save`.
+
+Once you've done this, you can then add the new SEO role to any user or user group you wish to be able to access the SEO settings.
+
+Note: We recommend having a separate role for allowing editing access to pages and entries. Not every user who needs access to the SEO settings will need access to edit pages and entries, and vice-versa.
+
 ### Tags
 
 Getting your site's SEO data onto the page relies on a few tags being present in your theme templates:
