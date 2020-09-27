@@ -13,6 +13,7 @@ use Statamic\API\File;
 use Statamic\API\Nav;
 use Statamic\API\YAML;
 use Statamic\API\Config;
+use Statamic\API\Role;
 use Statamic\API\User;
 use Statamic\Extend\Listener;
 
@@ -45,9 +46,11 @@ class AardvarkSeoListener extends Listener
      */
     public function addSeoNavItems($nav)
     {
-        // Only super-users can access this
+        // Only super-users and users with the role seo can access this
         $user = User::getCurrent();
-        if ($user->isSuper()) {
+		$role = Role::whereHandle('seo');
+
+        if ($user->hasRole($role) || $user->isSuper()) {
             $seo_section = Nav::item('aardvark-seo')->title('SEO')->route('aardvark-seo')->icon('line-graph');
 
             $errors = AardvarkController::getErrors();
