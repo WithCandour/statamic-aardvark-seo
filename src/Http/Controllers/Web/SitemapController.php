@@ -14,7 +14,7 @@ class SitemapController extends LaravelController
     public function index()
     {
         $site = Site::current();
-        $siteUrl = $site->url();
+        $siteUrl = $site->absoluteUrl();
 
         $view = Cache::remember("aardvark-seo.sitemap-index.{$site->handle()}", $this->getCacheExpiration(), function() use ($siteUrl) {
             return view('aardvark-seo::sitemaps.index', [
@@ -44,7 +44,7 @@ class SitemapController extends LaravelController
         }
 
         $site = Site::current();
-        $siteUrl = $site->url();
+        $siteUrl = $site->absoluteUrl();
 
         $view = Cache::remember("aardvark-seo.sitemap-{$handle}.{$site->handle()}", $this->getCacheExpiration(), function() use ($siteUrl, $sitemap) {
             return view('aardvark-seo::sitemaps.single', [

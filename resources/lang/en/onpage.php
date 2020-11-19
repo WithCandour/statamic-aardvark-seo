@@ -20,6 +20,9 @@ return [
             'display' => 'Meta Keywords',
             'instruct' => 'Press enter to add a new keyword.'
         ],
+        'google_preview' => [
+            'display' => 'Google search preview',
+        ],
         'urls_section' => [
             'display' => 'URL Options',
         ],

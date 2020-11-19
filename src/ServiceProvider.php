@@ -9,6 +9,9 @@ use Statamic\Facades\Permission;
 use Statamic\Events\EntryBlueprintFound;
 use Statamic\Events\TermBlueprintFound;
 use WithCandour\AardvarkSeo\Events\AardvarkContentDefaultsSaved;
+use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoMetaTitleFieldtype;
+use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoMetaDescriptionFieldtype;
+use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoGooglePreviewFieldtype;
 use WithCandour\AardvarkSeo\Listeners\AppendEntrySeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\AppendTermSeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\DefaultsSitemapCacheInvalidationListener;
@@ -16,49 +19,58 @@ use WithCandour\AardvarkSeo\Listeners\Subscribers\SitemapCacheInvalidationSubscr
 use WithCandour\AardvarkSeo\Console\Commands\BlueprintsUpdate;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsController;
 use WithCandour\AardvarkSeo\Policies\AardvarkSettingsPolicy;
+use WithCandour\AardvarkSeo\Tags\AardvarkSeoTags;
 
 class ServiceProvider extends AddonServiceProvider
 {
 
     protected $commands = [
-        BlueprintsUpdate::class
+        BlueprintsUpdate::class,
     ];
 
-    protected $tags = [
-        \WithCandour\AardvarkSeo\Tags\AardvarkSeoTags::class
+    protected $fieldtypes = [
+        AardvarkSeoMetaTitleFieldtype::class,
+        AardvarkSeoMetaDescriptionFieldtype::class,
+        AardvarkSeoGooglePreviewFieldtype::class,
+    ];
+
+    protected $listen = [
+        EntryBlueprintFound::class => [
+            AppendEntrySeoFieldsListener::class,
+        ],
+        TermBlueprintFound::class => [
+            AppendTermSeoFieldsListener::class,
+        ],
+        AardvarkContentDefaultsSaved::class => [
+            DefaultsSitemapCacheInvalidationListener::class,
+        ],
     ];
 
     protected $routes = [
         'cp'  => __DIR__ . '/../routes/cp.php',
-        'web' => __DIR__ . '/../routes/web.php'
+        'web' => __DIR__ . '/../routes/web.php',
+    ];
+
+    protected $scripts = [
+        __DIR__ . '/../public/js/aardvark-seo.js',
+    ];
+
+    protected $stylesheets = [
+        __DIR__ . '/../public/css/aardvark-seo.css',
+    ];
+
+    protected $subscribe = [
+        SitemapCacheInvalidationSubscriber::class,
+    ];
+
+    protected $tags = [
+        AardvarkSeoTags::class,
     ];
 
     // TODO: Make this work with the controller methods
     // protected $policies = [
     //     AardvarkSettingsController::class => AardvarkSettingsPolicy::class
     // ];
-
-    /**
-     * Add our SEO fields to the blueprints
-     */
-    protected $listen = [
-        EntryBlueprintFound::class => [
-            AppendEntrySeoFieldsListener::class
-        ],
-        TermBlueprintFound::class => [
-            AppendTermSeoFieldsListener::class
-        ],
-        AardvarkContentDefaultsSaved::class => [
-            DefaultsSitemapCacheInvalidationListener::class
-        ]
-    ];
-
-    /**
-     * Add our event subscriber
-     */
-    protected $subscribe = [
-        SitemapCacheInvalidationSubscriber::class
-    ];
 
     public function boot()
     {

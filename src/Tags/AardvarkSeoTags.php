@@ -53,7 +53,7 @@ class AardvarkSeoTags extends Tags
         $global_no_index = $ctx->get('aardvark_general_settings')['no_index_site'];
 
         if($ctx->get('no_index_page') || $global_no_index->raw()) {
-            array_push($attrs, 'noindex', 'noodp');
+            array_push($attrs, 'noindex');
         }
 
         if($ctx->get('no_follow_links')) {

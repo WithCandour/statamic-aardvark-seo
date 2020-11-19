@@ -34,4 +34,6 @@ Route::namespace('\WithCandour\AardvarkSeo\Http\Controllers\CP')
         ]);
 
     });
+
+    Route::get('errors', 'ErrorsController@index');
 });

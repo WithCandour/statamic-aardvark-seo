@@ -28,7 +28,7 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                         [
                             'handle' => 'meta_title',
                             'field' => [
-                                'type' => 'text',
+                                'type' => 'aardvark_seo_meta_title',
                                 'display' => __('aardvark-seo::onpage.fields.meta_title.display'),
                                 'localizable' => true
                             ]
@@ -36,9 +36,17 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                         [
                             'handle' => 'meta_description',
                             'field' => [
-                                'type' => 'textarea',
+                                'type' => 'aardvark_seo_meta_description',
                                 'display' => __('aardvark-seo::onpage.fields.meta_description.display'),
                                 'localizable' => true
+                            ]
+                        ],
+                        [
+                            'handle' => 'google_search_preview',
+                            'field' => [
+                                'type' => 'aardvark_seo_google_preview',
+                                'display' => __('aardvark-seo::onpage.fields.google_preview.display'),
+                                'listable' => 'hidden'
                             ]
                         ],
                         [
@@ -48,7 +56,6 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                                 'display' => __('aardvark-seo::onpage.fields.use_meta_keywords.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.use_meta_keywords.instruct'),
                                 'localizable' => true,
-                                'width' => 50
                             ]
                         ],
                         [
@@ -58,7 +65,6 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                                 'display' => __('aardvark-seo::onpage.fields.meta_keywords.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.meta_keywords.instruct'),
                                 'localizable' => true,
-                                'width' => 50,
                                 'if' => [
                                     'use_meta_keywords' => 'equals true'
                                 ]
