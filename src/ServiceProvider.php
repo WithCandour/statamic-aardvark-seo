@@ -7,6 +7,7 @@ use Statamic\Providers\AddonServiceProvider;
 use Statamic\Facades\CP\Nav;
 use Statamic\Facades\Permission;
 use Statamic\Events\EntryBlueprintFound;
+use Statamic\Events\ResponseCreated;
 use Statamic\Events\TermBlueprintFound;
 use WithCandour\AardvarkSeo\Events\AardvarkContentDefaultsSaved;
 use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoMetaTitleFieldtype;
@@ -18,6 +19,7 @@ use WithCandour\AardvarkSeo\Listeners\DefaultsSitemapCacheInvalidationListener;
 use WithCandour\AardvarkSeo\Listeners\Subscribers\SitemapCacheInvalidationSubscriber;
 use WithCandour\AardvarkSeo\Console\Commands\BlueprintsUpdate;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsController;
+use WithCandour\AardvarkSeo\Http\Middleware\RedirectsMiddleware;
 use WithCandour\AardvarkSeo\Policies\AardvarkSettingsPolicy;
 use WithCandour\AardvarkSeo\Tags\AardvarkSeoTags;
 
@@ -43,6 +45,12 @@ class ServiceProvider extends AddonServiceProvider
         ],
         AardvarkContentDefaultsSaved::class => [
             DefaultsSitemapCacheInvalidationListener::class,
+        ],
+    ];
+
+    protected $middlewareGroups = [
+        'statamic.web' => [
+            RedirectsMiddleware::class,
         ],
     ];
 
@@ -127,6 +135,9 @@ class ServiceProvider extends AddonServiceProvider
                     $nav->item(__('aardvark-seo::social.singular'))
                         ->route('aardvark-seo.social.index')
                         ->can('view aardvark social settings'),
+                    $nav->item(__('aardvark-seo::redirects.plural'))
+                        ->route('aardvark-seo.redirects.index')
+                        ->can('view aardvark redirects settings'),
                     $nav->item(__('aardvark-seo::sitemap.singular'))
                         ->route('aardvark-seo.sitemap.index')
                         ->can('view aardvark sitemap settings'),
@@ -153,6 +164,10 @@ class ServiceProvider extends AddonServiceProvider
             [
                 'value' => 'marketing',
                 'label' => 'Marketing'
+            ],
+            [
+                'value' => 'redirects',
+                'label' => 'Redirects'
             ],
             [
                 'value' => 'sitemap',

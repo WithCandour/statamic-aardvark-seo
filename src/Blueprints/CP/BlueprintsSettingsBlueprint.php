@@ -12,6 +12,7 @@ class BlueprintsSettingsBlueprint implements AardvarkBlueprint
      */
     public static function requestBlueprint()
     {
+        // TODO: Thank you so much Statamic for removing the blueprints field, need to fix this
         return StatamicBlueprint::make()->setContents([
             'sections' => [
                 'main' => [
@@ -19,10 +20,11 @@ class BlueprintsSettingsBlueprint implements AardvarkBlueprint
                         [
                             'handle' => 'exclude_blueprints',
                             'field' => [
-                                'type' => 'blueprints',
+                                'type' => 'select',
                                 'display' => 'Exclude Blueprints',
                                 'instructions' => 'Exclude the following blueprints from having the "SEO" section added',
-                                'mode' => 'tags',
+                                'multiple' => true,
+                                'taggable' => true,
                                 'default' => [
                                     'user',
                                     'asset'

@@ -25,6 +25,19 @@ Route::namespace('\WithCandour\AardvarkSeo\Http\Controllers\CP')
             'index', 'store'
         ]);
 
+        Route::namespace('Redirects')
+            ->name('redirects.')
+            ->prefix('/redirects')
+            ->group(function() {
+                Route::redirect('/', 'redirects/manual-redirects')->name('index');
+                Route::resource('manual-redirects', 'ManualRedirectsController')->only([
+                    'index', 'create', 'show', 'edit', 'update', 'store'
+                ]);
+                Route::resource('auto', 'AutoRedirectsController')->only([
+                    'index', 'show'
+                ]);
+            });
+
         Route::resource('blueprints', 'BlueprintsController')->only([
             'index', 'store'
         ]);
@@ -34,6 +47,4 @@ Route::namespace('\WithCandour\AardvarkSeo\Http\Controllers\CP')
         ]);
 
     });
-
-    Route::get('errors', 'ErrorsController@index');
 });
