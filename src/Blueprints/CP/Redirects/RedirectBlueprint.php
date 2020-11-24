@@ -20,14 +20,14 @@ class RedirectBlueprint implements AardvarkBlueprint
                             'handle' => 'source_url',
                             'field' => [
                                 'type' => 'text',
-                                'display' => 'Source URL'
+                                'display' => __('aardvark-seo::redirects.redirect.source_url')
                             ]
                         ],
                         [
                             'handle' => 'target_url',
                             'field' => [
                                 'type' => 'text',
-                                'display' => 'Target URL'
+                                'display' => __('aardvark-seo::redirects.redirect.target_url')
                             ]
                         ],
                         [
@@ -39,7 +39,7 @@ class RedirectBlueprint implements AardvarkBlueprint
                                     '301',
                                     '302'
                                 ],
-                                'display' => 'Status Code',
+                                'display' => __('aardvark-seo::redirects.redirect.status_code'),
                                 'default' => '301'
                             ],
                         ],
@@ -47,7 +47,7 @@ class RedirectBlueprint implements AardvarkBlueprint
                             'handle' => 'is_active',
                             'field' => [
                                 'type' => 'toggle',
-                                'display' => 'Is Active?',
+                                'display' => __('aardvark-seo::redirects.redirect.is_active'),
                                 'default' => true
                             ]
                         ]

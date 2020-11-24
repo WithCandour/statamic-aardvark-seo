@@ -30,8 +30,16 @@ Route::namespace('\WithCandour\AardvarkSeo\Http\Controllers\CP')
             ->prefix('/redirects')
             ->group(function() {
                 Route::redirect('/', 'redirects/manual-redirects')->name('index');
+                Route::prefix('/manual-redirects')
+                    ->name('manual-redirects.')
+                    ->group(function() {
+                        Route::get('actions', 'ManualRedirectsController@bulkActions')
+                            ->name('actions');
+                        Route::post('actions', 'ManualRedirectsController@runActions')
+                            ->name('run');
+                    });
                 Route::resource('manual-redirects', 'ManualRedirectsController')->only([
-                    'index', 'create', 'show', 'edit', 'update', 'store'
+                    'index', 'create', 'edit', 'update', 'store', 'destroy'
                 ]);
                 Route::resource('auto', 'AutoRedirectsController')->only([
                     'index', 'show'

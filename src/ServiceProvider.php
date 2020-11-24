@@ -9,6 +9,7 @@ use Statamic\Facades\Permission;
 use Statamic\Events\EntryBlueprintFound;
 use Statamic\Events\ResponseCreated;
 use Statamic\Events\TermBlueprintFound;
+use WithCandour\AardvarkSeo\Actions\Redirects\DeleteManualRedirectsAction;
 use WithCandour\AardvarkSeo\Events\AardvarkContentDefaultsSaved;
 use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoMetaTitleFieldtype;
 use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoMetaDescriptionFieldtype;
@@ -101,6 +102,9 @@ class ServiceProvider extends AddonServiceProvider
 
         // Set up navigation
         $this->bootNav();
+
+        // Boot actions
+        $this->bootActions();
     }
 
     /**
@@ -186,23 +190,36 @@ class ServiceProvider extends AddonServiceProvider
         Permission::group('aardvark-seo', 'Aardvark SEO', function () use ($settings_groups) {
             Permission::register('configure aardvark settings', function ($permission) use ($settings_groups) {
                 $permission->children([
-                        Permission::make('view aardvark {settings_group} settings')
-                            ->replacements('settings_group', function() use ($settings_groups) {
-                                return collect($settings_groups)->map(function ($group) {
-                                    return [
-                                        'value' => $group['value'],
-                                        'label' => $group['label']
-                                    ];
-                                });
-                            })
-                            ->label('View :settings_group Settings')
-                            ->children([
-                                Permission::make('update aardvark {settings_group} settings')
-                                    ->label('Update :settings_group Settings')
-                            ]),
+                    Permission::make('view aardvark {settings_group} settings')
+                        ->replacements('settings_group', function() use ($settings_groups) {
+                            return collect($settings_groups)->map(function ($group) {
+                                return [
+                                    'value' => $group['value'],
+                                    'label' => $group['label']
+                                ];
+                            });
+                        })
+                        ->label('View :settings_group Settings')
+                        ->children([
+                            Permission::make('update aardvark {settings_group} settings')
+                                ->label('Update :settings_group Settings')
+                        ]),
+                    Permission::make('view aardvark redirects')
+                        ->label(__('aardvark-seo::redirects.permissions.view'))
+                        ->children([
+                            Permission::make('edit aardvark redirects')
+                                ->label(__('aardvark-seo::redirects.permissions.edit')),
+                            Permission::make('create aardvark redirects')
+                                ->label(__('aardvark-seo::redirects.permissions.create'))
+                        ])
 
                 ]);
             })->label('Configure Aardvark Settings');
         });
+    }
+
+    public function bootActions()
+    {
+        DeleteManualRedirectsAction::register();
     }
 }

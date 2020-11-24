@@ -3,7 +3,7 @@
 @section('content')
     <breadcrumbs :crumbs='@json($crumbs)'></breadcrumbs>
     <aardvark-redirects-publish-form
-        title="General SEO Settings"
+        title="{{ $title }}"
         action="{{ cp_route('aardvark-seo.redirects.manual-redirects.store') }}"
         redirect-url={{ cp_route('aardvark-seo.redirects.manual-redirects.index') }}
         :blueprint='@json($blueprint)'

@@ -129,6 +129,23 @@ class RedirectsRepository
     }
 
     /**
+     * Delete a redirect
+     *
+     * @param string $redirect_id
+     */
+    public function delete($redirect_id)
+    {
+        $exists = $this->exists($redirect_id);
+        if($exists) {
+            $this->redirects = $this->redirects->reject(function($redirect) use ($redirect_id) {
+                return $redirect['id'] === $redirect_id;
+            });
+
+            $this->writeToFile();
+        }
+    }
+
+    /**
      * Process the raw data coming in
      *
      * @param array $raw
