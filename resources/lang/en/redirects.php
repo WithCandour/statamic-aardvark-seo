@@ -8,6 +8,17 @@ return [
     // Control Panel
     'index' => 'Redirects Settings',
 
+    // Types
+    'manual' => [
+        'singular' => 'Manual redirect',
+        'plural' => 'Manual redirects'
+    ],
+
+    'auto' => [
+        'singular' => 'Auto redirect',
+        'plural' => 'Auto redirects'
+    ],
+
     // Redirect attributes
     'redirect' => [
         'source_url' => 'Source URL',
@@ -27,13 +38,15 @@ return [
     'pages' => [
         'create' => 'Create a redirect',
         'edit' => 'Edit a redirect',
-        'manual' => 'Manual redirects'
+        'manual' => 'Manual redirects',
+        'auto' => 'Auto redirects'
     ],
 
     // Actions
     'actions' => [
         'create' => 'Create a redirect',
-        'auto' => 'Auto redirects'
+        'auto' => 'Auto redirects',
+        'manual' => 'Manual redirects'
     ]
 
 ];

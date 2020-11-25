@@ -1,7 +1,8 @@
 import MetaTitleFieldtype from './components/fieldtypes/MetaTitleFieldtype';
 import MetaDescriptionFieldtype from './components/fieldtypes/MetaDescriptionFieldtype';
 import GooglePreviewFieldtype from './components/fieldtypes/GooglePreviewFieldtype';
-import RedirectsListing from './components/cp/redirects/Listing';
+import ManualRedirectsListing from './components/cp/redirects/manual/Listing';
+import AutoRedirectsListing from './components/cp/redirects/auto/Listing';
 import RedirectsPublishForm from './components/cp/redirects/PublishForm';
 
 Statamic.booting(() => {
@@ -11,6 +12,7 @@ Statamic.booting(() => {
     Statamic.component('aardvark_seo_google_preview-fieldtype', GooglePreviewFieldtype);
 
     // Redirects components
-    Statamic.component('aardvark-redirects-listing', RedirectsListing);
+    Statamic.component('aardvark-manual-redirects-listing', ManualRedirectsListing);
+    Statamic.component('aardvark-auto-redirects-listing', AutoRedirectsListing);
     Statamic.component('aardvark-redirects-publish-form', RedirectsPublishForm);
 });

@@ -68,6 +68,10 @@
             actionCompleted() {
                 location.reload();
             }
+        },
+
+        computed: {
+
         }
 
     }

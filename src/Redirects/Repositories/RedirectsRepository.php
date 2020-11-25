@@ -113,6 +113,15 @@ class RedirectsRepository
     public function update(array $data, $redirect_id = null)
     {
         $data = $this->processRaw($data);
+
+        // If the source doesn't already exist add an ID
+        if(!$this->sourceExists($data['source_url'])) {
+            $redirect_id = Str::uuid()->toString();
+            $data['id'] = $redirect_id;
+        } else {
+            $redirect_id = $this->getBySource($data['source_url'])['id'];
+        }
+
         if($redirect_id && $this->exists($redirect_id)) {
             $data['id'] = $redirect_id;
             $this->redirects = $this->redirects->map(function($redirect) use ($data, $redirect_id) {
@@ -139,7 +148,7 @@ class RedirectsRepository
         if($exists) {
             $this->redirects = $this->redirects->reject(function($redirect) use ($redirect_id) {
                 return $redirect['id'] === $redirect_id;
-            });
+            })->values();
 
             $this->writeToFile();
         }

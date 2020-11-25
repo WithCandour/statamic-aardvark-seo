@@ -9,7 +9,6 @@ use Statamic\Facades\Permission;
 use Statamic\Events\EntryBlueprintFound;
 use Statamic\Events\ResponseCreated;
 use Statamic\Events\TermBlueprintFound;
-use WithCandour\AardvarkSeo\Actions\Redirects\DeleteManualRedirectsAction;
 use WithCandour\AardvarkSeo\Events\AardvarkContentDefaultsSaved;
 use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoMetaTitleFieldtype;
 use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoMetaDescriptionFieldtype;
@@ -18,6 +17,7 @@ use WithCandour\AardvarkSeo\Listeners\AppendEntrySeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\AppendTermSeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\DefaultsSitemapCacheInvalidationListener;
 use WithCandour\AardvarkSeo\Listeners\Subscribers\SitemapCacheInvalidationSubscriber;
+use WithCandour\AardvarkSeo\Listeners\Redirects\Subscribers\AutoRedirectsSubscriber;
 use WithCandour\AardvarkSeo\Console\Commands\BlueprintsUpdate;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsController;
 use WithCandour\AardvarkSeo\Http\Middleware\RedirectsMiddleware;
@@ -69,6 +69,7 @@ class ServiceProvider extends AddonServiceProvider
     ];
 
     protected $subscribe = [
+        AutoRedirectsSubscriber::class,
         SitemapCacheInvalidationSubscriber::class,
     ];
 
@@ -102,9 +103,6 @@ class ServiceProvider extends AddonServiceProvider
 
         // Set up navigation
         $this->bootNav();
-
-        // Boot actions
-        $this->bootActions();
     }
 
     /**
@@ -139,9 +137,6 @@ class ServiceProvider extends AddonServiceProvider
                     $nav->item(__('aardvark-seo::social.singular'))
                         ->route('aardvark-seo.social.index')
                         ->can('view aardvark social settings'),
-                    $nav->item(__('aardvark-seo::redirects.plural'))
-                        ->route('aardvark-seo.redirects.index')
-                        ->can('view aardvark redirects settings'),
                     $nav->item(__('aardvark-seo::sitemap.singular'))
                         ->route('aardvark-seo.sitemap.index')
                         ->can('view aardvark sitemap settings'),
@@ -150,6 +145,20 @@ class ServiceProvider extends AddonServiceProvider
                         ->can('view aardvark blueprints settings'),
                 ]);
 
+            $nav->create(__('aardvark-seo::redirects.plural'))
+                ->can('view aardvark redirects settings')
+                ->section('Tools')
+                ->route('aardvark-seo.redirects.index')
+                ->icon('arrow-right')
+                ->view('aardvark-seo::cp.nav.redirects')
+                ->children([
+                    $nav->item(__('aardvark-seo::redirects.manual.plural'))
+                        ->can('view aardvark redirects settings')
+                        ->route('aardvark-seo.redirects.manual-redirects.index'),
+                    $nav->item(__('aardvark-seo::redirects.auto.plural'))
+                        ->can('view aardvark redirects settings')
+                        ->route('aardvark-seo.redirects.auto-redirects.index'),
+                ]);
         });
     }
 
@@ -216,10 +225,5 @@ class ServiceProvider extends AddonServiceProvider
                 ]);
             })->label('Configure Aardvark Settings');
         });
-    }
-
-    public function bootActions()
-    {
-        DeleteManualRedirectsAction::register();
     }
 }

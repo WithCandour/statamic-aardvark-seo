@@ -7,7 +7,6 @@ use Statamic\CP\Breadcrumbs;
 use Statamic\CP\Column;
 use Statamic\Facades\Action;
 use Statamic\Facades\Site;
-use Statamic\Support\Str;
 use WithCandour\AardvarkSeo\Actions\Redirects\DeleteManualRedirectsAction;
 use WithCandour\AardvarkSeo\Blueprints\CP\Redirects\RedirectBlueprint;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller;
@@ -56,6 +55,7 @@ class ManualRedirectsController extends Controller
             'title' => __('aardvark-seo::redirects.pages.manual'),
             'columns' => $columns,
             'redirects' => $redirects,
+            'crumbs' => $crumbs
         ]);
     }
 
@@ -74,7 +74,7 @@ class ManualRedirectsController extends Controller
             ['text' => __('Create'), 'url' => null],
         ]);
 
-        return view('aardvark-seo::cp.redirects.create', [
+        return view('aardvark-seo::cp.redirects.manual.create', [
             'blueprint' => $this->blueprint()->toPublishArray(),
             'crumbs' => $crumbs,
             'meta' => $fields->meta(),
@@ -95,7 +95,6 @@ class ManualRedirectsController extends Controller
         $fields = $this->blueprint()->fields()->addValues($request->all());
         $fields->validate();
         $values = $fields->process()->values()->toArray();
-        $values['id'] = Str::uuid()->toString();
         $this->repository()->update($values);
     }
 
@@ -125,7 +124,7 @@ class ManualRedirectsController extends Controller
 
         $fields = $this->blueprint()->fields()->addValues($existing)->preProcess();
 
-        return view('aardvark-seo::cp.redirects.edit', [
+        return view('aardvark-seo::cp.redirects.manual.edit', [
             'blueprint' => $this->blueprint()->toPublishArray(),
             'crumbs' => $crumbs,
             'meta' => $fields->meta(),
@@ -192,6 +191,8 @@ class ManualRedirectsController extends Controller
         $context = $data['context'] ?? [];
 
         $action = Action::get($request->action)->context($context);
+
+        // die(print_r($data['selections']));
 
         $redirects = collect($data['selections']);
 
