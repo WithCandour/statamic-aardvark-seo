@@ -21,7 +21,6 @@ use WithCandour\AardvarkSeo\Listeners\Redirects\Subscribers\AutoRedirectsSubscri
 use WithCandour\AardvarkSeo\Console\Commands\BlueprintsUpdate;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsController;
 use WithCandour\AardvarkSeo\Http\Middleware\RedirectsMiddleware;
-use WithCandour\AardvarkSeo\Policies\AardvarkSettingsPolicy;
 use WithCandour\AardvarkSeo\Tags\AardvarkSeoTags;
 
 class ServiceProvider extends AddonServiceProvider
@@ -76,11 +75,6 @@ class ServiceProvider extends AddonServiceProvider
     protected $tags = [
         AardvarkSeoTags::class,
     ];
-
-    // TODO: Make this work with the controller methods
-    // protected $policies = [
-    //     AardvarkSettingsController::class => AardvarkSettingsPolicy::class
-    // ];
 
     public function boot()
     {
@@ -140,9 +134,6 @@ class ServiceProvider extends AddonServiceProvider
                     $nav->item(__('aardvark-seo::sitemap.singular'))
                         ->route('aardvark-seo.sitemap.index')
                         ->can('view aardvark sitemap settings'),
-                    $nav->item(__('aardvark-seo::blueprint.plural'))
-                        ->route('aardvark-seo.blueprints.index')
-                        ->can('view aardvark blueprints settings'),
                 ]);
 
             $nav->create(__('aardvark-seo::redirects.plural'))
@@ -179,20 +170,12 @@ class ServiceProvider extends AddonServiceProvider
                 'label' => 'Marketing'
             ],
             [
-                'value' => 'redirects',
-                'label' => 'Redirects'
-            ],
-            [
                 'value' => 'sitemap',
                 'label' => 'Sitemap'
             ],
             [
                 'value' => 'defaults',
                 'label' => 'Defaults'
-            ],
-            [
-                'value' => 'blueprints',
-                'label' => 'Blueprints'
             ],
         ];
 

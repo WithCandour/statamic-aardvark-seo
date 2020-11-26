@@ -29,9 +29,9 @@ return [
 
     // Permissions
     'permissions' => [
-        'view' => 'View redirects',
-        'edit' => 'Edit/Update redirects',
-        'create' => 'Create redirects'
+        'view' => 'View Redirects',
+        'edit' => 'Edit/Update Redirects',
+        'create' => 'Create Redirects'
     ],
 
     // Pages
