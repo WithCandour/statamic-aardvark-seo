@@ -71,6 +71,21 @@ class AardvarkSeoTags extends Tags
     }
 
     /**
+     * Return the list of social icons created in the 'Social' menu
+     *
+     * @return string
+     */
+    public function socials()
+    {
+        $data = PageDataParser::getData(collect($this->context));
+        $socials = $data->get('aardvark_social_settings')->get('social_links');
+        if($socials) {
+            return $this->parseLoop($socials->raw());
+        }
+        return false;
+    }
+
+    /**
      * Return the robots tag content
      * (done here to prevent a bunch of ifs and butts in the template file)
      *
