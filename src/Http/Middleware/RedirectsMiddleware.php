@@ -40,8 +40,6 @@ class RedirectsMiddleware
                     return redirect($target, $status);
                 }
             }
-
-            // Then check the auto redirects
         }
 
         return $response;

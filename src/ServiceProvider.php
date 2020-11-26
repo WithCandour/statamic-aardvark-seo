@@ -17,7 +17,6 @@ use WithCandour\AardvarkSeo\Listeners\AppendEntrySeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\AppendTermSeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\DefaultsSitemapCacheInvalidationListener;
 use WithCandour\AardvarkSeo\Listeners\Subscribers\SitemapCacheInvalidationSubscriber;
-use WithCandour\AardvarkSeo\Listeners\Redirects\Subscribers\AutoRedirectsSubscriber;
 use WithCandour\AardvarkSeo\Console\Commands\BlueprintsUpdate;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsController;
 use WithCandour\AardvarkSeo\Http\Middleware\RedirectsMiddleware;
@@ -68,7 +67,6 @@ class ServiceProvider extends AddonServiceProvider
     ];
 
     protected $subscribe = [
-        AutoRedirectsSubscriber::class,
         SitemapCacheInvalidationSubscriber::class,
     ];
 
@@ -146,9 +144,6 @@ class ServiceProvider extends AddonServiceProvider
                     $nav->item(__('aardvark-seo::redirects.manual.plural'))
                         ->can('view aardvark redirects settings')
                         ->route('aardvark-seo.redirects.manual-redirects.index'),
-                    $nav->item(__('aardvark-seo::redirects.auto.plural'))
-                        ->can('view aardvark redirects settings')
-                        ->route('aardvark-seo.redirects.auto-redirects.index'),
                 ]);
         });
     }

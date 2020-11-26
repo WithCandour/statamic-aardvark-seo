@@ -190,9 +190,8 @@ class ManualRedirectsController extends Controller
 
         $context = $data['context'] ?? [];
 
-        $action = Action::get($request->action)->context($context);
-
-        // die(print_r($data['selections']));
+        $action = new DeleteManualRedirectsAction();
+        $action->context($context);
 
         $redirects = collect($data['selections']);
 

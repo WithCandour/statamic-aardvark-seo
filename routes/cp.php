@@ -54,18 +54,5 @@ Route::namespace('\WithCandour\AardvarkSeo\Http\Controllers\CP')
             Route::resource('manual-redirects', 'ManualRedirectsController')->only([
                 'index', 'create', 'edit', 'update', 'store', 'destroy'
             ]);
-
-            // Auto redirects
-            Route::prefix('auto-redirects')
-                ->name('auto-redirects.')
-                ->group(function() {
-                    Route::get('actions', 'AutoRedirectsController@bulkActions')
-                        ->name('actions');
-                    Route::post('actions', 'AutoRedirectsController@runActions')
-                        ->name('run');
-                });
-            Route::resource('auto-redirects', 'AutoRedirectsController')->only([
-                'index', 'destroy'
-            ]);
         });
 });

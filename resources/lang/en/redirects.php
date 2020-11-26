@@ -14,11 +14,6 @@ return [
         'plural' => 'Manual redirects'
     ],
 
-    'auto' => [
-        'singular' => 'Auto redirect',
-        'plural' => 'Auto redirects'
-    ],
-
     // Redirect attributes
     'redirect' => [
         'source_url' => 'Source URL',
@@ -39,13 +34,11 @@ return [
         'create' => 'Create a redirect',
         'edit' => 'Edit a redirect',
         'manual' => 'Manual redirects',
-        'auto' => 'Auto redirects'
     ],
 
     // Actions
     'actions' => [
         'create' => 'Create a redirect',
-        'auto' => 'Auto redirects',
         'manual' => 'Manual redirects'
     ]
 
