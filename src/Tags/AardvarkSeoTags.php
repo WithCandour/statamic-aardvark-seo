@@ -2,6 +2,7 @@
 
 namespace WithCandour\AardvarkSeo\Tags;
 
+use Statamic\Facades\Data;
 use Statamic\Facades\Site;
 use Statamic\Tags\Tags;
 use WithCandour\AardvarkSeo\Schema\SchemaGraph;
@@ -56,6 +57,38 @@ class AardvarkSeoTags extends Tags
     {
         $data = PageDataParser::getData(collect($this->context));
         return view('aardvark-seo::tags.footer', $data);
+    }
+
+    /**
+     * Return the hreflang tags
+     */
+    public function hreflang()
+    {
+        $ctx = collect($this->context);
+
+        if(!$ctx->get('id')) {
+            return null;
+        }
+
+        $data = Data::find($ctx->get('id'));
+
+        if(!$data) {
+            return null;
+        }
+
+        $alternates = $data->sites()->filter(function($locale) use ($data) {
+            return !empty($data->in($locale));
+        })->reject(function($locale) use ($data) {
+            return $locale === $data->locale();
+        });
+
+        if($alternates->count() > 0) {
+            return $alternates->map(function($locale) use ($data) {
+                $site = Site::get($locale);
+                $localized_data = $data->in($locale);
+                return "<link rel='alternate' href=\"{$localized_data->absoluteUrl()}\" hreflang=\"{$site->locale()}\" >";
+            })->join("\n");
+        }
     }
 
     /**
