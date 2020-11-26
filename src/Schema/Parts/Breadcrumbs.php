@@ -4,9 +4,10 @@ namespace WithCandour\AardvarkSeo\Schema\Parts;
 
 use Spatie\SchemaOrg\Schema;
 use Statamic\Facades\Config;
-use Statamic\Facades\Data;
-use Statamic\Facades\URL;
+use Statamic\Facades\Entry;
 use Statamic\Facades\Site;
+use Statamic\Facades\Term;
+use Statamic\Facades\URL;
 use WithCandour\AardvarkSeo\Schema\SchemaIds;
 use WithCandour\AardvarkSeo\Schema\Parts\Contracts\SchemaPart;
 
@@ -32,7 +33,16 @@ class Breadcrumbs implements SchemaPart
 
             return $uri;
         })->mapWithKeys(function ($uri) {
-            return [$uri => Data::findByUri($uri, Site::current()->handle())];
+            $entry = Entry::findByUri($uri, Site::current()->handle());
+            if($entry) {
+                return [$uri => $entry];
+            }
+            $term = Term::findByUri($uri, Site::current()->handle());
+            if($term) {
+                return [$uri => $term];
+            }
+
+            return [$uri => null];
         })->filter();
 
         return $crumbs->reverse();

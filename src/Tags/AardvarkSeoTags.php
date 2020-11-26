@@ -2,7 +2,7 @@
 
 namespace WithCandour\AardvarkSeo\Tags;
 
-use Statamic\Facades\Data;
+use Statamic\Facades\Entry;
 use Statamic\Facades\Site;
 use Statamic\Tags\Tags;
 use WithCandour\AardvarkSeo\Schema\SchemaGraph;
@@ -60,7 +60,7 @@ class AardvarkSeoTags extends Tags
     }
 
     /**
-     * Return the hreflang tags
+     * Return the data for hreflang tags
      */
     public function hreflang()
     {
@@ -70,7 +70,7 @@ class AardvarkSeoTags extends Tags
             return null;
         }
 
-        $data = Data::find($ctx->get('id'));
+        $data = Entry::find($ctx->get('id'));
 
         if(!$data) {
             return null;
