@@ -40,26 +40,32 @@ class Sitemap
             })
             ->map(function ($collection) {
                 $indexable = self::getIndexStatusForContent('collections', $collection->handle(), Site::current());
+                $excluded = self::getExcludedStatusForContent('collections', $collection->handle(), Site::current());
                 return [
                     'type' => 'collection',
                     'handle' => $collection->handle(),
                     'indexable' => $indexable,
+                    'excluded' => $excluded,
                 ];
             });
         $taxonomies = collect(Taxonomy::all())
             ->map(function ($taxonomy) {
                 $indexable = self::getIndexStatusForContent('taxonomies', $taxonomy->handle(), Site::current());
+                $excluded = self::getExcludedStatusForContent('taxonomies', $taxonomy->handle(), Site::current());
                 return [
                     'type' => 'taxonomy',
                     'handle' => $taxonomy->handle(),
                     'indexable' => $indexable,
+                    'excluded' => $excluded,
                 ];
             });
 
         $sitemaps = collect([$collections, $taxonomies])->collapse();
 
         $filtered_sitemaps = $sitemaps->filter(function ($content_type) {
-            return $content_type['indexable'];
+            $indexable = $content_type['indexable'];
+            $excluded = $content_type['excluded'];
+            return $indexable && !$excluded;
         });
 
         $sitemap_objects = $filtered_sitemaps->map(function ($sitemap) {
@@ -147,6 +153,26 @@ class Sitemap
     {
         $no_indexed = Defaults::get($type, $handle, $site, 'no_index_page', 0);
         return !$no_indexed;
+    }
+
+    /**
+     * Detect whether this content type is excluded
+     *
+     * @param string $type
+     * @param string $handle
+     * @param Statamic\Sites\Site $site
+     */
+    public static function getExcludedStatusForContent($type = 'collections', $handle = 'pages', $site)
+    {
+        $settings = AardvarkStorage::getYaml('sitemap', $site, true);
+        $excluded_array = $settings->get("exclude_{$type}");
+
+        if(empty($excluded_array)) {
+            return false;
+        }
+
+        $excluded = in_array($handle, $settings->get("exclude_{$type}"));
+        return $excluded;
     }
 
     /**
