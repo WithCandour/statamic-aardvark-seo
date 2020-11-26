@@ -21,16 +21,16 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                             'field' => [
                                 'type' => 'section',
                                 'listable' => 'hidden',
-                                'display' => 'Google Tag Manager',
-                                'instructions' => 'Manage your Google tag manager settings here.',
+                                'display' => __('aardvark-seo::marketing.fields.gtm_section.display'),
+                                'instructions' => __('aardvark-seo::marketing.fields.gtm_section.instruct'),
                             ],
                         ],
                         [
                             'handle' => 'enable_gtm_script',
                             'field' => [
                                 'type' => 'toggle',
-                                'display' => 'Enable Google Tag Manager Script',
-                                'instructions' => 'Toggle whether the GTM script is placed on the website.',
+                                'display' => __('aardvark-seo::marketing.fields.enable_gtm_script.display'),
+                                'instructions' => __('aardvark-seo::marketing.fields.enable_gtm_script.instruct'),
                                 'width' => 33,
                             ],
                         ],
@@ -38,8 +38,8 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'gtm_identifier',
                             'field' => [
                                 'type' => 'text',
-                                'display' => 'Google Tag Manager ID',
-                                'instructions' => 'Copy your Google tag manager identifier here.',
+                                'display' => __('aardvark-seo::marketing.fields.gtm_identifier.display'),
+                                'instructions' => __('aardvark-seo::marketing.fields.gtm_identifier.instruct'),
                                 'width' => 66,
                                 'if' => [
                                     'enable_gtm_script' => 'equals true',
@@ -50,8 +50,7 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'site_verification_section',
                             'field' => [
                                 'type' => 'section',
-                                'display' => 'Site Verification',
-                                'instructions' => 'Copy your Google tag manager identifier here.',
+                                'display' => __('aardvark-seo::marketing.fields.site_verification_section.display'),
                                 'listable' => 'hidden',
                             ],
                         ],
@@ -59,7 +58,7 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'google_verification_code',
                             'field' => [
                                 'type' => 'text',
-                                'display' => 'Google Verification Code',
+                                'display' => __('aardvark-seo::marketing.fields.google_verification_code.display'),
                                 'width' => 50,
                             ],
                         ],
@@ -67,7 +66,7 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'bing_verification_code',
                             'field' => [
                                 'type' => 'text',
-                                'display' => 'Bing Verification Code',
+                                'display' => __('aardvark-seo::marketing.fields.bing_verification_code.display'),
                                 'width' => 50,
                             ],
                         ],
@@ -75,7 +74,7 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'yandex_verification_code',
                             'field' => [
                                 'type' => 'text',
-                                'display' => 'Yandex Verification Code',
+                                'display' => __('aardvark-seo::marketing.fields.yandex_verification_code.display'),
                                 'width' => 50,
                             ],
                         ],
@@ -83,7 +82,7 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'baidu_verification_code',
                             'field' => [
                                 'type' => 'text',
-                                'display' => 'Baidu Verification Code',
+                                'display' => __('aardvark-seo::marketing.fields.baidu_verification_code.display'),
                                 'width' => 50,
                             ],
                         ],

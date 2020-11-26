@@ -20,17 +20,17 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'titles_section',
                             'field' => [
                                 'type' => 'section',
-                                'display' => 'Titles',
+                                'display' => __('aardvark-seo::general.fields.titles_section.display'),
+                                'instructions' => __('aardvark-seo::general.fields.titles_section.instruct'),
                                 'listable' => 'hidden',
-                                'instructions' => 'Control how your site titles appear',
                             ],
                         ],
                         [
                             'handle' => 'title_separator',
                             'field' => [
                                 'type' => 'select',
-                                'display' => 'Title Separator',
-                                'instructions' => 'Set the character to separate the site and page names in the meta title',
+                                'display' => __('aardvark-seo::general.fields.title_separator.display'),
+                                'instructions' => __('aardvark-seo::general.fields.title_separator.instruct'),
                                 'default' => '|',
                                 'options' => [
                                     '|',
@@ -53,8 +53,8 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'site_name',
                             'field' => [
                                 'type' => 'text',
-                                'display' => 'Website Name',
-                                'instructions' => 'Set the name for the website. This will be used in generated meta titles as well as the OpenGraph site name property',
+                                'display' => __('aardvark-seo::general.fields.site_name.display'),
+                                'instructions' => __('aardvark-seo::general.fields.site_name.instruct'),
                                 'width' => 66,
                             ],
                         ],
@@ -62,15 +62,16 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'favicon_section',
                             'field' => [
                                 'type' => 'section',
-                                'display' => 'Favicon',
+                                'display' => __('aardvark-seo::general.fields.favicon_section.display'),
+                                'instructions' => __('aardvark-seo::general.fields.favicon_section.instruct'),
                                 'listable' => 'hidden',
-                                'instructions' => 'Upload a favicon to show in search results and the browser. It is recommended that your favicon is:<ul><li>A multiple of 48px square in dimensions</li><li>A supported favicon file format, we recommend using `.png`</li></ul>',
                             ],
                         ],
                         [
                             'handle' => 'global_favicon',
                             'field' => [
                                 'type' => 'assets',
+                                'display' => __('aardvark-seo::general.fields.global_favicon.display'),
                                 'max_files' => 1,
                                 'restrict' => false,
                                 'container' => config('aardvark-seo.asset_container'),
@@ -81,7 +82,7 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'knowledge_graph_section',
                             'field' => [
                                 'type' => 'section',
-                                'display' => 'Base Knowledge Graph Data',
+                                'display' => __('aardvark-seo::general.fields.knowledge_graph_section.display'),
                                 'listable' => 'hidden',
                             ],
                         ],
@@ -89,8 +90,8 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'company_or_person',
                             'field' => [
                                 'type' => 'radio',
-                                'display' => 'Company or Person?',
-                                'instructions' => 'Select whether the content on this website represents a company or a person',
+                                'display' => __('aardvark-seo::general.fields.company_or_person.display'),
+                                'instructions' => __('aardvark-seo::general.fields.company_or_person.instruct'),
                                 'default' => 'company',
                                 'inline' => true,
                                 'options' => [
@@ -103,9 +104,9 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'target_name',
                             'field' => [
                                 'type' => 'text',
-                                'display' => 'Target Name',
+                                'display' => __('aardvark-seo::general.fields.target_name.display'),
+                                'instructions' => __('aardvark-seo::general.fields.target_name.instruct'),
                                 'width' => 50,
-                                'instructions' => 'Enter the person/company name here',
                             ],
                         ],
                         [
@@ -115,6 +116,7 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'max_files' => 1,
                                 'restrict' => false,
                                 'width' => 50,
+                                'display' => __('aardvark-seo::general.fields.company_logo.display'),
                                 'container' => config('aardvark-seo.asset_container'),
                                 'folder' => config('aardvark-seo.asset_folder'),
                                 'if' => [
@@ -126,8 +128,8 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'breadcrumbs_section',
                             'field' => [
                                 'type' => 'section',
-                                'display' => 'Breadcrumbs',
-                                'instructions' => 'Enable breadcrumbs schema for pages (see [https://developers.google.com/search/docs/data-types/breadcrumb](https://developers.google.com/search/docs/data-types/breadcrumb)).',
+                                'display' => __('aardvark-seo::general.fields.breadcrumbs_section.display'),
+                                'instructions' => __('aardvark-seo::general.fields.breadcrumbs_section.instruct'),
                                 'listable' => 'hidden',
                             ],
                         ],
@@ -135,7 +137,7 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'enable_breadcrumbs',
                             'field' => [
                                 'type' => 'toggle',
-                                'display' => 'Enable Breadcrumbs?',
+                                'display' => __('aardvark-seo::general.fields.enable_breadcrumbs.display'),
                                 'default' => true,
                             ],
                         ],
@@ -143,16 +145,16 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'no_index_section',
                             'field' => [
                                 'type' => 'section',
-                                'display' => 'No Index',
-                                'instructions' => 'Set to `true` to exclude the **whole site** from search engine indexing - this can also be configured on a per-page basis.',
+                                'display' => __('aardvark-seo::general.fields.no_index_section.display'),
+                                'instructions' => __('aardvark-seo::general.fields.no_index_section.instruct'),
                             ],
                         ],
                         [
                             'handle' => 'no_index_site',
                             'field' => [
                                 'type' => 'toggle',
-                                'display' => 'No Index',
-                                'instructions' => 'Prevent indexing across the entire site.',
+                                'display' => __('aardvark-seo::general.fields.no_index_site.display'),
+                                'instructions' => __('aardvark-seo::general.fields.no_index_site.instruct'),
                             ],
                         ],
                     ],

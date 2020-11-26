@@ -20,7 +20,7 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'enable_sitemap',
                             'field' => [
                                 'type' => 'toggle',
-                                'display' => 'Enable Sitemap?',
+                                'display' => __('aardvark-seo::sitemap.fields.enable_sitemap.display'),
                                 'default' => true,
                             ],
                         ],
@@ -28,8 +28,8 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'sitemap_cache_expiration',
                             'field' => [
                                 'type' => 'select',
-                                'display' => 'Sitemap Cache Expiration',
-                                'instructions' => 'Set the amount of time before the sitemap should be regenerated.',
+                                'display' => __('aardvark-seo::sitemap.fields.sitemap_cache_expiration.display'),
+                                'instructions' => __('aardvark-seo::sitemap.fields.sitemap_cache_expiration.instruct'),
                                 'default' => '180',
                                 'options' => [
                                     'null' => 'Forever',
@@ -48,7 +48,7 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'exclude_content_section',
                             'field' => [
                                 'type' => 'section',
-                                'display' => 'Exclude Content',
+                                'display' => __('aardvark-seo::sitemap.fields.exclude_content_section.display'),
                                 'listable' => 'hidden',
                             ],
                         ],
@@ -56,8 +56,8 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'exclude_collections',
                             'field' => [
                                 'type' => 'collections',
-                                'display' => 'Exclude Collections',
-                                'instructions' => 'Select collections which you would like to exclude from the sitemap.',
+                                'display' => __('aardvark-seo::sitemap.fields.exclude_collections.display'),
+                                'instructions' => __('aardvark-seo::sitemap.fields.exclude_collections.instruct'),
                                 'width' => 50,
                             ],
                         ],
@@ -65,8 +65,8 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'exclude_taxonomies',
                             'field' => [
                                 'type' => 'taxonomies',
-                                'display' => 'Exclude Taxonomies',
-                                'instructions' => 'Select taxonomies which you would like to exclude from the sitemap.',
+                                'display' => __('aardvark-seo::sitemap.fields.exclude_taxonomies.display'),
+                                'instructions' => __('aardvark-seo::sitemap.fields.exclude_taxonomies.instruct'),
                                 'width' => 50,
                             ],
                         ],

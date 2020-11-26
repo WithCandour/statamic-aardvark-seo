@@ -20,8 +20,8 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'social_section',
                             'field' => [
                                 'type' => 'section',
-                                'display' => 'Social Media Settings',
-                                'instructions' => 'Put any related social media links in the table below.',
+                                'display' => __('aardvark-seo::social.fields.social_section.display'),
+                                'instructions' => __('aardvark-seo::social.fields.social_section.instruct'),
                                 'listable' => 'hidden',
                             ],
                         ],
@@ -29,14 +29,14 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'social_links',
                             'field' => [
                                 'type' => 'grid',
-                                'display' => 'Social Media Links',
-                                'add_row' => 'Add a new social icon',
+                                'display' => __('aardvark-seo::social.fields.social_links.display'),
+                                'add_row' => __('aardvark-seo::social.fields.social_links.add_new'),
                                 'fields' => [
                                     [
                                         'handle' => 'social_icon',
                                         'field' => [
                                             'type' => 'select',
-                                            'display' => 'Social Icon',
+                                            'display' => __('aardvark-seo::social.fields.social_links.icon'),
                                             'options' => self::getSocialOptions(),
                                         ],
                                     ],
@@ -44,7 +44,7 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                                         'handle' => 'url',
                                         'field' => [
                                             'type' => 'text',
-                                            'display' => 'URL',
+                                            'display' => __('aardvark-seo::social.fields.social_links.url'),
                                         ],
                                     ],
                                 ],
@@ -53,14 +53,14 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                     ],
                 ],
                 'opengraph' => [
-                    'display' => 'OpenGraph',
+                    'display' => __('aardvark-seo::social.fields.opengraph.display'),
                     'fields' => [
                         [
                             'handle' => 'og_image_site',
                             'field' => [
                                 'type' => 'assets',
-                                'display' => 'Default OpenGraph share image',
-                                'instructions' => 'Upload a default image for when the site is shared on social media platforms which support OpenGraph. The recommended size is 1200px x 630px.',
+                                'display' => __('aardvark-seo::social.fields.og_image_site.display'),
+                                'instructions' => __('aardvark-seo::social.fields.og_image_site.instruct'),
                                 'max_files' => 1,
                                 'restrict' => false,
                                 'container' => config('aardvark-seo.asset_container'),
@@ -70,22 +70,22 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                     ],
                 ],
                 'twitter' => [
-                    'display' => 'Twitter',
+                    'display' => __('aardvark-seo::social.fields.twitter.display'),
                     'fields' => [
                         [
                             'handle' => 'twitter_username',
                             'field' => [
                                 'type' => 'text',
-                                'display' => 'Twitter Username',
-                                'instructions' => 'Your twitter username (including the @ symbol)',
+                                'display' => __('aardvark-seo::social.fields.twitter_username.display'),
+                                'instructions' => __('aardvark-seo::social.fields.twitter_username.instruct'),
                             ],
                         ],
                         [
                             'handle' => 'twitter_meta_section_site',
                             'field' => [
                                 'type' => 'section',
-                                'display' => 'Twitter Share Data',
-                                'instructions' => 'This is the default data that will be used when this site is shared on Twitter. This data may be overridden at collection and/or page level.',
+                                'display' => __('aardvark-seo::social.fields.twitter_meta_section_site.display'),
+                                'instructions' => __('aardvark-seo::social.fields.twitter_meta_section_site.instruct'),
                                 'listable' => 'hidden',
                             ],
                         ],
@@ -93,8 +93,8 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'twitter_card_type_site',
                             'field' => [
                                 'type' => 'select',
-                                'display' => 'Card Type',
-                                'instructions' => 'Select which type of twitter card should be used throughout the site.',
+                                'display' => __('aardvark-seo::social.fields.twitter_card_type_site.display'),
+                                'instructions' => __('aardvark-seo::social.fields.twitter_card_type_site.instruct'),
                                 'width' => 50,
                                 'default' => 'summary',
                                 'options' => [
@@ -107,8 +107,8 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'twitter_default_image_section',
                             'field' => [
                                 'type' => 'section',
-                                'display' => 'Default Twitter Images',
-                                'instructions' => 'Upload default images to use when sharing pages on this site on Twitter.',
+                                'display' => __('aardvark-seo::social.fields.twitter_default_image_section.display'),
+                                'instructions' => __('aardvark-seo::social.fields.twitter_default_image_section.instruct'),
                                 'listable' => 'hidden',
                             ],
                         ],
@@ -116,8 +116,8 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'twitter_summary_image_site',
                             'field' => [
                                 'type' => 'assets',
-                                'display' => 'Default Summary Image',
-                                'instructions' => 'Upload a default image to show on twitter when this page is shared. The recommended size is 240px x 240px.',
+                                'display' => __('aardvark-seo::social.fields.twitter_summary_image_site.display'),
+                                'instructions' => __('aardvark-seo::social.fields.twitter_summary_image_site.instruct'),
                                 'max_files' => 1,
                                 'restrict' => false,
                                 'container' => config('aardvark-seo.asset_container'),
@@ -129,8 +129,8 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                             'handle' => 'twitter_summary_large_image_site',
                             'field' => [
                                 'type' => 'assets',
-                                'display' => 'Default Large Summary Image',
-                                'instructions' => 'Upload a default image to show on twitter when this page is shared using a large card. The recommended size is 876px x 438px.',
+                                'display' => __('aardvark-seo::social.fields.twitter_summary_large_image_site.display'),
+                                'instructions' => __('aardvark-seo::social.fields.twitter_summary_large_image_site.instruct'),
                                 'max_files' => 1,
                                 'restrict' => false,
                                 'container' => config('aardvark-seo.asset_container'),
