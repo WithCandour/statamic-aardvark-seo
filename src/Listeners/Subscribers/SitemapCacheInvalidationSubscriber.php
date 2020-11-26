@@ -25,7 +25,7 @@ class SitemapCacheInvalidationSubscriber
      */
     public function subscribe($events)
     {
-        foreach($this->events as $event) {
+        foreach ($this->events as $event) {
             $events->listen($event, ContentSitemapCacheInvalidationListener::class . '@handle');
         }
     }

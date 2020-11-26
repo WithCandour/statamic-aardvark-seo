@@ -22,8 +22,8 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => 'Titles',
                                 'listable' => 'hidden',
-                                'instructions' => 'Control how your site titles appear'
-                            ]
+                                'instructions' => 'Control how your site titles appear',
+                            ],
                         ],
                         [
                             'handle' => 'title_separator',
@@ -46,8 +46,8 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                     '*',
                                     '+',
                                 ],
-                                'width' => 33
-                            ]
+                                'width' => 33,
+                            ],
                         ],
                         [
                             'handle' => 'site_name',
@@ -55,8 +55,8 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'text',
                                 'display' => 'Website Name',
                                 'instructions' => 'Set the name for the website. This will be used in generated meta titles as well as the OpenGraph site name property',
-                                'width' => 66
-                            ]
+                                'width' => 66,
+                            ],
                         ],
                         [
                             'handle' => 'favicon_section',
@@ -64,8 +64,8 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => 'Favicon',
                                 'listable' => 'hidden',
-                                'instructions' => 'Upload a favicon to show in search results and the browser. It is recommended that your favicon is:<ul><li>A multiple of 48px square in dimensions</li><li>A supported favicon file format, we recommend using `.png`</li></ul>'
-                            ]
+                                'instructions' => 'Upload a favicon to show in search results and the browser. It is recommended that your favicon is:<ul><li>A multiple of 48px square in dimensions</li><li>A supported favicon file format, we recommend using `.png`</li></ul>',
+                            ],
                         ],
                         [
                             'handle' => 'global_favicon',
@@ -74,16 +74,16 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'max_files' => 1,
                                 'restrict' => false,
                                 'container' => config('aardvark-seo.asset_container'),
-                                'folder' => config('aardvark-seo.asset_folder')
-                            ]
+                                'folder' => config('aardvark-seo.asset_folder'),
+                            ],
                         ],
                         [
                             'handle' => 'knowledge_graph_section',
                             'field' => [
                                 'type' => 'section',
                                 'display' => 'Base Knowledge Graph Data',
-                                'listable' => 'hidden'
-                            ]
+                                'listable' => 'hidden',
+                            ],
                         ],
                         [
                             'handle' => 'company_or_person',
@@ -95,9 +95,9 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'inline' => true,
                                 'options' => [
                                     'company' => 'Company',
-                                    'person' => 'Person'
-                                ]
-                            ]
+                                    'person' => 'Person',
+                                ],
+                            ],
                         ],
                         [
                             'handle' => 'target_name',
@@ -105,8 +105,8 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'text',
                                 'display' => 'Target Name',
                                 'width' => 50,
-                                'instructions' => 'Enter the person/company name here'
-                            ]
+                                'instructions' => 'Enter the person/company name here',
+                            ],
                         ],
                         [
                             'handle' => 'company_logo',
@@ -118,9 +118,9 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'container' => config('aardvark-seo.asset_container'),
                                 'folder' => config('aardvark-seo.asset_folder'),
                                 'if' => [
-                                    'company_or_person' => 'equals company'
-                                ]
-                            ]
+                                    'company_or_person' => 'equals company',
+                                ],
+                            ],
                         ],
                         [
                             'handle' => 'breadcrumbs_section',
@@ -128,16 +128,16 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => 'Breadcrumbs',
                                 'instructions' => 'Enable breadcrumbs schema for pages (see [https://developers.google.com/search/docs/data-types/breadcrumb](https://developers.google.com/search/docs/data-types/breadcrumb)).',
-                                'listable' => 'hidden'
-                            ]
+                                'listable' => 'hidden',
+                            ],
                         ],
                         [
                             'handle' => 'enable_breadcrumbs',
                             'field' => [
                                 'type' => 'toggle',
                                 'display' => 'Enable Breadcrumbs?',
-                                'default' => true
-                            ]
+                                'default' => true,
+                            ],
                         ],
                         [
                             'handle' => 'no_index_section',
@@ -145,7 +145,7 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => 'No Index',
                                 'instructions' => 'Set to `true` to exclude the **whole site** from search engine indexing - this can also be configured on a per-page basis.',
-                            ]
+                            ],
                         ],
                         [
                             'handle' => 'no_index_site',
@@ -153,11 +153,11 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'toggle',
                                 'display' => 'No Index',
                                 'instructions' => 'Prevent indexing across the entire site.',
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ]);
     }
 }

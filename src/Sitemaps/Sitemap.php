@@ -13,7 +13,7 @@ use WithCandour\AardvarkSeo\Facades\ContentDefaults as Defaults;
 
 class Sitemap
 {
-     /**
+    /**
      * Create a new sitemap.
      *
      * @param string $type
@@ -167,7 +167,7 @@ class Sitemap
         $settings = AardvarkStorage::getYaml('sitemap', $site, true);
         $excluded_array = $settings->get("exclude_{$type}");
 
-        if(empty($excluded_array)) {
+        if (empty($excluded_array)) {
             return false;
         }
 

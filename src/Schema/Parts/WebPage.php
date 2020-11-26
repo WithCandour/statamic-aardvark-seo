@@ -25,7 +25,7 @@ class WebPage implements SchemaPart
         $page->name($title);
         $page->isPartOf(['@id' => WebSite::id()]);
         $page->inLanguage(Config::getFullLocale());
-        if($this->context->get('last_modified')) {
+        if ($this->context->get('last_modified')) {
             $page->datePublished($this->context->get('last_modified')->format('c'));
             $page->dateModified($this->context->get('last_modified')->format('c'));
         }

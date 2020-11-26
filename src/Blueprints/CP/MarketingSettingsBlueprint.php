@@ -22,8 +22,8 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'listable' => 'hidden',
                                 'display' => 'Google Tag Manager',
-                                'instructions' => 'Manage your Google tag manager settings here.'
-                            ]
+                                'instructions' => 'Manage your Google tag manager settings here.',
+                            ],
                         ],
                         [
                             'handle' => 'enable_gtm_script',
@@ -31,8 +31,8 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'toggle',
                                 'display' => 'Enable Google Tag Manager Script',
                                 'instructions' => 'Toggle whether the GTM script is placed on the website.',
-                                'width' => 33
-                            ]
+                                'width' => 33,
+                            ],
                         ],
                         [
                             'handle' => 'gtm_identifier',
@@ -42,9 +42,9 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                                 'instructions' => 'Copy your Google tag manager identifier here.',
                                 'width' => 66,
                                 'if' => [
-                                    'enable_gtm_script' => 'equals true'
-                                ]
-                            ]
+                                    'enable_gtm_script' => 'equals true',
+                                ],
+                            ],
                         ],
                         [
                             'handle' => 'site_verification_section',
@@ -52,44 +52,44 @@ class MarketingSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => 'Site Verification',
                                 'instructions' => 'Copy your Google tag manager identifier here.',
-                                'listable' => 'hidden'
-                            ]
+                                'listable' => 'hidden',
+                            ],
                         ],
                         [
                             'handle' => 'google_verification_code',
                             'field' => [
                                 'type' => 'text',
                                 'display' => 'Google Verification Code',
-                                'width' => 50
-                            ]
+                                'width' => 50,
+                            ],
                         ],
                         [
                             'handle' => 'bing_verification_code',
                             'field' => [
                                 'type' => 'text',
                                 'display' => 'Bing Verification Code',
-                                'width' => 50
-                            ]
+                                'width' => 50,
+                            ],
                         ],
                         [
                             'handle' => 'yandex_verification_code',
                             'field' => [
                                 'type' => 'text',
                                 'display' => 'Yandex Verification Code',
-                                'width' => 50
-                            ]
+                                'width' => 50,
+                            ],
                         ],
                         [
                             'handle' => 'baidu_verification_code',
                             'field' => [
                                 'type' => 'text',
                                 'display' => 'Baidu Verification Code',
-                                'width' => 50
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'width' => 50,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ]);
     }
 }

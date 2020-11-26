@@ -4,7 +4,6 @@ namespace WithCandour\AardvarkSeo\Http\Controllers\CP\Contracts;
 
 interface Publishable
 {
-
     /**
      * Return the view for the publish form
      */

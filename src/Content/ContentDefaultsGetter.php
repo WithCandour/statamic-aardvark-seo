@@ -15,6 +15,7 @@ class ContentDefaultsGetter
      * @param Statamic\Sites\Site $site
      * @param string $key
      * @param mixed $default
+     *
      * @return mixed
      */
     public static function get(string $type, string $handle, \Statamic\Sites\Site $site, string $key, $default)

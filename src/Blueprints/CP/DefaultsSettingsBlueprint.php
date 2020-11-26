@@ -23,23 +23,23 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'listable' => 'hidden',
                                 'display' => __('aardvark-seo::onpage.fields.meta_section.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.meta_section.instruct'),
-                            ]
+                            ],
                         ],
                         [
                             'handle' => 'meta_title',
                             'field' => [
                                 'type' => 'aardvark_seo_meta_title',
                                 'display' => __('aardvark-seo::onpage.fields.meta_title.display'),
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
                         [
                             'handle' => 'meta_description',
                             'field' => [
                                 'type' => 'aardvark_seo_meta_description',
                                 'display' => __('aardvark-seo::onpage.fields.meta_description.display'),
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
                         [
                             'handle' => 'use_meta_keywords',
@@ -48,8 +48,8 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'display' => __('aardvark-seo::onpage.fields.use_meta_keywords.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.use_meta_keywords.instruct'),
                                 'localizable' => true,
-                                'width' => 50
-                            ]
+                                'width' => 50,
+                            ],
                         ],
                         [
                             'handle' => 'meta_keywords',
@@ -60,16 +60,16 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'localizable' => true,
                                 'width' => 50,
                                 'if' => [
-                                    'use_meta_keywords' => 'equals true'
-                                ]
-                            ]
+                                    'use_meta_keywords' => 'equals true',
+                                ],
+                            ],
                         ],
                         [
                             'handle' => 'indexing_section',
                             'field' => [
                                 'type' => 'section',
                                 'display' => __('aardvark-seo::onpage.fields.indexing_section.display'),
-                            ]
+                            ],
                         ],
                         [
                             'handle' => 'no_index_page',
@@ -78,8 +78,8 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'display' => __('aardvark-seo::onpage.fields.no_index_page.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.no_index_page.instruct'),
                                 'width' => 50,
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
                         [
                             'handle' => 'no_follow_links',
@@ -88,8 +88,8 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'display' => __('aardvark-seo::onpage.fields.no_follow_links.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.no_follow_links.instruct'),
                                 'width' => 50,
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
                         [
                             'handle' => 'share_section_og',
@@ -97,23 +97,23 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => __('aardvark-seo::onpage.fields.share_section_og.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.share_section_og.instruct'),
-                            ]
+                            ],
                         ],
                         [
                             'handle' => 'og_title',
                             'field' => [
                                 'type' => 'text',
                                 'display' => __('aardvark-seo::onpage.fields.og_title.display'),
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
                         [
                             'handle' => 'og_description',
                             'field' => [
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.og_description.display'),
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
                         [
                             'handle' => 'og_image',
@@ -125,7 +125,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'container' => config('aardvark-seo.asset_container'),
                                 'folder' => config('aardvark-seo.asset_folder'),
                                 'localizable' => true,
-                            ]
+                            ],
                         ],
                         [
                             'handle' => 'share_section_twitter',
@@ -133,16 +133,16 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => __('aardvark-seo::onpage.fields.share_section_twitter.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.share_section_twitter.instruct'),
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
                         [
                             'handle' => 'override_twitter_settings',
                             'field' => [
                                 'type' => 'toggle',
                                 'display' => 'Override the twitter share settings for this content',
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
                         [
                             'handle' => 'twitter_title',
@@ -151,9 +151,9 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'display' => __('aardvark-seo::onpage.fields.twitter_title.display'),
                                 'localizable' => true,
                                 'if' => [
-                                    'override_twitter_settings' => 'equals true'
-                                ]
-                            ]
+                                    'override_twitter_settings' => 'equals true',
+                                ],
+                            ],
                         ],
                         [
                             'handle' => 'twitter_description',
@@ -161,9 +161,9 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.twitter_description.display'),
                                 'if' => [
-                                    'override_twitter_settings' => 'equals true'
+                                    'override_twitter_settings' => 'equals true',
                                 ],
-                            ]
+                            ],
                         ],
                         [
                             'handle' => 'override_twitter_card_settings',
@@ -172,9 +172,9 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'display' => 'Override the twitter card settings for this page',
                                 'localizable' => true,
                                 'if' => [
-                                    'override_twitter_settings' => 'equals true'
-                                ]
-                            ]
+                                    'override_twitter_settings' => 'equals true',
+                                ],
+                            ],
                         ],
                         [
                             'handle' => 'twitter_card_type_page',
@@ -187,13 +187,13 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'width' => 50,
                                 'options' => [
                                     'summary' => 'Summary Card',
-                                    'summary_large_image' => 'Summary Card with Large Image'
+                                    'summary_large_image' => 'Summary Card with Large Image',
                                 ],
                                 'if' => [
                                     'override_twitter_settings' => 'equals true',
-                                    'override_twitter_card_settings' => 'equals true'
-                                ]
-                            ]
+                                    'override_twitter_card_settings' => 'equals true',
+                                ],
+                            ],
                         ],
                         [
                             'handle' => 'twitter_summary_image',
@@ -209,9 +209,9 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'if' => [
                                     'override_twitter_settings' => 'equals true',
                                     'override_twitter_card_settings' => 'equals true',
-                                    'twitter_card_type_page' => 'equals summary'
-                                ]
-                            ]
+                                    'twitter_card_type_page' => 'equals summary',
+                                ],
+                            ],
                         ],
                         [
                             'handle' => 'twitter_summary_large_image',
@@ -227,9 +227,9 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'if' => [
                                     'override_twitter_settings' => 'equals true',
                                     'override_twitter_card_settings' => 'equals true',
-                                    'twitter_card_type_page' => 'equals summary_large_image'
-                                ]
-                            ]
+                                    'twitter_card_type_page' => 'equals summary_large_image',
+                                ],
+                            ],
                         ],
                         [
                             'handle' => 'scripts_section',
@@ -237,7 +237,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => __('aardvark-seo::onpage.fields.scripts_section.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.scripts_section.instruct'),
-                            ]
+                            ],
                         ],
                         [
                             'handle' => 'head_snippets',
@@ -245,8 +245,8 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.head_snippets.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.head_snippets.instruct'),
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
                         [
                             'handle' => 'footer_snippets',
@@ -254,8 +254,8 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.footer_snippets.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.footer_snippets.instruct'),
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
                         [
                             'handle' => 'schema_objects',
@@ -264,12 +264,12 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'display' => __('aardvark-seo::onpage.fields.schema_objects.display'),
                                 'instructions' => __('aardvark-seo::onpage.fields.schema_objects.instruct'),
                                 'rows' => 10,
-                                'localizable' => true
-                            ]
+                                'localizable' => true,
+                            ],
                         ],
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ]);
     }
 }

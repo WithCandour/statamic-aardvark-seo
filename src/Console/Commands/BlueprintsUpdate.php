@@ -24,10 +24,10 @@ class BlueprintsUpdate extends Command
 
         $all = Blueprint::all();
 
-        foreach($all as $blueprint) {
+        foreach ($all as $blueprint) {
             $handle = $blueprint->handle();
 
-            if(!in_array($handle, $excluded)) {
+            if (!in_array($handle, $excluded)) {
                 $contents = $blueprint->contents();
 
                 $on_page_bp = OnPageSeoBlueprint::requestBlueprint();

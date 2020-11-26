@@ -10,7 +10,7 @@ class DeleteManualRedirectsAction extends DeleteRedirectsAction
 {
     public function run($items, $values)
     {
-        $items->each(function($redirect) {
+        $items->each(function ($redirect) {
             $this->repository()->delete($redirect);
         });
     }

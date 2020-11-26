@@ -22,8 +22,8 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => 'Social Media Settings',
                                 'instructions' => 'Put any related social media links in the table below.',
-                                'listable' => 'hidden'
-                            ]
+                                'listable' => 'hidden',
+                            ],
                         ],
                         [
                             'handle' => 'social_links',
@@ -37,20 +37,20 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                                         'field' => [
                                             'type' => 'select',
                                             'display' => 'Social Icon',
-                                            'options' => self::getSocialOptions()
-                                        ]
+                                            'options' => self::getSocialOptions(),
+                                        ],
                                     ],
                                     [
                                         'handle' => 'url',
                                         'field' => [
                                             'type' => 'text',
-                                            'display' => 'URL'
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+                                            'display' => 'URL',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
                 'opengraph' => [
                     'display' => 'OpenGraph',
@@ -64,10 +64,10 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                                 'max_files' => 1,
                                 'restrict' => false,
                                 'container' => config('aardvark-seo.asset_container'),
-                                'folder' => config('aardvark-seo.asset_folder')
-                            ]
-                        ]
-                    ]
+                                'folder' => config('aardvark-seo.asset_folder'),
+                            ],
+                        ],
+                    ],
                 ],
                 'twitter' => [
                     'display' => 'Twitter',
@@ -77,8 +77,8 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                             'field' => [
                                 'type' => 'text',
                                 'display' => 'Twitter Username',
-                                'instructions' => 'Your twitter username (including the @ symbol)'
-                            ]
+                                'instructions' => 'Your twitter username (including the @ symbol)',
+                            ],
                         ],
                         [
                             'handle' => 'twitter_meta_section_site',
@@ -86,8 +86,8 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => 'Twitter Share Data',
                                 'instructions' => 'This is the default data that will be used when this site is shared on Twitter. This data may be overridden at collection and/or page level.',
-                                'listable' => 'hidden'
-                            ]
+                                'listable' => 'hidden',
+                            ],
                         ],
                         [
                             'handle' => 'twitter_card_type_site',
@@ -99,9 +99,9 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                                 'default' => 'summary',
                                 'options' => [
                                     'summary' => 'Summary Card',
-                                    'summary_large_image' => 'Summary card with Large Image'
-                                ]
-                            ]
+                                    'summary_large_image' => 'Summary card with Large Image',
+                                ],
+                            ],
                         ],
                         [
                             'handle' => 'twitter_default_image_section',
@@ -109,8 +109,8 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'section',
                                 'display' => 'Default Twitter Images',
                                 'instructions' => 'Upload default images to use when sharing pages on this site on Twitter.',
-                                'listable' => 'hidden'
-                            ]
+                                'listable' => 'hidden',
+                            ],
                         ],
                         [
                             'handle' => 'twitter_summary_image_site',
@@ -122,8 +122,8 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                                 'restrict' => false,
                                 'container' => config('aardvark-seo.asset_container'),
                                 'folder' => config('aardvark-seo.asset_folder'),
-                                'width' => 50
-                            ]
+                                'width' => 50,
+                            ],
                         ],
                         [
                             'handle' => 'twitter_summary_large_image_site',
@@ -135,12 +135,12 @@ class SocialSettingsBlueprint implements AardvarkBlueprint
                                 'restrict' => false,
                                 'container' => config('aardvark-seo.asset_container'),
                                 'folder' => config('aardvark-seo.asset_folder'),
-                                'width' => 50
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'width' => 50,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ]);
     }
 

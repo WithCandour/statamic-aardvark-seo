@@ -13,7 +13,6 @@ use WithCandour\AardvarkSeo\Schema\Parts\WebSite;
 
 class SchemaGraph
 {
-
     /**
      * @var \Illuminate\Support\Collection
      */
@@ -47,7 +46,7 @@ class SchemaGraph
         $webPageData = $webPage->data();
 
         // // If breadcrumbs are enabled - add them to the graph
-        if(!empty($this->globals->get('enable_breadcrumbs', 0)) && $this->context->get('url', '') !== '/') {
+        if (!empty($this->globals->get('enable_breadcrumbs', 0)) && $this->context->get('url', '') !== '/') {
             $breadcrumbs = new Breadcrumbs();
             $webPageData->breadcrumb($breadcrumbs->data());
         }

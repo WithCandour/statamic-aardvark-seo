@@ -10,7 +10,6 @@ use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
 
 class RedirectsRepository
 {
-
     /**
      * @var Collection
      */
@@ -45,7 +44,8 @@ class RedirectsRepository
      *
      * @return bool
      */
-    public function exists(string $id) {
+    public function exists(string $id)
+    {
         return $this->redirects->contains('id', $id);
     }
 
@@ -56,7 +56,8 @@ class RedirectsRepository
      *
      * @return bool
      */
-    public function sourceExists(string $source_url) {
+    public function sourceExists(string $source_url)
+    {
         return $this->redirects->contains('source_url', $source_url);
     }
 
@@ -69,7 +70,7 @@ class RedirectsRepository
      */
     public function get($id)
     {
-        if(!$this->exists($id)) {
+        if (!$this->exists($id)) {
             return false;
         }
 
@@ -85,7 +86,7 @@ class RedirectsRepository
      */
     public function getBySource($source_url)
     {
-        if(!$this->sourceExists($source_url)) {
+        if (!$this->sourceExists($source_url)) {
             return false;
         }
 
@@ -99,7 +100,7 @@ class RedirectsRepository
      */
     public function all($returnCollection = false)
     {
-        if($returnCollection) {
+        if ($returnCollection) {
             return collect($this->redirects);
         }
         return $this->redirects;
@@ -115,17 +116,17 @@ class RedirectsRepository
         $data = $this->processRaw($data);
 
         // If the source doesn't already exist add an ID
-        if(!$this->sourceExists($data['source_url'])) {
+        if (!$this->sourceExists($data['source_url'])) {
             $redirect_id = Str::uuid()->toString();
             $data['id'] = $redirect_id;
         } else {
             $redirect_id = $this->getBySource($data['source_url'])['id'];
         }
 
-        if($redirect_id && $this->exists($redirect_id)) {
+        if ($redirect_id && $this->exists($redirect_id)) {
             $data['id'] = $redirect_id;
-            $this->redirects = $this->redirects->map(function($redirect) use ($data, $redirect_id) {
-                if($redirect['id'] === $redirect_id) {
+            $this->redirects = $this->redirects->map(function ($redirect) use ($data, $redirect_id) {
+                if ($redirect['id'] === $redirect_id) {
                     $redirect = $data;
                 }
                 return $redirect;
@@ -145,8 +146,8 @@ class RedirectsRepository
     public function delete($redirect_id)
     {
         $exists = $this->exists($redirect_id);
-        if($exists) {
-            $this->redirects = $this->redirects->reject(function($redirect) use ($redirect_id) {
+        if ($exists) {
+            $this->redirects = $this->redirects->reject(function ($redirect) use ($redirect_id) {
                 return $redirect['id'] === $redirect_id;
             })->values();
 

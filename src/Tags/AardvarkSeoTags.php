@@ -24,7 +24,7 @@ class AardvarkSeoTags extends Tags
 
         $view = view('aardvark-seo::tags.head', $data);
 
-        if($this->params->get('debug')) {
+        if ($this->params->get('debug')) {
             return $view;
         }
 
@@ -34,7 +34,7 @@ class AardvarkSeoTags extends Tags
                 "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/",
             ],
             [
-                "",
+                '',
                 "\n",
             ],
             $view
@@ -66,24 +66,24 @@ class AardvarkSeoTags extends Tags
     {
         $ctx = collect($this->context);
 
-        if(!$ctx->get('id')) {
+        if (!$ctx->get('id')) {
             return null;
         }
 
         $data = Entry::find($ctx->get('id'));
 
-        if(!$data) {
+        if (!$data) {
             return null;
         }
 
-        $alternates = $data->sites()->filter(function($locale) use ($data) {
+        $alternates = $data->sites()->filter(function ($locale) use ($data) {
             return !empty($data->in($locale));
-        })->reject(function($locale) use ($data) {
+        })->reject(function ($locale) use ($data) {
             return $locale === $data->locale();
         });
 
-        if($alternates->count() > 0) {
-            return $alternates->map(function($locale) use ($data) {
+        if ($alternates->count() > 0) {
+            return $alternates->map(function ($locale) use ($data) {
                 $site = Site::get($locale);
                 $localized_data = $data->in($locale);
                 return "<link rel='alternate' href=\"{$localized_data->absoluteUrl()}\" hreflang=\"{$site->locale()}\" >";
@@ -112,7 +112,7 @@ class AardvarkSeoTags extends Tags
     {
         $data = PageDataParser::getData(collect($this->context));
         $socials = $data->get('aardvark_social_settings')->get('social_links');
-        if($socials) {
+        if ($socials) {
             return $this->parseLoop($socials->raw());
         }
         return false;
@@ -131,15 +131,15 @@ class AardvarkSeoTags extends Tags
 
         $global_no_index = $ctx->get('aardvark_general_settings')['no_index_site'];
 
-        if($ctx->get('no_index_page') || $global_no_index->raw()) {
+        if ($ctx->get('no_index_page') || $global_no_index->raw()) {
             array_push($attrs, 'noindex');
         }
 
-        if($ctx->get('no_follow_links')) {
+        if ($ctx->get('no_follow_links')) {
             array_push($attrs, 'nofollow');
         }
 
-        if(!empty($attrs)) {
+        if (!empty($attrs)) {
             $attrs_string = implode(', ', $attrs);
             return "<meta name=\"robots\" content=\"{$attrs_string}\">";
         }

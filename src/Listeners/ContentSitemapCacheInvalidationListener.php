@@ -13,7 +13,7 @@ class ContentSitemapCacheInvalidationListener
         $blank_event = new \ReflectionClass($event);
         $content_type = Str::contains($blank_event->getShortName(), 'Term') ? 'term' : 'entry';
 
-        if($content_type === 'term') {
+        if ($content_type === 'term') {
             $term = $event->term;
             $handle = $term->taxonomy()->handle();
         } else {

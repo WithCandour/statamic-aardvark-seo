@@ -34,17 +34,16 @@ class ManualRedirectsController extends Controller
             Column::make('source_url')->label(__('aardvark-seo::redirects.redirect.source_url')),
             Column::make('target_url')->label(__('aardvark-seo::redirects.redirect.target_url')),
             Column::make('status_code')->label(__('aardvark-seo::redirects.redirect.status_code')),
-            Column::make('is_active')->label(__('aardvark-seo::redirects.redirect.is_active'))
+            Column::make('is_active')->label(__('aardvark-seo::redirects.redirect.is_active')),
         ];
 
         $redirects = $this->repository()->all()->map(function ($redirect) {
-
             $delete_url = cp_route('aardvark-seo.redirects.manual-redirects.destroy', [
-                'manual_redirect' => $redirect['id']
+                'manual_redirect' => $redirect['id'],
             ]);
 
             $edit_url = cp_route('aardvark-seo.redirects.manual-redirects.edit', [
-                'manual_redirect' => $redirect['id']
+                'manual_redirect' => $redirect['id'],
             ]);
 
             $redirect['delete_url'] = $delete_url;
@@ -58,7 +57,7 @@ class ManualRedirectsController extends Controller
             'title' => __('aardvark-seo::redirects.pages.manual'),
             'columns' => $columns,
             'redirects' => $redirects,
-            'crumbs' => $crumbs
+            'crumbs' => $crumbs,
         ]);
     }
 
@@ -121,7 +120,7 @@ class ManualRedirectsController extends Controller
 
         $exists = $this->repository()->exists($redirect_id);
 
-        if(!$exists) {
+        if (!$exists) {
             return redirect()->route('statamic.cp.aardvark-seo.redirects.manual-redirects.index');
         }
 
@@ -135,7 +134,7 @@ class ManualRedirectsController extends Controller
             'meta' => $fields->meta(),
             'title' => __('aardvark-seo::redirects.pages.edit'),
             'values' => $fields->values(),
-            'redirect_id' => $redirect_id
+            'redirect_id' => $redirect_id,
         ]);
     }
 

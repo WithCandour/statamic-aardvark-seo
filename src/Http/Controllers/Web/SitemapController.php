@@ -16,7 +16,7 @@ class SitemapController extends LaravelController
         $site = Site::current();
         $siteUrl = $site->absoluteUrl();
 
-        $view = Cache::remember("aardvark-seo.sitemap-index.{$site->handle()}", $this->getCacheExpiration(), function() use ($siteUrl) {
+        $view = Cache::remember("aardvark-seo.sitemap-index.{$site->handle()}", $this->getCacheExpiration(), function () use ($siteUrl) {
             return view('aardvark-seo::sitemaps.index', [
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
                 'xslLink' => '<?xml-stylesheet type="text/xsl" href="' . $siteUrl . '/aardvark-sitemap.xsl"?>',
@@ -46,7 +46,7 @@ class SitemapController extends LaravelController
         $site = Site::current();
         $siteUrl = $site->absoluteUrl();
 
-        $view = Cache::remember("aardvark-seo.sitemap-{$handle}.{$site->handle()}", $this->getCacheExpiration(), function() use ($siteUrl, $sitemap) {
+        $view = Cache::remember("aardvark-seo.sitemap-{$handle}.{$site->handle()}", $this->getCacheExpiration(), function () use ($siteUrl, $sitemap) {
             return view('aardvark-seo::sitemaps.single', [
                 'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
                 'xslLink' => '<?xml-stylesheet type="text/xsl" href="' . $siteUrl . '/aardvark-sitemap.xsl"?>',

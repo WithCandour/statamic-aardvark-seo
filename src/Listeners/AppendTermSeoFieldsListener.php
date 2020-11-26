@@ -16,7 +16,7 @@ class AppendTermSeoFieldsListener implements SeoFieldsListener
     public function handle(TermBlueprintFound $event)
     {
         $handle = $event->blueprint->namespace();
-        if($this->check_content_type($handle)) {
+        if ($this->check_content_type($handle)) {
             $bp = $event->blueprint;
             $contents = $bp->contents();
 
@@ -34,7 +34,7 @@ class AppendTermSeoFieldsListener implements SeoFieldsListener
         $ns_parts = explode('.', $blueprint_namespace);
         $taxonomy_handle = !empty($ns_parts[1]) ? $ns_parts[1] : null;
         $excluded_taxonomies = config('aardvark-seo.excluded_taxonomies', []);
-        if(\in_array($taxonomy_handle, $excluded_taxonomies)) {
+        if (\in_array($taxonomy_handle, $excluded_taxonomies)) {
             return false;
         }
         return true;

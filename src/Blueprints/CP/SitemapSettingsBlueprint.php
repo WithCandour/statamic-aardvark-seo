@@ -21,8 +21,8 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                             'field' => [
                                 'type' => 'toggle',
                                 'display' => 'Enable Sitemap?',
-                                'default' => true
-                            ]
+                                'default' => true,
+                            ],
                         ],
                         [
                             'handle' => 'sitemap_cache_expiration',
@@ -40,17 +40,17 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                                     '10080' => '1 Week',
                                     '40320' => '1 Month',
                                     '120960' => '3 Months',
-                                    '483840' => '1 Year'
+                                    '483840' => '1 Year',
                                 ],
-                            ]
+                            ],
                         ],
                         [
                             'handle' => 'exclude_content_section',
                             'field' => [
                                 'type' => 'section',
                                 'display' => 'Exclude Content',
-                                'listable' => 'hidden'
-                            ]
+                                'listable' => 'hidden',
+                            ],
                         ],
                         [
                             'handle' => 'exclude_collections',
@@ -58,8 +58,8 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'collections',
                                 'display' => 'Exclude Collections',
                                 'instructions' => 'Select collections which you would like to exclude from the sitemap.',
-                                'width' => 50
-                            ]
+                                'width' => 50,
+                            ],
                         ],
                         [
                             'handle' => 'exclude_taxonomies',
@@ -67,12 +67,12 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'taxonomies',
                                 'display' => 'Exclude Taxonomies',
                                 'instructions' => 'Select taxonomies which you would like to exclude from the sitemap.',
-                                'width' => 50
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'width' => 50,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ]);
     }
 }

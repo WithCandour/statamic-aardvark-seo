@@ -20,15 +20,15 @@ class RedirectBlueprint implements AardvarkBlueprint
                             'handle' => 'source_url',
                             'field' => [
                                 'type' => 'text',
-                                'display' => __('aardvark-seo::redirects.redirect.source_url')
-                            ]
+                                'display' => __('aardvark-seo::redirects.redirect.source_url'),
+                            ],
                         ],
                         [
                             'handle' => 'target_url',
                             'field' => [
                                 'type' => 'text',
-                                'display' => __('aardvark-seo::redirects.redirect.target_url')
-                            ]
+                                'display' => __('aardvark-seo::redirects.redirect.target_url'),
+                            ],
                         ],
                         [
                             'handle' => 'status_code',
@@ -37,10 +37,10 @@ class RedirectBlueprint implements AardvarkBlueprint
                                 'inline' => true,
                                 'options' => [
                                     '301',
-                                    '302'
+                                    '302',
                                 ],
                                 'display' => __('aardvark-seo::redirects.redirect.status_code'),
-                                'default' => '301'
+                                'default' => '301',
                             ],
                         ],
                         [
@@ -48,12 +48,12 @@ class RedirectBlueprint implements AardvarkBlueprint
                             'field' => [
                                 'type' => 'toggle',
                                 'display' => __('aardvark-seo::redirects.redirect.is_active'),
-                                'default' => true
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'default' => true,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ]);
     }
 }

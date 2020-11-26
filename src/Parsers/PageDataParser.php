@@ -27,18 +27,17 @@ class PageDataParser
         $defaults = self::getDefaults($ctx);
 
         $bp = OnPageSeoBlueprint::requestBlueprint();
-        $fields_to_map = $bp->fields()->items()->mapWithKeys(function($field) {
-            return [$field['handle'] =>
-                [
+        $fields_to_map = $bp->fields()->items()->mapWithKeys(function ($field) {
+            return [$field['handle'] => [
                     'handle' => $field['handle'],
-                    'type' => $field['field']['type']
-                ]
+                    'type' => $field['field']['type'],
+                ],
             ];
         });
 
-        $data = $ctx->map(function($value, $field) use ($defaults, $fields_to_map) {
-            if($bp_field = $fields_to_map->get($field)) {
-                switch($bp_field['type']) {
+        $data = $ctx->map(function ($value, $field) use ($defaults, $fields_to_map) {
+            if ($bp_field = $fields_to_map->get($field)) {
+                switch ($bp_field['type']) {
                     case 'toggle':
                             $default_value = $defaults->get($field) && $defaults->get($field)->raw();
                             $page_value = $value && $value->raw();
@@ -69,7 +68,7 @@ class PageDataParser
     {
         $type = $ctx->get('is_term') ? 'taxonomies' : 'collections';
 
-        switch($type) {
+        switch ($type) {
             case 'taxonomies':
                 $repo = $ctx->get('taxonomy');
                 break;
@@ -84,7 +83,7 @@ class PageDataParser
          * Exception routes and taxonomy indexes - and anything else which
          * doesn't 'belong' to a collection
          */
-        if(!$repo) {
+        if (!$repo) {
             $repo = Collection::findByHandle('pages');
         }
 
@@ -145,7 +144,7 @@ class PageDataParser
      */
     public static function generatePageTitle($data, $ctx)
     {
-        if($data->get('meta_title') && $data->get('meta_title')->raw()) {
+        if ($data->get('meta_title') && $data->get('meta_title')->raw()) {
             return $data->get('meta_title');
         }
 
@@ -154,7 +153,7 @@ class PageDataParser
         return implode(' ', [
             $data->get('title'),
             $storage->get('title_separator'),
-            $storage->get('site_name')
+            $storage->get('site_name'),
         ]);
     }
 
@@ -183,8 +182,8 @@ class PageDataParser
     private static function getCalculatedTwitterCardType($data, $ctx)
     {
         $override = $data->get('override_twitter_settings') && $data->get('override_twitter_card_settings');
-        if($override) {
-            if($data->get('twitter_card_type_page')) {
+        if ($override) {
+            if ($data->get('twitter_card_type_page')) {
                 return $data->get('twitter_card_type_page');
             }
         }
@@ -202,9 +201,9 @@ class PageDataParser
         $type = self::getCalculatedTwitterCardType($data, $ctx)->raw();
         $field = $type === 'summary_large_image' ? 'twitter_summary_large_image' : 'twitter_summary_image';
 
-        if($override) {
+        if ($override) {
             $page_value = $data->get($field) && $data->get($field)->raw() ? $data->get($field) : null;
-            if($page_value) {
+            if ($page_value) {
                 return $page_value;
             }
         }

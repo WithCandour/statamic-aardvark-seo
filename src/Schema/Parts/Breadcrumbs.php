@@ -34,11 +34,11 @@ class Breadcrumbs implements SchemaPart
             return $uri;
         })->mapWithKeys(function ($uri) {
             $entry = Entry::findByUri($uri, Site::current()->handle());
-            if($entry) {
+            if ($entry) {
                 return [$uri => $entry];
             }
             $term = Term::findByUri($uri, Site::current()->handle());
-            if($term) {
+            if ($term) {
                 return [$uri => $term];
             }
 
@@ -46,7 +46,6 @@ class Breadcrumbs implements SchemaPart
         })->filter();
 
         return $crumbs->reverse();
-
     }
 
     public function data()
@@ -56,7 +55,7 @@ class Breadcrumbs implements SchemaPart
 
         $position = 1;
         $listItems = [];
-        foreach($crumbs as $crumb) {
+        foreach ($crumbs as $crumb) {
             $listItem = Schema::listItem();
             $listItem->position($position);
             $item = Schema::thing();

@@ -15,17 +15,17 @@ class SiteOwner implements SchemaPart
 {
     public function __construct($context = [])
     {
-       $this->context = $context;
+        $this->context = $context;
     }
 
     public function data()
     {
         $type = $this->context->get('company_or_person')->raw();
-        if($type === 'company') {
+        if ($type === 'company') {
             $owner = Schema::organization();
             $owner->name($this->context->get('target_name')->raw());
             $logo = $this->context->get('company_logo')->value();
-            if(!empty($logo)) {
+            if (!empty($logo)) {
                 $logoObject = Schema::imageObject();
                 $logoObject->url($logo->absoluteUrl());
                 $logoObject->width($logo->width());
@@ -42,10 +42,10 @@ class SiteOwner implements SchemaPart
         // Social settings
         $social_settings = AardvarkStorage::getYaml('social', Site::current(), true);
 
-        if(!empty($social_settings->get('social_links'))) {
+        if (!empty($social_settings->get('social_links'))) {
             $owner->sameAs(
                 collect($social_settings->get('social_links'))
-                    ->map(function($link) {
+                    ->map(function ($link) {
                         return $link['url'];
                     })
                     ->toArray()

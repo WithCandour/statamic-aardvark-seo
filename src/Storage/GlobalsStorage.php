@@ -23,9 +23,9 @@ class GlobalsStorage implements Storage
      */
     public static function getYaml(string $handle, SiteObject $site, bool $returnCollection = false)
     {
-        $path = storage_path(implode("/", [
+        $path = storage_path(implode('/', [
             'statamic/addons/aardvark-seo',
-            self::prefix . '_' . "{$handle}.yaml"
+            self::prefix . '_' . "{$handle}.yaml",
         ]));
 
         $data = YAML::parse(File::get($path));
@@ -52,7 +52,7 @@ class GlobalsStorage implements Storage
     {
         $storage = self::getYaml($handle, $site, true);
 
-        if(Site::hasMultiple() && $site !== Site::default()) {
+        if (Site::hasMultiple() && $site !== Site::default()) {
             $default_storage = self::getYaml($handle, Site::default(), true);
             $storage = $default_storage->merge($storage);
         }
@@ -75,15 +75,15 @@ class GlobalsStorage implements Storage
      */
     public static function putYaml(string $handle, SiteObject $site, array $data)
     {
-        $path = storage_path(implode("/", [
+        $path = storage_path(implode('/', [
             'statamic/addons/aardvark-seo',
-            self::prefix . '_' . "{$handle}.yaml"
+            self::prefix . '_' . "{$handle}.yaml",
         ]));
 
         $existing = collect(YAML::parse(File::get($path)));
 
         $combined_data = $existing->merge([
-            "{$site->handle()}" => $data
+            "{$site->handle()}" => $data,
         ]);
 
         File::put($path, YAML::dump($combined_data->toArray()));

@@ -24,7 +24,6 @@ use WithCandour\AardvarkSeo\Tags\AardvarkSeoTags;
 
 class ServiceProvider extends AddonServiceProvider
 {
-
     protected $commands = [
         BlueprintsUpdate::class,
     ];
@@ -54,7 +53,7 @@ class ServiceProvider extends AddonServiceProvider
     ];
 
     protected $routes = [
-        'cp'  => __DIR__ . '/../routes/cp.php',
+        'cp' => __DIR__ . '/../routes/cp.php',
         'web' => __DIR__ . '/../routes/web.php',
     ];
 
@@ -79,7 +78,7 @@ class ServiceProvider extends AddonServiceProvider
         parent::boot();
 
         // Set up views path
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'aardvark-seo');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'aardvark-seo');
 
         // Set up translations
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'aardvark-seo');
@@ -87,7 +86,7 @@ class ServiceProvider extends AddonServiceProvider
         // Load in custom addon config
         $this->mergeConfigFrom(__DIR__ . '/../config/aardvark-seo.php', 'aardvark-seo');
         $this->publishes([
-            __DIR__ . '/../config/aardvark-seo.php' => config_path('aardvark-seo.php')
+            __DIR__ . '/../config/aardvark-seo.php' => config_path('aardvark-seo.php'),
         ], 'config');
 
         // Set up permissions
@@ -107,8 +106,7 @@ class ServiceProvider extends AddonServiceProvider
         $routeCollection = Route::getRoutes();
 
         // Add SEO item to nav
-        Nav::extend(function($nav) {
-
+        Nav::extend(function ($nav) {
             // Top level SEO item
             $nav->create('SEO')
                 ->can('configure aardvark settings')
@@ -158,19 +156,19 @@ class ServiceProvider extends AddonServiceProvider
         $settings_groups = [
             [
                 'value' => 'general',
-                'label' => 'General'
+                'label' => 'General',
             ],
             [
                 'value' => 'marketing',
-                'label' => 'Marketing'
+                'label' => 'Marketing',
             ],
             [
                 'value' => 'sitemap',
-                'label' => 'Sitemap'
+                'label' => 'Sitemap',
             ],
             [
                 'value' => 'defaults',
-                'label' => 'Defaults'
+                'label' => 'Defaults',
             ],
         ];
 
@@ -178,18 +176,18 @@ class ServiceProvider extends AddonServiceProvider
             Permission::register('configure aardvark settings', function ($permission) use ($settings_groups) {
                 $permission->children([
                     Permission::make('view aardvark {settings_group} settings')
-                        ->replacements('settings_group', function() use ($settings_groups) {
+                        ->replacements('settings_group', function () use ($settings_groups) {
                             return collect($settings_groups)->map(function ($group) {
                                 return [
                                     'value' => $group['value'],
-                                    'label' => $group['label']
+                                    'label' => $group['label'],
                                 ];
                             });
                         })
                         ->label('View :settings_group Settings')
                         ->children([
                             Permission::make('update aardvark {settings_group} settings')
-                                ->label('Update :settings_group Settings')
+                                ->label('Update :settings_group Settings'),
                         ]),
                     Permission::make('view aardvark redirects')
                         ->label(__('aardvark-seo::redirects.permissions.view'))
@@ -197,9 +195,8 @@ class ServiceProvider extends AddonServiceProvider
                             Permission::make('edit aardvark redirects')
                                 ->label(__('aardvark-seo::redirects.permissions.edit')),
                             Permission::make('create aardvark redirects')
-                                ->label(__('aardvark-seo::redirects.permissions.create'))
-                        ])
-
+                                ->label(__('aardvark-seo::redirects.permissions.create')),
+                        ]),
                 ]);
             })->label('Configure Aardvark Settings');
         });

@@ -11,7 +11,6 @@ use WithCandour\AardvarkSeo\Http\Controllers\CP\Contracts\Publishable;
 
 class GeneralController extends Controller implements Publishable
 {
-
     public function index()
     {
         $this->authorize('view aardvark general settings');

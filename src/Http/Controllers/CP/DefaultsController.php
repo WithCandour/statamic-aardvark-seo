@@ -27,27 +27,27 @@ class DefaultsController extends Controller
 
         $content_types = [
             'Collections' => $collections
-                ->filter(function($collection) use ($curr_site) {
+                ->filter(function ($collection) use ($curr_site) {
                     return $collection->sites()->contains($curr_site);
                 })
-                ->map(function($collection) {
-                return [
+                ->map(function ($collection) {
+                    return [
                     'count' => $collection->queryEntries()->count(),
                     'handle' => $collection->handle(),
-                    'title' => $collection->title()
+                    'title' => $collection->title(),
                 ];
-            })->toArray(),
+                })->toArray(),
             'Taxonomies' => $taxonomies
-                ->filter(function($taxonomy) use ($curr_site) {
+                ->filter(function ($taxonomy) use ($curr_site) {
                     return $taxonomy->sites()->contains($curr_site);
                 })
-                ->map(function($taxonomy) {
-                return [
+                ->map(function ($taxonomy) {
+                    return [
                     'count' => $taxonomy->queryTerms()->count(),
                     'handle' => $taxonomy->handle(),
-                    'title' => $taxonomy->title()
+                    'title' => $taxonomy->title(),
                 ];
-            })->toArray()
+                })->toArray(),
         ];
 
         $crumbs = Breadcrumbs::make([
@@ -158,7 +158,7 @@ class DefaultsController extends Controller
 
         if ($type === 'collections') {
             return Collection::findByHandle($content_handle);
-        } else if ($type === 'taxonomies') {
+        } elseif ($type === 'taxonomies') {
             return Taxonomy::findByHandle($content_handle);
         }
     }

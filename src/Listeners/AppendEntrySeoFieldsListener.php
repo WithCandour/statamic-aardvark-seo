@@ -16,7 +16,7 @@ class AppendEntrySeoFieldsListener implements SeoFieldsListener
     public function handle(EntryBlueprintFound $event)
     {
         $handle = $event->blueprint->namespace();
-        if($this->check_content_type($handle)) {
+        if ($this->check_content_type($handle)) {
             $bp = $event->blueprint;
             $contents = $bp->contents();
 
@@ -34,7 +34,7 @@ class AppendEntrySeoFieldsListener implements SeoFieldsListener
         $ns_parts = explode('.', $blueprint_namespace);
         $collection_handle = !empty($ns_parts[1]) ? $ns_parts[1] : null;
         $excluded_collections = config('aardvark-seo.excluded_collections', []);
-        if(\in_array($collection_handle, $excluded_collections)) {
+        if (\in_array($collection_handle, $excluded_collections)) {
             return false;
         }
         return true;
