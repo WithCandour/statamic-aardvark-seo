@@ -6,5 +6,4 @@ return [
     'custom_socials' => [],
     'excluded_collections' => [],
     'excluded_taxonomies' => [],
-    'enable_auto_redirection' => false,
 ];
