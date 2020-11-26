@@ -15,7 +15,7 @@ class SitemapController extends LaravelController
     {
         $storage = AardvarkStorage::getYaml('sitemap', Site::current(), true);
 
-        if(!$storage->get('enable_sitemap', true)) {
+        if (!$storage->get('enable_sitemap', true)) {
             abort(404);
         }
 
@@ -45,7 +45,7 @@ class SitemapController extends LaravelController
     {
         $storage = AardvarkStorage::getYaml('sitemap', Site::current(), true);
 
-        if(!$storage->get('enable_sitemap', true)) {
+        if (!$storage->get('enable_sitemap', true)) {
             abort(404);
         }
 
