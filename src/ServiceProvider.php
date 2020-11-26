@@ -17,17 +17,12 @@ use WithCandour\AardvarkSeo\Listeners\AppendEntrySeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\AppendTermSeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\DefaultsSitemapCacheInvalidationListener;
 use WithCandour\AardvarkSeo\Listeners\Subscribers\SitemapCacheInvalidationSubscriber;
-use WithCandour\AardvarkSeo\Console\Commands\BlueprintsUpdate;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsController;
 use WithCandour\AardvarkSeo\Http\Middleware\RedirectsMiddleware;
 use WithCandour\AardvarkSeo\Tags\AardvarkSeoTags;
 
 class ServiceProvider extends AddonServiceProvider
 {
-    protected $commands = [
-        BlueprintsUpdate::class,
-    ];
-
     protected $fieldtypes = [
         AardvarkSeoMetaTitleFieldtype::class,
         AardvarkSeoMetaDescriptionFieldtype::class,
