@@ -3,6 +3,12 @@
     "description": "Save time and get your Statamic site to rank better - Candour's SEO addon for Statamic CMS",
     "version": "2.0.0",
     "type": "statamic-addon",
+    "authors": [
+        {
+            "name": "Candour",
+            "email": "devs@withcandour.co.uk"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "WithCandour\\AardvarkSeo\\": "src"
@@ -18,5 +24,8 @@
                 "WithCandour\\AardvarkSeo\\ServiceProvider"
             ]
         }
+    },
+    "require": {
+        "spatie/schema-org": "^3.2"
     }
 }

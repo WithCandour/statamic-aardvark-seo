@@ -60,7 +60,7 @@
 {{ if override_twitter_settings && twitter_description }}
 <meta name="twitter:description" content="{{ twitter_description }}">
 {{ /if }}
-<meta name="twitter:card" content="{{ calculated_twitter_card_type }}">
+<meta name="twitter:card" content="{{ calculated_twitter_card_type or 'summary' }}">
 {{ if calculated_twitter_image }}
 {{ calculated_twitter_image }}
 <meta name="twitter:image" content="{{ permalink }}">
@@ -95,6 +95,10 @@
     {{ /if }}
 {{ /aardvark_marketing_settings }}
 <!-- End marketing content -->
+
+<!-- Start aardvark schema generation -->
+{{ aardvark-seo:graph }}
+<!-- End aardvark schema generation -->
 
 <!-- Start schema content -->
 {{ if schema_objects }}

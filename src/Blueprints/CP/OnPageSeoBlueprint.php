@@ -256,6 +256,7 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                             'field' => [
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.twitter_description.display'),
+                                'localizable' => true,
                                 'if' => [
                                     'override_twitter_settings' => 'equals true'
                                 ]

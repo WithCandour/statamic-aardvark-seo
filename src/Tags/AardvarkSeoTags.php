@@ -4,6 +4,7 @@ namespace WithCandour\AardvarkSeo\Tags;
 
 use Statamic\Facades\Site;
 use Statamic\Tags\Tags;
+use WithCandour\AardvarkSeo\Schema\SchemaGraph;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
 use WithCandour\AardvarkSeo\Facades\PageDataParser;
 
@@ -37,6 +38,36 @@ class AardvarkSeoTags extends Tags
             ],
             $view
         );
+    }
+
+    /**
+     * Return the body content
+     */
+    public function body()
+    {
+        $data = PageDataParser::getData(collect($this->context));
+        return view('aardvark-seo::tags.body', $data);
+    }
+
+    /**
+     * Return the footer content
+     */
+    public function footer()
+    {
+        $data = PageDataParser::getData(collect($this->context));
+        return view('aardvark-seo::tags.footer', $data);
+    }
+
+    /**
+     * Return the schema graph object
+     *
+     * @return string
+     */
+    public function graph()
+    {
+        $ctx = collect($this->context);
+        $graph = new SchemaGraph($ctx);
+        return $graph->build();
     }
 
     /**

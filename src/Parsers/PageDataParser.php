@@ -128,7 +128,7 @@ class PageDataParser
      *
      * @return Illuminate\Support\Collection
      */
-    private static function getSettingsBlueprintWithValues($ctx, $type, $blueprint_class)
+    public static function getSettingsBlueprintWithValues($ctx, $type, $blueprint_class)
     {
         $settings = AardvarkStorage::getYaml($type, $ctx->get('site'));
         $blueprint = $blueprint_class::requestBlueprint();
