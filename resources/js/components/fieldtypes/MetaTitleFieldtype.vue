@@ -21,7 +21,7 @@
         methods: {
             generatePlaceholder() {
                 const state = this.$store.state.publish[this.storeName];
-                return `${state.values.title} ${this.meta.title_separator} ${this.meta.site_name}`
+                return `${state.values.title || ''} ${this.meta.title_separator} ${this.meta.site_name}`
             },
             validateMeta(length) {
                 let validation;

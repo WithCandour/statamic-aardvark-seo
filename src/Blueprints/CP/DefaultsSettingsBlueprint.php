@@ -28,7 +28,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                         [
                             'handle' => 'meta_title',
                             'field' => [
-                                'type' => 'text',
+                                'type' => 'aardvark_seo_meta_title',
                                 'display' => __('aardvark-seo::onpage.fields.meta_title.display'),
                                 'localizable' => true
                             ]
@@ -36,7 +36,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                         [
                             'handle' => 'meta_description',
                             'field' => [
-                                'type' => 'textarea',
+                                'type' => 'aardvark_seo_meta_description',
                                 'display' => __('aardvark-seo::onpage.fields.meta_description.display'),
                                 'localizable' => true
                             ]

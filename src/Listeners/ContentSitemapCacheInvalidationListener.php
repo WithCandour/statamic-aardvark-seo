@@ -3,6 +3,7 @@
 namespace WithCandour\AardvarkSeo\Listeners;
 
 use Illuminate\Support\Facades\Cache;
+use Statamic\Support\Str;
 use Statamic\Facades\Site;
 
 class ContentSitemapCacheInvalidationListener
@@ -10,7 +11,7 @@ class ContentSitemapCacheInvalidationListener
     public function handle($event)
     {
         $blank_event = new \ReflectionClass($event);
-        $content_type = strpos($blank_event->getShortName(), 'Term') ? 'term' : 'entry';
+        $content_type = Str::contains($blank_event->getShortName(), 'Term') ? 'term' : 'entry';
 
         if($content_type === 'term') {
             $term = $event->term;
