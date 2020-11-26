@@ -8,6 +8,9 @@ use Statamic\CP\Column;
 use Statamic\Facades\Action;
 use Statamic\Facades\Site;
 use WithCandour\AardvarkSeo\Actions\Redirects\DeleteManualRedirectsAction;
+use WithCandour\AardvarkSeo\Events\Redirects\ManualRedirectCreated;
+use WithCandour\AardvarkSeo\Events\Redirects\ManualRedirectDeleted;
+use WithCandour\AardvarkSeo\Events\Redirects\ManualRedirectSaved;
 use WithCandour\AardvarkSeo\Blueprints\CP\Redirects\RedirectBlueprint;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller;
 use WithCandour\AardvarkSeo\Redirects\Repositories\RedirectsRepository;
@@ -96,6 +99,8 @@ class ManualRedirectsController extends Controller
         $fields->validate();
         $values = $fields->process()->values()->toArray();
         $this->repository()->update($values);
+
+        ManualRedirectSaved::dispatch($values);
     }
 
     /**
@@ -148,6 +153,8 @@ class ManualRedirectsController extends Controller
         $fields->validate();
         $values = $fields->process()->values()->toArray();
         $this->repository()->update($values, $redirect_id);
+
+        ManualRedirectSaved::dispatch($values);
     }
 
     /**
@@ -160,7 +167,9 @@ class ManualRedirectsController extends Controller
     {
         $this->authorize('edit aardvark redirects');
 
-        return $this->repository()->delete($redirect_id);
+        $this->repository()->delete($redirect_id);
+
+        ManualRedirectDeleted::dispatch();
     }
 
     /**
@@ -196,6 +205,8 @@ class ManualRedirectsController extends Controller
         $redirects = collect($data['selections']);
 
         $action->run($redirects, $request->all());
+
+        ManualRedirectDeleted::dispatch();
     }
 
     /**

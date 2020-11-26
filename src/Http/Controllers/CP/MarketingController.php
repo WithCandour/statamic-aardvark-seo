@@ -4,9 +4,10 @@ namespace WithCandour\AardvarkSeo\Http\Controllers\CP;
 
 use Statamic\CP\Breadcrumbs;
 use Statamic\Facades\Site;
-use WithCandour\AardvarkSeo\Http\Controllers\CP\Contracts\Publishable;
 use WithCandour\AardvarkSeo\Blueprints\CP\MarketingSettingsBlueprint;
+use WithCandour\AardvarkSeo\Events\AardvarkGlobalsUpdated;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
+use WithCandour\AardvarkSeo\Http\Controllers\CP\Contracts\Publishable;
 
 class MarketingController extends Controller implements Publishable
 {
@@ -43,6 +44,8 @@ class MarketingController extends Controller implements Publishable
         $fields->validate();
 
         $this->putData($fields->process()->values()->toArray());
+
+        AardvarkGlobalsUpdated::dispatch('marketing');
     }
 
     /**
