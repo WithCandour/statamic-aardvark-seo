@@ -5,7 +5,9 @@ namespace WithCandour\AardvarkSeo\Schema\Parts;
 use Spatie\SchemaOrg\Schema;
 use Statamic\Facades\Asset;
 use Statamic\Facades\Config;
+use Statamic\Facades\Site;
 use Statamic\Facades\URL;
+use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
 use WithCandour\AardvarkSeo\Schema\SchemaIds;
 use WithCandour\AardvarkSeo\Schema\Parts\Contracts\SchemaPart;
 
@@ -36,6 +38,20 @@ class SiteOwner implements SchemaPart
         }
         $owner->setProperty('@id', self::id());
         $owner->url(URL::makeAbsolute(Config::getSiteUrl()));
+
+        // Social settings
+        $social_settings = AardvarkStorage::getYaml('social', Site::current(), true);
+
+        if(!empty($social_settings->get('social_links'))) {
+            $owner->sameAs(
+                collect($social_settings->get('social_links'))
+                    ->map(function($link) {
+                        return $link['url'];
+                    })
+                    ->toArray()
+            );
+        }
+
         return $owner;
     }
 
