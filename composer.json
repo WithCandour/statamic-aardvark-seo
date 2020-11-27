@@ -1,0 +1,45 @@
+{
+    "name": "withcandour/aardvark-seo",
+    "description": "Save time and get your Statamic site to rank better - Candour's SEO addon for Statamic CMS",
+    "version": "2.0.0",
+    "type": "statamic-addon",
+    "keywords": [
+        "Statamic",
+        "Aardvark",
+        "SEO",
+        "Google",
+        "sitemaps",
+        "redirects",
+        "schema",
+        "tools",
+        "meta data",
+        "opengraph",
+        "Candour",
+        "WithCandour"
+    ],
+    "authors": [
+        {
+            "name": "Candour",
+            "email": "aardvarkseo@withcandour.co.uk"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WithCandour\\AardvarkSeo\\": "src"
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Aardvark SEO",
+            "description": "Aardvark SEO addon"
+        },
+        "laravel": {
+            "providers": [
+                "WithCandour\\AardvarkSeo\\ServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "spatie/schema-org": "^3.2"
+    }
+}

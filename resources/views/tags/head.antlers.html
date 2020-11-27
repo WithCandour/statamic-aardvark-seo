@@ -1,0 +1,117 @@
+<!-- Start robots content -->
+    {{ aardvark-seo:robots_tag }}
+<!-- End robots content -->
+
+<!-- Start page content -->
+    <title>{{ calculated_title }}</title>
+{{ if meta_description }}
+    <meta name="description" content="{{ meta_description }}">
+{{ /if }}
+{{ if use_meta_keywords }}
+    <meta name="keywords" content="{{ meta_keywords join=', ' }}">
+{{ /if }}
+<!-- End page content -->
+
+<!-- Start urls content -->
+{{ if canonical_url }}
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+{{ else }}
+    <link rel="canonical" href="{{ aardvark-seo:generated_canonical }}">
+    <meta property="og:url" content="{{ aardvark-seo:generated_canonical }}">
+{{ /if }}
+<!-- End urls content -->
+
+<!-- Start hreflag content -->
+{{ aardvark-seo:hreflang }}
+{{ if localized_urls }}
+{{ localized_urls }}
+    <link rel="alternate" hreflang="{{ locale }}" href="{{ url }}">
+{{ /localized_urls }}
+{{ /if }}
+<!-- End hreflang content -->
+
+<!-- Start favicon content -->
+{{ aardvark_general_settings }}
+    {{ if global_favicon }}
+        {{ global_favicon }}
+    <link rel="shortcut icon" href="{{ permalink }}">
+        {{ /global_favicon }}
+    {{ /if }}
+{{ /aardvark_general_settings }}
+<!-- End favicon content -->
+
+<!-- Start OpenGraph content -->
+    <meta property="og:site_name" content="{{ aardvark_general_settings:site_name }}">
+    <meta property="og:title" content="{{ og_title or calculated_title }}">
+    <meta property="og:description" content="{{ og_description or meta_description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="{{ site:locale }}">
+    {{ if calculated_og_image }}
+    {{ calculated_og_image }}
+    <meta property="og:image" content="{{ permalink }}">
+    <meta property="og:image:width" content="{{ width }}">
+    <meta property="og:image:height" content="{{ height }}">
+    <meta property="og:image:alt" content="{{ alt }}">
+    {{ /calculated_og_image }}
+    {{ /if }}
+<!-- End OpenGraph content -->
+
+<!-- Start Twitter content -->
+{{ if override_twitter_settings && twitter_title }}
+    <meta name="twitter:title" content="{{ twitter_title }}">
+{{ /if }}
+{{ if override_twitter_settings && twitter_description }}
+    <meta name="twitter:description" content="{{ twitter_description }}">
+{{ /if }}
+    <meta name="twitter:card" content="{{ calculated_twitter_card_type or 'summary' }}">
+{{ if calculated_twitter_image }}
+{{ calculated_twitter_image }}
+    <meta name="twitter:image" content="{{ permalink }}">
+{{ /calculated_twitter_image }}
+{{ /if }}
+{{ if aardvark_social_settings:twitter_username }}
+    <meta name="twitter:site" content="{{ aardvark_social_settings:twitter_username ensure_left='@' }}">
+    <meta name="twitter:creator" content="{{ aardvark_social_settings:twitter_username ensure_left='@' }}">
+{{ /if }}
+<!-- End Twitter content -->
+
+<!-- Start marketing content -->
+{{ aardvark_marketing_settings }}
+    {{ if enable_gtm_script && gtm_identifier }}
+    <script>(function (w, d, s, l, i){w[l]=w[l] || []; w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l !='dataLayer' ? '&l=' + l : ''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);})(window, document, 'script', 'dataLayer', '{{ gtm_identifier }}');</script>
+    {{ /if }}
+
+    {{ if google_verification_code }}
+    <meta name="google-site-verification" content="{{ google_verification_code }}">
+    {{ /if }}
+
+    {{ if bing_verification_code }}
+    <meta name="msvalidate.01" content="{{ bing_verification_code }}">
+    {{ /if }}
+
+    {{ if yandex_verification_code }}
+    <meta name="yandex-verification" content="{{ yandex_verification_code }}">
+    {{ /if }}
+
+    {{ if baidu_verification_code }}
+    <meta name="baidu-site-verification" content="{{ baidu_verification_code }}">
+    {{ /if }}
+{{ /aardvark_marketing_settings }}
+<!-- End marketing content -->
+
+<!-- Start aardvark schema generation -->
+{{ aardvark-seo:graph }}
+<!-- End aardvark schema generation -->
+
+<!-- Start schema content -->
+{{ if schema_objects }}
+  {{ schema_objects }}
+{{ /if }}
+<!-- End schema content -->
+
+<!-- Start head snippets content -->
+{{ if head_snippets }}
+  {{ head_snippets }}
+{{ /if }}
+<!-- End head snippets content -->
