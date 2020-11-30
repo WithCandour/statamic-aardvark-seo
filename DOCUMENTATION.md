@@ -2,12 +2,17 @@
 
 ## Installation
 
-Install via composer:
+#### Install via composer:
 ```
 composer require withcandour/aardvark-seo
 ```
+Then publish the publishables from the service provider:
+```
+php artisan vendor:publish --provider="WithCandour\AardvarkSeo\ServiceProvider"
+```
 
-...or alternatively search for us in the `Tools > Addons` section of the Statamic control panel.
+#### Install via CP
+Or alternatively search for us in the `Tools > Addons` section of the Statamic control panel.
 
 ### Tags
 
