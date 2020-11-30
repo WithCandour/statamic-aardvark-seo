@@ -128,14 +128,14 @@ class ServiceProvider extends AddonServiceProvider
                 ]);
 
             $nav->create(__('aardvark-seo::redirects.plural'))
-                ->can('view aardvark redirects settings')
+                ->can('view aardvark redirects')
                 ->section('Tools')
                 ->route('aardvark-seo.redirects.index')
                 ->icon('arrow-right')
                 ->view('aardvark-seo::cp.nav.redirects')
                 ->children([
                     $nav->item(__('aardvark-seo::redirects.manual.plural'))
-                        ->can('view aardvark redirects settings')
+                        ->can('view aardvark redirects')
                         ->route('aardvark-seo.redirects.manual-redirects.index'),
                 ]);
         });
@@ -156,6 +156,10 @@ class ServiceProvider extends AddonServiceProvider
             [
                 'value' => 'marketing',
                 'label' => 'Marketing',
+            ],
+            [
+                'value' => 'social',
+                'label' => 'Social',
             ],
             [
                 'value' => 'sitemap',
