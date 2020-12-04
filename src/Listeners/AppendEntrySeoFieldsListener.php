@@ -15,6 +15,11 @@ class AppendEntrySeoFieldsListener implements SeoFieldsListener
      */
     public function handle(EntryBlueprintFound $event)
     {
+        // We don't want the SEO fields to get added to the blueprint editor
+        if(empty($event->entry)) {
+            return null;
+        };
+
         $handle = $event->blueprint->namespace();
         if ($this->check_content_type($handle)) {
             $bp = $event->blueprint;
