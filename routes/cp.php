@@ -4,8 +4,8 @@ Route::namespace('\WithCandour\AardvarkSeo\Http\Controllers\CP')
     ->prefix('aardvark-seo')
     ->name('aardvark-seo.')
     ->group(function () {
-        Route::redirect('settings', 'settings/general')
-        ->name('settings');
+        Route::get('settings', 'GeneralController@settingsRedirect')
+            ->name('settings');
 
         Route::prefix('settings')->group(function () {
             Route::resource('general', 'GeneralController')->only([

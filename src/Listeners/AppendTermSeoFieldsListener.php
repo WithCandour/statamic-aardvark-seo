@@ -16,9 +16,9 @@ class AppendTermSeoFieldsListener implements SeoFieldsListener
     public function handle(TermBlueprintFound $event)
     {
         // We don't want the SEO fields to get added to the blueprint editor
-        if(empty($event->term)) {
+        if (empty($event->term)) {
             return null;
-        };
+        }
 
         $handle = $event->blueprint->namespace();
         if ($this->check_content_type($handle)) {

@@ -4,6 +4,7 @@ namespace WithCandour\AardvarkSeo\Http\Controllers\CP;
 
 use Statamic\CP\Breadcrumbs;
 use Statamic\Facades\Site;
+use Statamic\Facades\User;
 use WithCandour\AardvarkSeo\Blueprints\CP\GeneralSettingsBlueprint;
 use WithCandour\AardvarkSeo\Events\AardvarkGlobalsUpdated;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
@@ -46,6 +47,31 @@ class GeneralController extends Controller implements Publishable
         $this->putData($fields->process()->values()->toArray());
 
         AardvarkGlobalsUpdated::dispatch('general');
+    }
+
+    /**
+     * Redirects from the top level SEO nav item
+     */
+    public function settingsRedirect()
+    {
+        $groups = collect([
+            'general',
+            'marketing',
+            'defaults',
+            'social',
+            'sitemap',
+        ]);
+
+        $first_group = $groups->filter(function ($group) {
+            return User::current()->can("view aardvark {$group} settings");
+        })->first();
+
+        if (!empty($first_group)) {
+            return redirect()->route("statamic.cp.aardvark-seo.{$first_group}.index");
+        }
+
+        // If no permissions are found use Statamic to inform the user
+        $this->authorize('view aardvark general settings');
     }
 
     /**
