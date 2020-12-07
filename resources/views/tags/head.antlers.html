@@ -26,7 +26,7 @@
 {{ aardvark-seo:hreflang }}
 {{ if localized_urls }}
 {{ localized_urls }}
-    <link rel="alternate" hreflang="{{ locale }}" href="{{ url }}">
+    <link rel="alternate" href="{{ url }}" hreflang="{{ locale | aardvark_parse_locale }}">
 {{ /localized_urls }}
 {{ /if }}
 <!-- End hreflang content -->
@@ -46,7 +46,7 @@
     <meta property="og:title" content="{{ og_title or calculated_title }}">
     <meta property="og:description" content="{{ og_description or meta_description }}">
     <meta property="og:type" content="website">
-    <meta property="og:locale" content="{{ site:locale }}">
+    <meta property="og:locale" content="{{ site:locale | aardvark_parse_locale }}">
     {{ if calculated_og_image }}
     {{ calculated_og_image }}
     <meta property="og:image" content="{{ permalink }}">

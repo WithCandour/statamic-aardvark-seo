@@ -40,6 +40,7 @@
         }
     },
     "require": {
-        "spatie/schema-org": "^3.2"
+        "spatie/schema-org": "^3.2",
+        "whitecube/lingua": "^1.0"
     }
 }

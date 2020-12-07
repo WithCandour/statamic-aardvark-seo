@@ -19,6 +19,7 @@ use WithCandour\AardvarkSeo\Listeners\DefaultsSitemapCacheInvalidationListener;
 use WithCandour\AardvarkSeo\Listeners\Subscribers\SitemapCacheInvalidationSubscriber;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsController;
 use WithCandour\AardvarkSeo\Http\Middleware\RedirectsMiddleware;
+use WithCandour\AardvarkSeo\Modifiers\ParseLocaleModifier;
 use WithCandour\AardvarkSeo\Tags\AardvarkSeoTags;
 
 class ServiceProvider extends AddonServiceProvider
@@ -45,6 +46,10 @@ class ServiceProvider extends AddonServiceProvider
         'statamic.web' => [
             RedirectsMiddleware::class,
         ],
+    ];
+
+    protected $modifiers = [
+        ParseLocaleModifier::class,
     ];
 
     protected $routes = [
