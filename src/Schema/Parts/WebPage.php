@@ -5,6 +5,7 @@ namespace WithCandour\AardvarkSeo\Schema\Parts;
 use Spatie\SchemaOrg\Schema;
 use Statamic\Facades\Config;
 use Statamic\Facades\URL;
+use WithCandour\AardvarkSeo\Modifiers\ParseLocaleModifier;
 use WithCandour\AardvarkSeo\Schema\SchemaIds;
 use WithCandour\AardvarkSeo\Schema\Parts\WebSite;
 use WithCandour\AardvarkSeo\Schema\Parts\Contracts\SchemaPart;
@@ -24,7 +25,7 @@ class WebPage implements SchemaPart
         $title = $this->context->get('meta_title') ?: $this->context->get('calculated_title', '');
         $page->name($title);
         $page->isPartOf(['@id' => WebSite::id()]);
-        $page->inLanguage(Config::getFullLocale());
+        $page->inLanguage(ParseLocaleModifier::index(Config::getFullLocale()));
         if ($this->context->get('last_modified')) {
             $page->datePublished($this->context->get('last_modified')->format('c'));
             $page->dateModified($this->context->get('last_modified')->format('c'));

@@ -13,10 +13,10 @@ class ParseLocaleModifier extends Modifier
     {
         $parsed = preg_replace('/\.utf8/i', '', $value);
 
-        // Convert to ISO 639-1
+        // Convert to W3C
         $lang = Lingua::create($parsed);
-        $iso_format = $lang->toISO_639_1();
+        $code = $lang->toW3C();
 
-        return $iso_format;
+        return $code;
     }
 }
