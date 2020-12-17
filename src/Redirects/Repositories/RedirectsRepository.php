@@ -116,11 +116,13 @@ class RedirectsRepository
         $data = $this->processRaw($data);
 
         // If the source doesn't already exist add an ID
-        if (!$this->sourceExists($data['source_url'])) {
-            $redirect_id = Str::uuid()->toString();
-            $data['id'] = $redirect_id;
-        } else {
-            $redirect_id = $this->getBySource($data['source_url'])['id'];
+        if (!$redirect_id) {
+            if (!$this->sourceExists($data['source_url'])) {
+                $redirect_id = Str::uuid()->toString();
+                $data['id'] = $redirect_id;
+            } else {
+                $redirect_id = $this->getBySource($data['source_url'])['id'];
+            }
         }
 
         if ($redirect_id && $this->exists($redirect_id)) {
