@@ -30,7 +30,14 @@ class RedirectsMiddleware
             $manualRepository = $this->getManualRedirectsRepository();
             if ($manualRepository->sourceExists($source_url)) {
                 $redirect = $manualRepository->getBySource($source_url);
+
                 $target = $redirect['target_url'];
+
+                // If the target is relative - prepend the site root
+                if (Str::startsWith($target, '/')) {
+                    $target = URL::prependSiteRoot($target);
+                }
+
                 $status = $redirect['status_code'];
                 $is_active = $redirect['is_active'];
 
