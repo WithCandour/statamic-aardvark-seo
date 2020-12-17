@@ -16,26 +16,25 @@ class RedirectsMiddleware
         $response = $next($request);
 
         if ($response->getStatusCode() === 404) {
-            // Remove site URL and root from the request to account for
-            // Subdirectory multisite installations
+            // Get the current site root
+            $site_root = Url::makeRelative(Url::makeAbsolute(Config::getSiteUrl()));
 
-            // Absolute site URL
-            $absolute_site_url = URL::makeAbsolute(Config::getSiteUrl());
-            $processed_url = preg_replace('#^' . $absolute_site_url . '#', '', $request->url());
+            // Remove the current site root from the request
+            $path = Str::removeLeft(Str::ensureLeft($request->path(), '/'), $site_root);
 
             // Ensure we have a leading slash
-            $source_url = Str::ensureLeft($processed_url, '/');
+            $source_url = Str::ensureLeft($path, '/');
 
             // First check the manual redirects
-            $manualRepository = $this->getManualRedirectsRepository();
-            if ($manualRepository->sourceExists($source_url)) {
-                $redirect = $manualRepository->getBySource($source_url);
+            $manual_repository = $this->getManualRedirectsRepository();
+            if ($manual_repository->sourceExists($source_url)) {
+                $redirect = $manual_repository->getBySource($source_url);
 
                 $target = $redirect['target_url'];
 
                 // If the target is relative - prepend the site root
                 if (Str::startsWith($target, '/')) {
-                    $target = URL::prependSiteRoot($target);
+                    $target = Str::ensureLeft($target, $site_root);
                 }
 
                 $status = $redirect['status_code'];
