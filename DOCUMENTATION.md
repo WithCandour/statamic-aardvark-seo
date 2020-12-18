@@ -38,6 +38,8 @@ Individual collections / taxonomies can be excluded from the sitemap with the se
 
 You can manage the list of redirects for your site from within the control panel, the Redirects item in the Tools section of the control panel is the place to go for this.
 
+> Redirects are relative to the site URL, so subfolder multisite installations will not need the site root prepended to the redirect URLs e.g. `/redirect` rather than `/en/redirect` for a site installed at `example.com/en`
+
 ## Marketing tools
 
 Google tag manager can be enabled and managed through the Aardvark addon, additionally there is functionality to add verification codes for the major webmaster tools under the SEO > Marketing page.
