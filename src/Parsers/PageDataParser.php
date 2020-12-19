@@ -148,6 +148,10 @@ class PageDataParser
             return $data->get('meta_title');
         }
 
+        if ($data->get('response_code') === 404) {
+            $data->put('title', '404');
+        }
+
         $storage = self::getSettingsBlueprintWithValues($ctx, 'general', new GeneralSettingsBlueprint());
 
         return implode(' ', [
