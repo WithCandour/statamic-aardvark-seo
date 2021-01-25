@@ -8,6 +8,7 @@ use Statamic\Facades\Entry;
 use Statamic\Facades\Site;
 use Statamic\Facades\Term;
 use Statamic\Facades\URL;
+use Statamic\Support\Str;
 use WithCandour\AardvarkSeo\Schema\SchemaIds;
 use WithCandour\AardvarkSeo\Schema\Parts\Contracts\SchemaPart;
 
@@ -20,8 +21,9 @@ class Breadcrumbs implements SchemaPart
     {
         $crumbs = [];
 
-        $url = URL::getCurrent();
-        $locale = Config::getFullLocale();
+        $url = URL::makeAbsolute(URL::getCurrent());
+        $url = Str::removeLeft($url, Site::current()->absoluteUrl());
+        $url = Str::ensureLeft($url, '/');
 
         $segments = explode('/', $url);
         $segments[0] = '/';
