@@ -116,10 +116,10 @@ class AardvarkSeoTags extends Tags
     {
         $data = PageDataParser::getData(collect($this->context));
         $socials = $data->get('aardvark_social_settings')->get('social_links');
-        if ($socials) {
+        if ($socials->raw()) {
             return $this->parseLoop($socials->raw());
         }
-        return false;
+        return $this->parseLoop([]);
     }
 
     /**
