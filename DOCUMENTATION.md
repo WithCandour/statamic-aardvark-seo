@@ -14,6 +14,17 @@ php artisan vendor:publish --provider="WithCandour\AardvarkSeo\ServiceProvider"
 #### Install via CP
 Or alternatively search for us in the `Tools > Addons` section of the Statamic control panel.
 
+### Config
+After installing, a config file will be created at `config/aardvark-seo.php`. This will give you control over a number of config options:
+
+| Setting | Type       | Description                                                 |
+| --------- | ---------- | ----------------------------------------------------------- |
+| `asset_container`      | String  | The asset container to store images in            |
+| `asset_folder`         | String  | The folder inside the container to use            |
+| `custom_socials`       | Array   | An array of custom socials to add to our selector |
+| `excluded_collections` | Array   | An array of collections to exclude from adding the SEO tab |
+| `excluded_taxonomies`  | Array   | An array of taxonomies to exclude from adding the SEO tab |
+
 ### Tags
 
 Getting your site's SEO data onto the page relies on a few tags being present in your theme templates:
