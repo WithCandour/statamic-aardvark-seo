@@ -27,12 +27,12 @@ class RedirectsRepository
 
     /**
      * @param string $storage_key
-     * @param Site $site
+     * @param Site|null $site
      */
-    public function __construct(string $storage_key = 'redirects/manual', Site $site)
+    public function __construct(string $storage_key = 'redirects/manual', $site = null)
     {
         $this->storage_key = $storage_key;
-        $this->site = $site;
+        $this->site = $site ?: Site::current();
 
         $this->getRedirectsFromFile();
     }
