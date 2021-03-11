@@ -3,6 +3,7 @@
 namespace WithCandour\AardvarkSeo\Parsers;
 
 use Statamic\Facades\Collection;
+use Statamic\Facades\Parse;
 use WithCandour\AardvarkSeo\Blueprints\CP\DefaultsSettingsBlueprint;
 use WithCandour\AardvarkSeo\Blueprints\CP\GeneralSettingsBlueprint;
 use WithCandour\AardvarkSeo\Blueprints\CP\MarketingSettingsBlueprint;
@@ -145,7 +146,7 @@ class PageDataParser
     public static function generatePageTitle($data, $ctx)
     {
         if ($data->get('meta_title') && $data->get('meta_title')->raw()) {
-            return $data->get('meta_title');
+            return Parse::template($data->get('meta_title'), $ctx);
         }
 
         if ($data->get('response_code') === 404) {
