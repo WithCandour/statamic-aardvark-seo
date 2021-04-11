@@ -18,8 +18,9 @@ class Sitemap
      *
      * @param string $type
      * @param string $handle
+     * @param Statamic\Sites\Site $site
      */
-    public function __construct($type, $handle = '', $site)
+    public function __construct($type, $handle, $site)
     {
         $this->type = $type;
         $this->handle = $handle;
