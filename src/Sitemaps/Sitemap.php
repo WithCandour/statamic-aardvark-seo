@@ -150,7 +150,7 @@ class Sitemap
      * @param string $handle
      * @param Statamic\Sites\Site $site
      */
-    public static function getIndexStatusForContent($type = 'collections', $handle = 'pages', $site)
+    public static function getIndexStatusForContent($type = 'collections', $handle = 'pages', $site = null)
     {
         $no_indexed = Defaults::get($type, $handle, $site, 'no_index_page', 0);
         return !$no_indexed;
@@ -163,7 +163,7 @@ class Sitemap
      * @param string $handle
      * @param Statamic\Sites\Site $site
      */
-    public static function getExcludedStatusForContent($type = 'collections', $handle = 'pages', $site)
+    public static function getExcludedStatusForContent($type = 'collections', $handle = 'pages', $site = null)
     {
         $settings = AardvarkStorage::getYaml('sitemap', $site, true);
         $excluded_array = $settings->get("exclude_{$type}");
