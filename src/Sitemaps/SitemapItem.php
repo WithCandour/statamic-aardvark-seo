@@ -2,6 +2,8 @@
 
 namespace WithCandour\AardvarkSeo\Sitemaps;
 
+use Statamic\Facades\URL;
+
 class SitemapItem
 {
     const DEFAULT_CHANGEFREQ = 'daily';
@@ -28,7 +30,8 @@ class SitemapItem
     public function getUrl()
     {
         $item = $this->data_object;
-        return $item->get('canonical_url') ?: $item->absoluteUrl();
+        $canonical = $item->get('canonical_url');
+        return !empty($canonical) ? URL::makeAbsolute($canonical) : $item->absoluteUrl();
     }
 
     /**
