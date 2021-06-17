@@ -63,10 +63,10 @@ class Breadcrumbs implements SchemaPart
             $item = Schema::thing();
 
             // If we've got a title add it, else see of we've got an origin and add the title from there
-            if($title = $crumb->get('title')) {
+            if ($title = $crumb->get('title')) {
                 $item->name($title);
             } else {
-                if($crumb->origin()) {
+                if ($crumb->origin()) {
                     $item->name($crumb->origin()->get('title'));
                 }
             }
