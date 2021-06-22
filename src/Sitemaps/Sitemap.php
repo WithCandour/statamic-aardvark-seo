@@ -90,6 +90,7 @@ class Sitemap
                     ->where('collection', $this->handle)
                     ->where('site', Site::current()->handle())
                     ->where('no_index_page', false)
+                    ->where('redirect', '=', null)
                     ->get();
                 break;
             case 'taxonomy':
@@ -97,6 +98,7 @@ class Sitemap
                     ->where('taxonomy', $this->handle)
                     ->where('site', Site::current()->handle())
                     ->where('no_index_page', false)
+                    ->where('redirect', '=', null)
                     ->get();
                 break;
             default:
@@ -104,6 +106,7 @@ class Sitemap
                     ->where('collection', 'pages')
                     ->where('site', Site::current()->handle())
                     ->where('no_index_page', false)
+                    ->where('redirect', '=', null)
                     ->get();
         }
 
