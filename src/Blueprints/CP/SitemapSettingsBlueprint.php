@@ -70,6 +70,41 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                                 'width' => 50,
                             ],
                         ],
+                        [
+                            'handle' => 'taxonomies_section',
+                            'field' => [
+                                'type' => 'section',
+                                'display' => __('aardvark-seo::sitemap.fields.taxonomies_section.display'),
+                                'instructions' => __('aardvark-seo::sitemap.fields.taxonomies_section.instruct'),
+                                'listable' => 'hidden',
+                            ],
+                        ],
+                        [
+                            'handle' => 'taxonomy_collection_map',
+                            'field' => [
+                                'type' => 'grid',
+                                'display' => __('aardvark-seo::sitemap.fields.taxonomy_collection_map.display'),
+                                'add_row' => __('aardvark-seo::sitemap.fields.taxonomy_collection_map.add_new'),
+                                'fields' => [
+                                    [
+                                        'handle' => 'taxonomy',
+                                        'field' => [
+                                            'type' => 'taxonomies',
+                                            'max_items' => 1,
+                                            'display' => 'Taxonomy'
+                                        ]
+                                    ],
+                                    [
+                                        'handle' => 'collection',
+                                        'field' => [
+                                            'type' => 'collections',
+                                            'max_items' => 1,
+                                            'display' => 'Collection'
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
                     ],
                 ],
             ],

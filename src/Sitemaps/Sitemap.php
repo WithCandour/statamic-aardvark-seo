@@ -10,6 +10,7 @@ use Statamic\Facades\Term;
 use Statamic\Support\Str;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
 use WithCandour\AardvarkSeo\Facades\ContentDefaults as Defaults;
+use WithCandour\AardvarkSeo\Blueprints\CP\SitemapSettingsBlueprint;
 
 class Sitemap
 {
@@ -100,6 +101,20 @@ class Sitemap
                     ->where('no_index_page', false)
                     ->where('redirect', '=', null)
                     ->get();
+
+                // If a collection has been set for this taxonomy - use it to generate a more relevant sitemap URL
+                $settings = self::getSitemapSettings();
+                $mapping = collect($settings->get('taxonomy_collection_map')->value())->filter(function ($row) {
+                    if(!empty($row['taxonomy'])) {
+                        $taxonomy = ($row['taxonomy'])->value();
+                        return !empty($taxonomy) && $taxonomy->handle() === $this->handle;
+                    }
+                })->first();
+
+                if(!empty($mapping['collection'])) {
+                    $items->each->collection(($mapping['collection'])->value());
+                }
+
                 break;
             default:
                 $items = Entry::query()
