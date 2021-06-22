@@ -31,7 +31,7 @@ class SitemapItem
     {
         $item = $this->data_object;
         $canonical = $item->get('canonical_url');
-        return !empty($canonical) ? URL::makeAbsolute($canonical) : $item->absoluteUrl();
+        return !empty($canonical) ? URL::makeAbsolute($canonical) : URL::makeAbsolute($item->absoluteUrl());
     }
 
     /**
