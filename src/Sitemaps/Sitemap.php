@@ -104,14 +104,17 @@ class Sitemap
 
                 // If a collection has been set for this taxonomy - use it to generate a more relevant sitemap URL
                 $settings = self::getSitemapSettings();
-                $mapping = collect($settings->get('taxonomy_collection_map')->value())->filter(function ($row) {
-                    if(!empty($row['taxonomy'])) {
-                        $taxonomy = ($row['taxonomy'])->value();
-                        return !empty($taxonomy) && $taxonomy->handle() === $this->handle;
-                    }
-                })->first();
 
-                if(!empty($mapping['collection'])) {
+                $mapping = collect($settings->get('taxonomy_collection_map')->value())
+                    ->filter(function ($row) {
+                        if (!empty($row['taxonomy'])) {
+                            $taxonomy = ($row['taxonomy'])->value();
+                            return !empty($taxonomy) && $taxonomy->handle() === $this->handle;
+                        }
+                    })
+                    ->first();
+
+                if (!empty($mapping['collection'])) {
                     $items->each->collection(($mapping['collection'])->value());
                 }
 

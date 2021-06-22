@@ -91,20 +91,20 @@ class SitemapSettingsBlueprint implements AardvarkBlueprint
                                         'field' => [
                                             'type' => 'taxonomies',
                                             'max_items' => 1,
-                                            'display' => 'Taxonomy'
-                                        ]
+                                            'display' => 'Taxonomy',
+                                        ],
                                     ],
                                     [
                                         'handle' => 'collection',
                                         'field' => [
                                             'type' => 'collections',
                                             'max_items' => 1,
-                                            'display' => 'Collection'
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
+                                            'display' => 'Collection',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],
