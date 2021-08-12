@@ -103,13 +103,19 @@ class ServiceProvider extends AddonServiceProvider
 
         //set up ssg generation and generate sitemaps for static sites
         if (class_exists('Statamic\StaticSite\SSG')) {
+            //runs as callback after static site files have been generated
             SSG::after(function () {
                 $this->makeStaticSitemaps();
             });
         }
     }
 
-    //create static sitemap files
+    /**
+     * get destination from SSG config, and Sitemaps from SitemapController.
+     * create and save static files for sitemaps of main site and any sub sites if present
+     *
+     * @return void
+     */
     public function makeStaticSitemaps()
     {
         //check for settings set in ssg config for destination of static files
@@ -121,17 +127,22 @@ class ServiceProvider extends AddonServiceProvider
         //generate and save sitemaps for base site
         $this->generateSitemaps($sitemaps, $destination);
 
-        //generate sitemaps for anysub sites
+       //get any sub sites
         $roots = Site::all()->map(function ($site) {
             return URL::makeRelative($site->url());
         })->filter(function ($root) {
             return $root !== '/';
         })->unique();
+         //generate sitemaps for any sub sites
         foreach ($roots as $root) {
             $this->generateSitemaps($sitemaps, $destination, $root);
         }
     }
 
+    /**
+     * generate sitemaps using views and save to file based on destination and sub-site root (if present)
+     *  @return void
+     */
     public function generateSitemaps($sitemaps, $destination, $root = null)
     {
         $xsl_path = __DIR__ . '/../resources/xsl/sitemap.xsl';
