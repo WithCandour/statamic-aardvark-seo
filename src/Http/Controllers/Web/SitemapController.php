@@ -84,7 +84,7 @@ class SitemapController extends LaravelController
      *
      * @return int
      */
-    private function getCacheExpiration()
+    public static function getCacheExpiration()
     {
         $storage = AardvarkStorage::getYaml('sitemap', Site::current(), true);
         return $storage->get('sitemap_cache_expiration', 180);
@@ -95,7 +95,7 @@ class SitemapController extends LaravelController
      *
      * @return string
      */
-    private function getAddonVersion()
+    public static function getAddonVersion()
     {
         $path = __DIR__ . '/../../../../composer.json';
         $contents = file_get_contents($path);

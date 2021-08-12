@@ -21,6 +21,9 @@ use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsCo
 use WithCandour\AardvarkSeo\Http\Middleware\RedirectsMiddleware;
 use WithCandour\AardvarkSeo\Modifiers\ParseLocaleModifier;
 use WithCandour\AardvarkSeo\Tags\AardvarkSeoTags;
+use Statamic\StaticSite\SSG;
+use WithCandour\AardvarkSeo\Sitemaps\Sitemap;
+use WithCandour\AardvarkSeo\Http\Controllers\Web\SitemapController as SitemapController;
 
 class ServiceProvider extends AddonServiceProvider
 {
@@ -94,6 +97,50 @@ class ServiceProvider extends AddonServiceProvider
 
         // Set up navigation
         $this->bootNav();
+
+
+        //set up ssg generation and generate sitemaps for static sites
+        if (class_exists('Statamic\StaticSite\SSG')) {
+            SSG::after(function () {
+                info('hello');
+                //call sitemap controller methods to generate sitemaps
+
+
+                //check for settings set in ssg config for destination of static files
+                $destination = config('statamic.ssg')['destination'];
+                info($destination);
+
+                $sitemaps = Sitemap::all();
+                info($sitemaps);
+                $response =  view('aardvark-seo::sitemaps.index_ssg', [
+                    'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
+                    'sitemaps' => $sitemaps,
+                    'version' => SitemapController::getAddonVersion(),
+                ])->render();
+
+                // info($response);
+                //write results to file
+                file_put_contents($destination . '/sitemap.xml', $response);
+
+                foreach ($sitemaps as $sitemap) {
+                    // (dump($sitemap));
+                    $response = view('aardvark-seo::sitemaps.single_ssg', [
+                        'xmlDefinition' => '<?xml version="1.0" encoding="utf-8"?>',
+                        'data' => $sitemap->getSitemapItems(),
+                        'version' => SitemapController::getAddonVersion(),
+                    ])->render();
+                    // info($response);
+                    file_put_contents($destination . '/' . $sitemap->route, $response);
+                }
+
+
+                $path = __DIR__ . '/../resources/xsl/sitemap.xsl';
+                // file_put_contents($destination . '
+                file_put_contents($destination . '/aardvark-sitemap.xsl', file_get_contents($path));
+
+                // Storage::putFile($destination, new File($path), 'sitemap.xsl');
+            });
+        }
     }
 
     /**
