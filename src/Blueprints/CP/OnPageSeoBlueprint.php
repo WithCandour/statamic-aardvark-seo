@@ -39,6 +39,7 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                                 'type' => 'aardvark_seo_meta_description',
                                 'display' => __('aardvark-seo::onpage.fields.meta_description.display'),
                                 'localizable' => true,
+                                'antlers' => true,
                             ],
                         ],
                         [
@@ -209,6 +210,7 @@ class OnPageSeoBlueprint implements AardvarkBlueprint
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.og_description.display'),
                                 'localizable' => true,
+                                'antlers' => true,
                             ],
                         ],
                         [
