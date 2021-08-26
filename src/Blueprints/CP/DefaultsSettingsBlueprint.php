@@ -162,6 +162,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                             'field' => [
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.twitter_description.display'),
+                                'antlers' => true,
                                 'if' => [
                                     'override_twitter_settings' => 'equals true',
                                 ],
