@@ -39,6 +39,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'aardvark_seo_meta_description',
                                 'display' => __('aardvark-seo::onpage.fields.meta_description.display'),
                                 'localizable' => true,
+                                'antlers' => true,
                             ],
                         ],
                         [
@@ -113,6 +114,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.og_description.display'),
                                 'localizable' => true,
+                                'antlers' => true,
                             ],
                         ],
                         [
@@ -160,6 +162,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                             'field' => [
                                 'type' => 'textarea',
                                 'display' => __('aardvark-seo::onpage.fields.twitter_description.display'),
+                                'antlers' => true,
                                 'if' => [
                                     'override_twitter_settings' => 'equals true',
                                 ],
