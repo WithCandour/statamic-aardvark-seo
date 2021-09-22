@@ -5,6 +5,7 @@ namespace WithCandour\AardvarkSeo\Listeners;
 use Statamic\Events\EntryBlueprintFound;
 use WithCandour\AardvarkSeo\Blueprints\CP\OnPageSeoBlueprint;
 use WithCandour\AardvarkSeo\Listeners\Contracts\SeoFieldsListener;
+use Statamic\Support\Str;
 
 class AppendEntrySeoFieldsListener implements SeoFieldsListener
 {
@@ -16,8 +17,8 @@ class AppendEntrySeoFieldsListener implements SeoFieldsListener
     public function handle(EntryBlueprintFound $event)
     {
         // We don't want the SEO fields to get added to the blueprint editor
-        if (empty($event->entry)) {
-            return null;
+        if (Str::contains(request()->url(), '/blueprints/') || app()->runningInConsole()) {
+            return;
         }
 
         $handle = $event->blueprint->namespace();
