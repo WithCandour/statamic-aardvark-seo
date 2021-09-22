@@ -4,6 +4,7 @@ namespace WithCandour\AardvarkSeo\Parsers;
 
 use Statamic\Facades\Collection;
 use Statamic\Facades\Parse;
+use Statamic\Facades\Site;
 use WithCandour\AardvarkSeo\Blueprints\CP\DefaultsSettingsBlueprint;
 use WithCandour\AardvarkSeo\Blueprints\CP\GeneralSettingsBlueprint;
 use WithCandour\AardvarkSeo\Blueprints\CP\MarketingSettingsBlueprint;
@@ -130,7 +131,7 @@ class PageDataParser
      */
     public static function getSettingsBlueprintWithValues($ctx, $type, $blueprint_class)
     {
-        $settings = AardvarkStorage::getYaml($type, $ctx->get('site'));
+        $settings = AardvarkStorage::getYaml($type, Site::current());
         $blueprint = $blueprint_class::requestBlueprint();
         return $blueprint->fields()->addValues($settings)->augment()->values();
     }
