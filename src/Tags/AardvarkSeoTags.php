@@ -81,7 +81,7 @@ class AardvarkSeoTags extends Tags
         });
 
         if ($alternates->count() > 0) {
-            $data = $alternates->map(function ($locale) use ($data) {
+            $hreflang_tags = $alternates->map(function ($locale) use ($data) {
                 $site = Site::get($locale);
                 $localized_data = $data->in($locale);
                 return [
@@ -89,7 +89,10 @@ class AardvarkSeoTags extends Tags
                     'locale' => $site->locale(),
                 ];
             });
-            return view('aardvark-seo::tags.hreflang', ['hreflang_tags' => $data]);
+
+            return view('aardvark-seo::tags.hreflang', [
+                'hreflang_tags' => $hreflang_tags,
+            ]);
         }
     }
 
