@@ -17,7 +17,7 @@ class AppendEntrySeoFieldsListener implements SeoFieldsListener
     public function handle(EntryBlueprintFound $event)
     {
         // We don't want the SEO fields to get added to the blueprint editor
-        if (Str::contains(request()->url(), '/blueprints/') || app()->runningInConsole()) {
+        if (Str::contains(request()->url(), '/blueprints/')) {
             return;
         }
 
