@@ -78,8 +78,6 @@ class AardvarkSeoTags extends Tags
 
         $alternates = $data->sites()->filter(function ($locale) use ($data) {
             return !empty($data->in($locale));
-        })->reject(function ($locale) use ($data) {
-            return $locale === $data->locale();
         });
 
         if ($alternates->count() > 0) {
