@@ -76,22 +76,28 @@ class AardvarkSeoTags extends Tags
             return null;
         }
 
-        $alternates = $data->sites()->filter(function ($locale) use ($data) {
-            return !empty($data->in($locale));
-        });
+        $sites_by_handle = Site::all()->reduce(function($sites, $site) {
+            $sites[$site->handle()] = $site;
+            return $sites;
+        }, []);
 
-        if ($alternates->count() > 0) {
-            $hreflang_tags = $alternates->map(function ($locale) use ($data) {
-                $site = Site::get($locale);
-                $localized_data = $data->in($locale);
+        $alternates = $data->sites()->map(function ($handle) use ($data, $sites_by_handle) {
+            $localized_data = $data->in($handle);
+
+            if(!empty($localized_data)) {
+                $site = $sites_by_handle[$handle];
                 return [
                     'url' => $localized_data->absoluteUrl(),
-                    'locale' => $site->locale(),
+                    'locale' => $site->locale()
                 ];
-            });
+            }
 
+            return null;
+        }, []);
+
+        if (!empty($alternates)) {
             return view('aardvark-seo::tags.hreflang', [
-                'hreflang_tags' => $hreflang_tags,
+                'hreflang_tags' => $alternates,
             ]);
         }
     }
