@@ -15,13 +15,13 @@ class ContentSitemapCacheInvalidationListener
 
         if ($content_type === 'term') {
             $term = $event->term;
+            $site = $term->site();
             $handle = $term->taxonomy()->handle();
         } else {
             $entry = $event->entry;
+            $site = $entry->site();
             $handle = $entry->collection()->handle();
         }
-
-        $site = Site::current();
 
         Cache::forget("aardvark-seo.sitemap-index.{$site->handle()}");
         Cache::forget("aardvark-seo.sitemap-{$handle}.{$site->handle()}");
