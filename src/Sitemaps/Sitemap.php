@@ -90,7 +90,6 @@ class Sitemap
                 $items = Entry::query()
                     ->where('collection', $this->handle)
                     ->where('site', Site::current()->handle())
-                    ->where('no_index_page', false)
                     ->where('redirect', '=', null)
                     ->get();
                 break;
@@ -98,7 +97,6 @@ class Sitemap
                 $items = Term::query()
                     ->where('taxonomy', $this->handle)
                     ->where('site', Site::current()->handle())
-                    ->where('no_index_page', false)
                     ->where('redirect', '=', null)
                     ->get();
 
@@ -123,13 +121,12 @@ class Sitemap
                 $items = Entry::query()
                     ->where('collection', 'pages')
                     ->where('site', Site::current()->handle())
-                    ->where('no_index_page', false)
                     ->where('redirect', '=', null)
                     ->get();
         }
 
         $items = $items->filter(function ($item) {
-            return $item->published();
+            return $item->published() && !$item->data()->get('no_index_page');
         });
 
         $sitemap_items = collect($items)->map(function ($item) {
