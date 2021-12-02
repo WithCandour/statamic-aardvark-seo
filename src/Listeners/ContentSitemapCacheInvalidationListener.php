@@ -15,6 +15,8 @@ class ContentSitemapCacheInvalidationListener
 
         if ($content_type === 'term') {
             $term = $event->term;
+            // TODO: This will always return the origin site but this is an upstream issue
+            // We need Statamic to tell us which site the term was saved in.
             $site = $term->site();
             $handle = $term->taxonomy()->handle();
         } else {
