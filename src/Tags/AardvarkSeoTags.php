@@ -93,7 +93,7 @@ class AardvarkSeoTags extends Tags
             }
 
             return null;
-        }, []);
+        }, [])->filter();
 
         if (!empty($alternates)) {
             return view('aardvark-seo::tags.hreflang', [
