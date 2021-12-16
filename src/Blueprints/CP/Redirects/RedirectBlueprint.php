@@ -31,6 +31,20 @@ class RedirectBlueprint implements AardvarkBlueprint
                             ],
                         ],
                         [
+                            'handle' => 'match_type',
+                            'field' => [
+                                'type' => 'select',
+                                'display' => __('aardvark-seo::redirects.redirect.match_type'),
+                                'instructions' => 'Details on RegEx matching can be found at [regexr.com](http://regexr.com/). Regex will be applied to source URL.',
+                                'validate' => 'required|string',
+                                'options' => [
+                                    'Exact Match',
+                                    'RegEx Match',
+                                ],
+                                'default' => 'Exact Match',
+                            ],
+                        ],
+                        [
                             'handle' => 'status_code',
                             'field' => [
                                 'type' => 'radio',

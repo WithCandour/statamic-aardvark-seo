@@ -18,6 +18,7 @@ return [
     'redirect' => [
         'source_url' => 'Source URL',
         'target_url' => 'Target URL',
+        'match_type' => 'Match Type',
         'status_code' => 'Status Code',
         'is_active' => 'Is Active?'
     ],

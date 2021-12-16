@@ -33,6 +33,7 @@ class ManualRedirectsController extends Controller
         $columns = [
             Column::make('source_url')->label(__('aardvark-seo::redirects.redirect.source_url')),
             Column::make('target_url')->label(__('aardvark-seo::redirects.redirect.target_url')),
+            Column::make('match_type')->label(__('aardvark-seo::redirects.redirect.match_type')),
             Column::make('status_code')->label(__('aardvark-seo::redirects.redirect.status_code')),
             Column::make('is_active')->label(__('aardvark-seo::redirects.redirect.is_active')),
         ];

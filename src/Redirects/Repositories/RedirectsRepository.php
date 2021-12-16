@@ -86,11 +86,20 @@ class RedirectsRepository
      */
     public function getBySource($source_url)
     {
-        if (!$this->sourceExists($source_url)) {
-            return false;
-        }
+        $this->redirects->map(function ($redirect, $source_url) {
+            if ($redirect->match_type == 'Exact Match') {
+                if ($redirect->source_url == $source_url) {
+                    return $redirect;
+                }
+            }
+            else {
+                if (preg_match($redirect->source_url, $source_url)) {
+                    return $redirect;
+                }
+            }
+        });
 
-        return $this->redirects->where('source_url', $source_url)->first();
+        return false;
     }
 
     /**
