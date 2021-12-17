@@ -58,7 +58,21 @@ class RedirectsRepository
      */
     public function sourceExists(string $source_url)
     {
-        return $this->redirects->contains('source_url', $source_url);
+        foreach($this->redirects as $redirect) {
+            if ($redirect['match_type'] == 'Exact Match') {
+                if ($redirect['source_url'] == $source_url) {
+                    return true;
+                }
+            }
+            else {
+                $redirect['source_url'] = str_replace('/', "\/", $redirect['source_url']);
+                if (preg_match('`'.$redirect['source_url'].'`', $source_url)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -86,20 +100,21 @@ class RedirectsRepository
      */
     public function getBySource($source_url)
     {
-        $this->redirects->map(function ($redirect, $source_url) {
-            if ($redirect->match_type == 'Exact Match') {
-                if ($redirect->source_url == $source_url) {
+        foreach($this->redirects as $redirect) {
+            if ($redirect['match_type'] == 'Exact Match') {
+                if ($redirect['source_url'] == $source_url) {
                     return $redirect;
                 }
             }
             else {
-                if (preg_match($redirect->source_url, $source_url)) {
+                $redirect['source_url'] = str_replace('/', "\/", $redirect['source_url']);
+                if (preg_match('`'.$redirect['source_url'].'`', $source_url, $matches)) {
+                    if (count($matches) > 1)
+                    $redirect['target_url'] = str_replace('$1', $matches[1], $redirect['target_url']);
                     return $redirect;
                 }
             }
-        });
-
-        return false;
+        }
     }
 
     /**
@@ -174,7 +189,9 @@ class RedirectsRepository
     private function processRaw($data)
     {
         // Ensure source is a relative url
-        $data['source_url'] = Str::ensureLeft(URL::makeRelative($data['source_url']), '/');
+        if($data['match_type'] == 'Exact Match') {
+            $data['source_url'] = Str::ensureLeft(URL::makeRelative($data['source_url']), '/');
+        }
 
         return $data;
     }
