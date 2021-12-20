@@ -46,7 +46,9 @@ class AardvarkSeoTags extends Tags
      */
     public function generatedTitle()
     {
-        return PageDataParser::generatePageTitle($data = PageDataParser::getData(collect($this->context)), $this->context);
+        $data = PageDataParser::getData(collect($this->context));
+        
+        return PageDataParser::generatePageTitle($data, $this->context);
     }
 
     /**
