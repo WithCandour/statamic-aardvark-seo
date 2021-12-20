@@ -108,11 +108,13 @@ class RedirectsRepository
             }
             else {
                 $redirect['source_url'] = str_replace('/', "\/", $redirect['source_url']);
-                if (preg_match('`'.$redirect['source_url'].'`', $source_url, $matches)) {
-                    if (count($matches) > 1)
-                    $redirect['target_url'] = str_replace('$1', $matches[1], $redirect['target_url']);
+                if (preg_match('`'.$redirect['source_url'].'`i', $source_url, $matches)) {
+                    $redirect['target_url'] = preg_replace('`'.$redirect['source_url'].'`i', $redirect['target_url'], $source_url);
+
                     return $redirect;
                 }
+
+                
             }
         }
     }
