@@ -84,7 +84,7 @@ class AardvarkSeoTags extends Tags
         $alternates = $data->sites()->map(function ($handle) use ($data, $sites_by_handle) {
             $localized_data = $data->in($handle);
 
-            if(!empty($localized_data)) {
+            if(!empty($localized_data) && $localized_data->published()) {
                 $site = $sites_by_handle[$handle];
                 return [
                     'url' => $localized_data->absoluteUrl(),
