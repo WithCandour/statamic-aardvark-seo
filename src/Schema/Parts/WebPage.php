@@ -2,6 +2,7 @@
 
 namespace WithCandour\AardvarkSeo\Schema\Parts;
 
+use Carbon\Carbon;
 use Spatie\SchemaOrg\Schema;
 use Statamic\Facades\Config;
 use Statamic\Facades\URL;
@@ -27,8 +28,9 @@ class WebPage implements SchemaPart
         $page->isPartOf(['@id' => WebSite::id()]);
         $page->inLanguage(ParseLocaleModifier::index(Config::getFullLocale()));
         if ($this->context->get('last_modified')) {
-            $page->datePublished($this->context->get('last_modified')->format('c'));
-            $page->dateModified($this->context->get('last_modified')->format('c'));
+            $lastModifiedTimestamp = Carbon::parse($this->context->get('last_modified'))->format('c');
+            $page->datePublished($lastModifiedTimestamp);
+            $page->dateModified($lastModifiedTimestamp);
         }
         return $page;
     }
