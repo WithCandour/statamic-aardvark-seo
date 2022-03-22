@@ -126,8 +126,41 @@ class Sitemap
         }
 
         $items = $items->filter(function ($item) {
-            return $item->published() && !$item->data()->get('no_index_page');
+            if ($item->published()) {
+                ray($item->url());
+                ray($item->data());
+
+                // Handle entries where we have an explicit value
+                if ($item->data()->has('no_index_page')) {
+                    ray($item->data()->get('no_index_page'))->blue();
+                    if ($item->data()->get('no_index_page')) {
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                // Handle entries where the `no_index_page` value is inherited from an origin
+                if ($item->hasOrigin()) {
+                    if ($item->origin()->data()->has('no_index_page')) {
+                        if($item->origin()->data()->get('no_index_page')) {
+                            return false;
+                        }
+
+                        return true;
+                    }
+
+                    return true;
+                }
+
+                // Published entries which don't have an explicit value or an origin value should be returned
+                return true;
+            }
+
+            return false;
         });
+
+        ray($items->values());
 
         $sitemap_items = collect($items)->map(function ($item) {
             return new SitemapItem($item);
