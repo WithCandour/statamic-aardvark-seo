@@ -127,12 +127,9 @@ class Sitemap
 
         $items = $items->filter(function ($item) {
             if ($item->published()) {
-                ray($item->url());
-                ray($item->data());
 
                 // Handle entries where we have an explicit value
                 if ($item->data()->has('no_index_page')) {
-                    ray($item->data()->get('no_index_page'))->blue();
                     if ($item->data()->get('no_index_page')) {
                         return false;
                     }
@@ -159,8 +156,6 @@ class Sitemap
 
             return false;
         });
-
-        ray($items->values());
 
         $sitemap_items = collect($items)->map(function ($item) {
             return new SitemapItem($item);
