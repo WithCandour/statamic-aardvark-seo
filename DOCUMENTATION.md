@@ -33,6 +33,23 @@ Getting your site's SEO data onto the page relies on a few tags being present in
 - `{{ aardvark-seo:body }}` - Contains scripts that need to be inside of the `<body>` element, it should be placed after the opening `<body>` tag.
 - `{{ aardvark-seo:footer }}` - Contains any scripts that need to be included at the end of the page, it should be placed towards the end of page along with any other scripts you have in the footer.
 
+### Git integration
+> Heads up! This behaviour will be changing from Aardvark SEO 2.1 onwards, the following documentation is for 2.0.x only!
+Aardvark SEO integrates with the [Statamic Git functionality](https://statamic.dev/git-automation) meaning that any changes you make to the site settings, content defaults or redirects will get committed to your git repo automatically. The following steps are required to enable the git integration for Aardvark SEO:
+1. Add the Aardvark storage directory to the `paths` array in `config/statamic/git.php`.
+```
+    base_path('content'),
+    base_path('users'),
+    ...
+    storage_path('statamic/addons/aardvark-seo'),
+```
+2. Ensure that the Aardvark storage directory is not ignored in `storage/statamic/.gitignore`. This can be done by replacing the contents of that file with the following:
+```
+/*
+!.gitignore
+!/addons/aardvark-seo
+```
+
 ## Permissions
 
 Aardvark SEO now has a set of permissions which can be applied to user roles, head to the permissions section of the control panel to take a look, non-super users will now need permission to view and update the global settings. There are additional permissions for creating and updating redirects.

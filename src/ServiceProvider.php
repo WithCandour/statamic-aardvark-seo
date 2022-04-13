@@ -3,13 +3,17 @@
 namespace WithCandour\AardvarkSeo;
 
 use Illuminate\Support\Facades\Route;
-use Statamic\Providers\AddonServiceProvider;
+use Statamic\Facades\Git;
 use Statamic\Facades\CP\Nav;
 use Statamic\Facades\Permission;
 use Statamic\Events\EntryBlueprintFound;
-use Statamic\Events\ResponseCreated;
 use Statamic\Events\TermBlueprintFound;
+use Statamic\Providers\AddonServiceProvider;
 use WithCandour\AardvarkSeo\Events\AardvarkContentDefaultsSaved;
+use WithCandour\AardvarkSeo\Events\AardvarkGlobalsUpdated;
+use WithCandour\AardvarkSeo\Events\Redirects\ManualRedirectCreated;
+use WithCandour\AardvarkSeo\Events\Redirects\ManualRedirectDeleted;
+use WithCandour\AardvarkSeo\Events\Redirects\ManualRedirectSaved;
 use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoMetaTitleFieldtype;
 use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoMetaDescriptionFieldtype;
 use WithCandour\AardvarkSeo\Fieldtypes\AardvarkSeoGooglePreviewFieldtype;
@@ -17,7 +21,6 @@ use WithCandour\AardvarkSeo\Listeners\AppendEntrySeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\AppendTermSeoFieldsListener;
 use WithCandour\AardvarkSeo\Listeners\DefaultsSitemapCacheInvalidationListener;
 use WithCandour\AardvarkSeo\Listeners\Subscribers\SitemapCacheInvalidationSubscriber;
-use WithCandour\AardvarkSeo\Http\Controllers\CP\Controller as AardvarkSettingsController;
 use WithCandour\AardvarkSeo\Http\Middleware\RedirectsMiddleware;
 use WithCandour\AardvarkSeo\Modifiers\ParseLocaleModifier;
 use WithCandour\AardvarkSeo\Tags\AardvarkSeoTags;
@@ -94,6 +97,9 @@ class ServiceProvider extends AddonServiceProvider
 
         // Set up navigation
         $this->bootNav();
+
+        // Set up git integration
+        $this->bootGitListener();
     }
 
     /**
@@ -203,5 +209,27 @@ class ServiceProvider extends AddonServiceProvider
                 ]);
             })->label('Configure Aardvark Settings');
         });
+    }
+
+    /**
+     * Register our custom events with the Statamic git integration
+     *
+     * @return void
+     */
+    protected function bootGitListener(): void
+    {
+        if (config('statamic.git.enabled')) {
+            $events = [
+                AardvarkContentDefaultsSaved::class,
+                AardvarkGlobalsUpdated::class,
+                ManualRedirectCreated::class,
+                ManualRedirectDeleted::class,
+                ManualRedirectSaved::class,
+            ];
+
+            foreach ($events as $event) {
+                Git::listen($event);
+            }
+        }
     }
 }
