@@ -105,15 +105,26 @@ class Sitemap
 
                 $mapping = collect($settings->get('taxonomy_collection_map')->value())
                     ->filter(function ($row) {
-                        if (!empty($row['taxonomy'])) {
-                            $taxonomy = ($row['taxonomy'])->value();
-                            return !empty($taxonomy) && $taxonomy->handle() === $this->handle;
+                        $taxonomy = $row['taxonomy'] ?? null;
+
+                        if ($taxonomy instanceof \Statamic\Fields\Value) {
+                            $taxonomy = $taxonomy->value();
+                        }
+
+                        if (!empty($taxonomy)) {
+                            return $taxonomy->handle() === $this->handle;
                         }
                     })
                     ->first();
 
-                if (!empty($mapping['collection'])) {
-                    $items->each->collection(($mapping['collection'])->value());
+                $collection = $mapping['collection'] ?? null;
+
+                if (!empty($collection)) {
+                    if ($collection instanceof \Statamic\Fields\Value) {
+                        $collection = $collection->value();
+                    }
+
+                    $items->each->collection($collection);
                 }
 
                 break;
