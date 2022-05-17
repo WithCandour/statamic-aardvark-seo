@@ -72,10 +72,10 @@ class PageDataParser
 
         switch ($type) {
             case 'taxonomies':
-                $repo = $ctx->get('taxonomy');
+                $repo = $ctx->get('taxonomy')->value();
                 break;
             case 'collections':
-                $repo = $ctx->get('collection');
+                $repo = $ctx->get('collection')->value();
                 break;
             default:
                 $repo = null;
