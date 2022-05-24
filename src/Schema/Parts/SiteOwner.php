@@ -42,13 +42,15 @@ class SiteOwner implements SchemaPart
         // Social settings
         $social_settings = AardvarkStorage::getYaml('social', Site::current(), true);
 
-        if (!empty($social_settings->get('social_links'))) {
+        $social_urls = \collect($social_settings->get('social_links', []))
+            ->map(function ($social_item) {
+                return $social_item['url'] ?? null;
+            })
+            ->filter();
+
+        if ($social_urls->count() > 0) {
             $owner->sameAs(
-                collect($social_settings->get('social_links'))
-                    ->map(function ($link) {
-                        return $link['url'];
-                    })
-                    ->toArray()
+                $social_urls->toArray()
             );
         }
 
