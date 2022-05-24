@@ -68,7 +68,8 @@ class PageDataParser
      */
     public static function getDefaults($ctx)
     {
-        $type = $ctx->get('is_term') ? 'taxonomies' : 'collections';
+        $is_term = $ctx->get('is_term')?->value();
+        $type = $is_term ? 'taxonomies' : 'collections';
 
         switch ($type) {
             case 'taxonomies':

@@ -66,11 +66,13 @@ class AardvarkSeoTags extends Tags
     {
         $ctx = collect($this->context);
 
-        if (!$ctx->get('id')) {
+        $id = $ctx->get('id')?->value();
+
+        if (empty($id)) {
             return null;
         }
 
-        $data = Entry::find($ctx->get('id'));
+        $data = Entry::find($id);
 
         if (!$data) {
             return null;
