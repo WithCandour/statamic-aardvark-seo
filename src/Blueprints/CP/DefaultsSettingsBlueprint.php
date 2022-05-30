@@ -31,6 +31,7 @@ class DefaultsSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'aardvark_seo_meta_title',
                                 'display' => __('aardvark-seo::onpage.fields.meta_title.display'),
                                 'localizable' => true,
+                                'antlers' => true,
                             ],
                         ],
                         [
