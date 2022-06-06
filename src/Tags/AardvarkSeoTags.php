@@ -66,7 +66,11 @@ class AardvarkSeoTags extends Tags
     {
         $ctx = collect($this->context);
 
-        $id = $ctx->get('id')?->value();
+        $id = $ctx->get('id');
+
+        if ($id instanceof \Statamic\Fields\Value) {
+            $id = $id->value();
+        }
 
         if (empty($id)) {
             return null;

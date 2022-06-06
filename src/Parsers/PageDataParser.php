@@ -68,15 +68,26 @@ class PageDataParser
      */
     public static function getDefaults($ctx)
     {
-        $is_term = $ctx->get('is_term')?->value();
+        $is_term = $ctx->get('is_term');
+
+        if ($is_term instanceof \Statamic\Fields\Value) {
+            $is_term = $is_term->value();
+        }
+
         $type = $is_term ? 'taxonomies' : 'collections';
 
         switch ($type) {
             case 'taxonomies':
-                $repo = $ctx->get('taxonomy')?->value();
+                $repo = $ctx->get('taxonomy');
+                if ($repo instanceof \Statamic\Fields\Value) {
+                    $repo = $repo->value();
+                }
                 break;
             case 'collections':
-                $repo = $ctx->get('collection')?->value();
+                $repo = $ctx->get('taxonomy');
+                if ($repo instanceof \Statamic\Fields\Value) {
+                    $repo = $repo->value();
+                }
                 break;
             default:
                 $repo = null;
