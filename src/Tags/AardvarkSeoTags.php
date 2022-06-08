@@ -5,6 +5,7 @@ namespace WithCandour\AardvarkSeo\Tags;
 use Statamic\Facades\Entry;
 use Statamic\Facades\Site;
 use Statamic\Tags\Tags;
+use Statamic\View\View;
 use WithCandour\AardvarkSeo\Schema\SchemaGraph;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
 use WithCandour\AardvarkSeo\Facades\PageDataParser;
@@ -22,7 +23,7 @@ class AardvarkSeoTags extends Tags
     {
         $data = PageDataParser::getData(collect($this->context));
 
-        $view = view('aardvark-seo::tags.head', $data);
+        $view = View::make('aardvark-seo::tags.head', $data->all());
 
         if ($this->params->get('debug')) {
             return $view;
@@ -47,7 +48,7 @@ class AardvarkSeoTags extends Tags
     public function body()
     {
         $data = PageDataParser::getData(collect($this->context));
-        return view('aardvark-seo::tags.body', $data);
+        return View::make('aardvark-seo::tags.body', $data->all());
     }
 
     /**
@@ -56,7 +57,7 @@ class AardvarkSeoTags extends Tags
     public function footer()
     {
         $data = PageDataParser::getData(collect($this->context));
-        return view('aardvark-seo::tags.footer', $data);
+        return View::make('aardvark-seo::tags.footer', $data->all());
     }
 
     /**
