@@ -32,13 +32,11 @@
 <!-- End hreflang content -->
 
 <!-- Start favicon content -->
-{{ aardvark_general_settings }}
-    {{ if global_favicon }}
-        {{ global_favicon }}
-    <link rel="shortcut icon" href="{{ permalink }}">
-        {{ /global_favicon }}
-    {{ /if }}
-{{ /aardvark_general_settings }}
+{{ if aardvark_general_settings:global_favicon }}
+    {{ aardvark_general_settings:global_favicon }}
+<link rel="shortcut icon" href="{{ permalink }}">
+    {{ /aardvark_general_settings:global_favicon }}
+{{ /if }}
 <!-- End favicon content -->
 
 <!-- Start OpenGraph content -->
@@ -77,27 +75,25 @@
 <!-- End Twitter content -->
 
 <!-- Start marketing content -->
-{{ aardvark_marketing_settings }}
-    {{ if enable_gtm_script && gtm_identifier }}
-    <script>(function (w, d, s, l, i){w[l]=w[l] || []; w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l !='dataLayer' ? '&l=' + l : ''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);})(window, document, 'script', 'dataLayer', '{{ gtm_identifier }}');</script>
-    {{ /if }}
+{{ if aardvark_marketing_settings:enable_gtm_script && aardvark_marketing_settings:gtm_identifier }}
+<script>(function (w, d, s, l, i){w[l]=w[l] || []; w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l !='dataLayer' ? '&l=' + l : ''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);})(window, document, 'script', 'dataLayer', '{{ aardvark_marketing_settings:gtm_identifier }}');</script>
+{{ /if }}
 
-    {{ if google_verification_code }}
-    <meta name="google-site-verification" content="{{ google_verification_code }}">
-    {{ /if }}
+{{ if aardvark_marketing_settings:google_verification_code }}
+<meta name="google-site-verification" content="{{ aardvark_marketing_settings:google_verification_code }}">
+{{ /if }}
 
-    {{ if bing_verification_code }}
-    <meta name="msvalidate.01" content="{{ bing_verification_code }}">
-    {{ /if }}
+{{ if aardvark_marketing_settings:bing_verification_code }}
+<meta name="msvalidate.01" content="{{ aardvark_marketing_settings:bing_verification_code }}">
+{{ /if }}
 
-    {{ if yandex_verification_code }}
-    <meta name="yandex-verification" content="{{ yandex_verification_code }}">
-    {{ /if }}
+{{ if aardvark_marketing_settings:yandex_verification_code }}
+<meta name="yandex-verification" content="{{ aardvark_marketing_settings:yandex_verification_code }}">
+{{ /if }}
 
-    {{ if baidu_verification_code }}
-    <meta name="baidu-site-verification" content="{{ baidu_verification_code }}">
-    {{ /if }}
-{{ /aardvark_marketing_settings }}
+{{ if aardvark_marketing_settings:baidu_verification_code }}
+<meta name="baidu-site-verification" content="{{ aardvark_marketing_settings:baidu_verification_code }}">
+{{ /if }}
 <!-- End marketing content -->
 
 <!-- Start aardvark schema generation -->
