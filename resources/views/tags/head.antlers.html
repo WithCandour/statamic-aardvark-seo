@@ -8,7 +8,7 @@
     <meta name="description" content="{{ meta_description }}">
 {{ /if }}
 {{ if use_meta_keywords }}
-    <meta name="keywords" content="{{ meta_keywords join=', ' }}">
+    <meta name="keywords" content="{{ meta_keywords | join  }}">
 {{ /if }}
 <!-- End page content -->
 
