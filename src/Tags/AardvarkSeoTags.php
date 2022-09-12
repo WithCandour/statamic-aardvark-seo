@@ -43,6 +43,15 @@ class AardvarkSeoTags extends Tags
     }
 
     /**
+     * Return the calculated meta title
+     */
+    public function title()
+    {
+        $data = PageDataParser::getData(collect($this->context));
+        return View::make('aardvark-seo::tags.title', $data->all());
+    }
+
+    /**
      * Return the body content
      */
     public function body()
