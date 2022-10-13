@@ -23,7 +23,11 @@ class AardvarkSeoTags extends Tags
     {
         $data = PageDataParser::getData(collect($this->context));
 
-        $view = View::make('aardvark-seo::tags.head', $data->all());
+        if (config('statamic.antlers.version') == 'regex') {
+            $view = view('aardvark-seo::tags.head', $data);
+        } else {
+            $view = View::make('aardvark-seo::tags.head', $data->all());
+        }
 
         if ($this->params->get('debug')) {
             return $view;
@@ -48,7 +52,14 @@ class AardvarkSeoTags extends Tags
     public function body()
     {
         $data = PageDataParser::getData(collect($this->context));
-        return View::make('aardvark-seo::tags.body', $data->all());
+
+        if (config('statamic.antlers.version') == 'regex') {
+            $view = view('aardvark-seo::tags.body', $data);
+        } else {
+            View::make('aardvark-seo::tags.body', $data->all());
+        }
+
+        return $view;
     }
 
     /**
@@ -57,7 +68,14 @@ class AardvarkSeoTags extends Tags
     public function footer()
     {
         $data = PageDataParser::getData(collect($this->context));
-        return View::make('aardvark-seo::tags.footer', $data->all());
+
+        if (config('statamic.antlers.version') == 'regex') {
+            $view = view('aardvark-seo::tags.footer', $data);
+        } else {
+            View::make('aardvark-seo::tags.footer', $data->all());
+        }
+
+        return $view;
     }
 
     /**
