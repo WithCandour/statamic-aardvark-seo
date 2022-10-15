@@ -3,12 +3,15 @@
 namespace WithCandour\AardvarkSeo;
 
 use Illuminate\Support\Facades\Route;
-use Statamic\Facades\Git;
 use Statamic\Facades\CP\Nav;
+use Statamic\Facades\Git;
+use Statamic\Facades\GraphQL;
 use Statamic\Facades\Permission;
 use Statamic\Events\EntryBlueprintFound;
 use Statamic\Events\TermBlueprintFound;
+use Statamic\GraphQL\Types\GridItemType;
 use Statamic\Providers\AddonServiceProvider;
+use WithCandour\AardvarkSeo\Blueprints\CP\OnPageSeoBlueprint;
 use WithCandour\AardvarkSeo\Events\AardvarkContentDefaultsSaved;
 use WithCandour\AardvarkSeo\Events\AardvarkGlobalsUpdated;
 use WithCandour\AardvarkSeo\Events\Redirects\ManualRedirectCreated;
@@ -100,6 +103,9 @@ class ServiceProvider extends AddonServiceProvider
 
         // Set up git integration
         $this->bootGitListener();
+
+        // Add compatibility with GraphQL
+        $this->bootGraphqlCompatibility();
     }
 
     /**
@@ -230,6 +236,19 @@ class ServiceProvider extends AddonServiceProvider
             foreach ($events as $event) {
                 Git::listen($event);
             }
+        }
+    }
+
+    /**
+     * Register a custom graphql type for our localized_urls field
+     *
+     * @return void
+     */
+    protected function bootGraphqlCompatibility()
+    {
+        if (config('statamic.graphql.enabled')) {
+            $blueprint = OnPageSeoBlueprint::requestBlueprint();
+            GraphQL::addType(new GridItemType($blueprint->field('localized_urls')->fieldtype(), 'GridItem_LocalizedUrls'));
         }
     }
 }
