@@ -2,10 +2,10 @@
 
 namespace WithCandour\AardvarkSeo\Blueprints\CP;
 
-use WithCandour\AardvarkSeo\Blueprints\Blueprint as AardvarkBlueprint;
+use WithCandour\AardvarkSeo\Contracts\Blueprints\Blueprint as Contract;
 use Statamic\Facades\Blueprint as StatamicBlueprint;
 
-class SitemapSettingsBlueprint implements AardvarkBlueprint
+class SitemapSettingsBlueprint implements Contract
 {
     /**
      * @inheritDoc

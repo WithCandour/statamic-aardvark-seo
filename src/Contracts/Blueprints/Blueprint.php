@@ -1,6 +1,6 @@
 <?php
 
-namespace WithCandour\AardvarkSeo\Blueprints;
+namespace WithCandour\AardvarkSeo\Contracts\Blueprints;
 
 interface Blueprint
 {

@@ -2,10 +2,10 @@
 
 namespace WithCandour\AardvarkSeo\Blueprints\CP\Redirects;
 
-use WithCandour\AardvarkSeo\Blueprints\Blueprint as AardvarkBlueprint;
+use WithCandour\AardvarkSeo\Contracts\Blueprints\Blueprint as Contract;
 use Statamic\Facades\Blueprint as StatamicBlueprint;
 
-class RedirectBlueprint implements AardvarkBlueprint
+class RedirectBlueprint implements Contract
 {
     /**
      * @inheritDoc
