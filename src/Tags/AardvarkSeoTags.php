@@ -56,7 +56,7 @@ class AardvarkSeoTags extends Tags
         if (config('statamic.antlers.version') == 'regex') {
             $view = view('aardvark-seo::tags.body', $data);
         } else {
-            View::make('aardvark-seo::tags.body', $data->all());
+            $view = View::make('aardvark-seo::tags.body', $data->all());
         }
 
         return $view;
@@ -72,7 +72,7 @@ class AardvarkSeoTags extends Tags
         if (config('statamic.antlers.version') == 'regex') {
             $view = view('aardvark-seo::tags.footer', $data);
         } else {
-            View::make('aardvark-seo::tags.footer', $data->all());
+            $view = View::make('aardvark-seo::tags.footer', $data->all());
         }
 
         return $view;
