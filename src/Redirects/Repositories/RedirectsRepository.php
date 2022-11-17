@@ -60,7 +60,7 @@ class RedirectsRepository
     {
         return $this->redirects->contains(function ($redirect) use ($source_url) {
             $redirect_source_url = str_replace('/', '\/', $redirect['source_url']);
-            return preg_match("/{$redirect_source_url}/i", $source_url) === 1;
+            return preg_match("/{$redirect_source_url}/i", $source_url) === 1 && $source_url !== $redirect['target_url'];
         });
     }
 
@@ -95,7 +95,7 @@ class RedirectsRepository
 
         return $this->redirects->first(function ($redirect) use ($source_url) {
             $redirect_source_url = str_replace('/', '\/', $redirect['source_url']);
-            return preg_match("/{$redirect_source_url}/i", $source_url) === 1;
+            return preg_match("/{$redirect_source_url}/i", $source_url) === 1 && $source_url !== $redirect['target_url'];
         });
     }
 
