@@ -59,7 +59,7 @@ class RedirectsRepository
     public function sourceExists(string $source_url)
     {
         return $this->redirects->contains(function ($redirect) {
-            $redirect_source_url = str_replace('/', '\/', $$redirect['source_url']);
+            $redirect_source_url = str_replace('/', '\/', $redirect['source_url']);
             return preg_match($redirect_source_url, $source_url) === 1;
         });
     }
@@ -94,7 +94,7 @@ class RedirectsRepository
         }
 
         return $this->redirects->first(function ($redirect) {
-            $redirect_source_url = str_replace('/', '\/', $$redirect['source_url']);
+            $redirect_source_url = str_replace('/', '\/', $redirect['source_url']);
             return preg_match($redirect_source_url, $source_url) === 1;
         });
     }
