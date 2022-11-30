@@ -13,15 +13,7 @@ interface GlobalVariables
      * @param \WithCandour\AardvarkSeo\Contracts\Globals\GlobalSet|null
      * @return self
      */
-    public function globalSet(?GlobalSet $set = null): GlobalSet;
-
-    /**
-     * Get or set the locale for these variables.
-     *
-     * @param string|null $locale
-     * @return string
-     */
-    public function locale(?string $locale = null): string;
+    public function globalSet(?GlobalSet $set = null);
 
     /**
      * Get the ID of the global set that the variables belong to.

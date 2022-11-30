@@ -5,9 +5,15 @@ namespace WithCandour\AardvarkSeo\Providers;
 use Illuminate\Support\ServiceProvider;
 use Statamic\Facades\Site;
 use Statamic\Stache\Stache;
+use WithCandour\AardvarkSeo\Contracts\Stache\Repositories\GlobalsRepository as GlobalsRepositoryContract;
+use WithCandour\AardvarkSeo\Stache\Repositories\GlobalsRepository;
 
 class StacheServiceProvider extends ServiceProvider
 {
+    public $singletons = [
+        GlobalsRepositoryContract::class => GlobalsRepository::class
+    ];
+
     /**
      * @return void
      */

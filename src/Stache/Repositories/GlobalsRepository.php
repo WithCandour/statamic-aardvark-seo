@@ -2,11 +2,10 @@
 
 namespace WithCandour\AardvarkSeo\Stache\Repositories;
 
-use Illuminate\Support\Collection;
 use Statamic\Stache\Stache;
 use WithCandour\AardvarkSeo\Contracts\Globals\GlobalSet;
-use WithCandour\AardvarkSeo\Stache\Stores\GlobalsStore;
-use WithCandour\AardvarkSeo\Stache\Repositories\GlobalsRepository as Contract;
+use WithCandour\AardvarkSeo\Stache\Stores\GlobalSetStore;
+use WithCandour\AardvarkSeo\Contracts\Stache\Repositories\GlobalsRepository as Contract;
 
 class GlobalsRepository implements Contract
 {
@@ -16,9 +15,9 @@ class GlobalsRepository implements Contract
     protected Stache $stache;
 
     /**
-     * @var \WithCandour\AardvarkSeo\Stache\Stores\GlobalsStore
+     * @var \WithCandour\AardvarkSeo\Stache\Stores\GlobalSetStore
      */
-    protected GlobalsStore $store;
+    protected GlobalSetStore $store;
 
     /**
      * @param \Statamic\Stache\Stache
@@ -32,27 +31,9 @@ class GlobalsRepository implements Contract
     /**
      * @inheritDoc
      */
-    public function all(): Collection
+    public function find(string $id): ?GlobalSet
     {
-        $keys = $this->store->paths()->keys();
-        return \collect($this->store->getItems($keys));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function find($id): ?GlobalSet
-    {
-        return $this->store->getItem($id);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function findByHandle(string $handle): ?GlobalSet
-    {
-        $key = $this->store->index('handle')->items()->flip()->get($handle);
-        return $this->find($key);
+        return $this->store->store('globals')->getItem($id);
     }
 
     /**
@@ -60,6 +41,6 @@ class GlobalsRepository implements Contract
      */
     public function save(GlobalSet $set): void
     {
-        $this->store->save($set);
+        $this->store->store($set->handle())->save($set);
     }
 }

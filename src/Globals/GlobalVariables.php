@@ -41,7 +41,7 @@ class GlobalVariables implements Contract, Localization, ArrayAccess, Arrayable
     /**
      * @inheritDoc
      */
-    public function globalSet(?GlobalSet $set = null): GlobalSet
+    public function globalSet(?GlobalSet $set = null)
     {
         return $this->fluentlyGetOrSet('set')->args(func_get_args());
     }
@@ -49,7 +49,7 @@ class GlobalVariables implements Contract, Localization, ArrayAccess, Arrayable
     /**
      * @inheritDoc
      */
-    public function locale(?string $locale = null): string
+    public function locale($locale = null)
     {
         return $this->fluentlyGetOrSet('locale')->args(func_get_args());
     }
@@ -93,7 +93,7 @@ class GlobalVariables implements Contract, Localization, ArrayAccess, Arrayable
     public function path(): string
     {
         return vsprintf('%s/%s%s.%s', [
-            rtrim(Stache::store('globals')->directory(), '/'),
+            rtrim(Stache::store('aardvark-seo-globals')->directory(), '/'),
             Site::hasMultiple() ? $this->locale().'/' : '',
             $this->handle(),
             'yaml',

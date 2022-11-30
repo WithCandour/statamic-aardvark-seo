@@ -8,9 +8,10 @@ use Statamic\Facades\User;
 use WithCandour\AardvarkSeo\Blueprints\CP\GeneralSettingsBlueprint;
 use WithCandour\AardvarkSeo\Events\AardvarkGlobalsUpdated;
 use WithCandour\AardvarkSeo\Facades\AardvarkStorage;
+use WithCandour\AardvarkSeo\Globals\GlobalSet;
 use WithCandour\AardvarkSeo\Http\Controllers\CP\Contracts\Publishable;
 
-class GeneralController extends Controller implements Publishable
+class GeneralController extends GlobalsController implements Publishable
 {
     public function index()
     {
@@ -95,6 +96,26 @@ class GeneralController extends Controller implements Publishable
      */
     public function putData($data)
     {
+        /**
+         * @var \Statamic\Sites\Site
+         */
+        $site = Site::selected();
+        $repository = $this->repository();
+
+        // $set = $repository->find('general');
+        $set = null;
+
+        // Create the set if it doesn't already exist
+        if (!$set) {
+            $set = new GlobalSet();
+            $set->handle('general');
+
+            $localization = $set->makeLocalization($site)
+                    ->data($data);
+
+            $localization->save();
+        }
+
         return AardvarkStorage::putYaml('general', Site::selected(), $data);
     }
 }

@@ -8,23 +8,16 @@ use Statamic\Facades\Site;
 use Statamic\Facades\YAML;
 use Statamic\Support\Arr;
 use Statamic\Support\Str;
-use Statamic\Stache\Stores\BasicStore;
+use Statamic\Stache\Stores\ChildStore;
 use WithCandour\AardvarkSeo\Contracts\Globals\GlobalSet;
 
-class GlobalsStore extends BasicStore
+class GlobalVariablesStore extends ChildStore
 {
-    public function key()
-    {
-        return 'aardvark-seo-globals';
-    }
-
     public function makeItemFromFile($path, $contents)
     {
         $relative = str_after($path, $this->directory);
         $handle = str_before($relative, '.yaml');
 
-        // If it's a variables file that was requested, instead assume that the
-        // base file was requested. The variables will get made as part of it.
         if (Site::hasMultiple() && Str::contains($relative, '/')) {
             $handle = pathinfo($relative, PATHINFO_FILENAME);
             $path = $this->directory.$handle.'.yaml';

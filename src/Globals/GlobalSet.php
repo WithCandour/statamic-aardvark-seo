@@ -38,7 +38,10 @@ class GlobalSet implements Contract
         return $this->handle();
     }
 
-    public function handle(string $handle = null): string
+    /**
+     * @inheritDoc
+     */
+    public function handle(string $handle = null)
     {
         return $this->fluentlyGetOrSet('handle')->args(func_get_args());
     }
@@ -88,9 +91,9 @@ class GlobalSet implements Contract
     /**
      * @inheritDoc
      */
-    public function makeLocalization(StatamicSite $site): GlobalVariables
+    public function makeLocalization(StatamicSite $site)
     {
-        return (new GlobalVariables)
+        return App::make(GlobalVariables::class)
             ->globalSet($this)
             ->locale($site->locale());
     }

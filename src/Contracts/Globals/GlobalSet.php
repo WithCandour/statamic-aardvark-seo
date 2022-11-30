@@ -16,11 +16,11 @@ interface GlobalSet
     public function id(): string;
 
     /**
-     * Get the handle of the global set.
+     * Get or set the handle of the global set.
      *
-     * @return string
+     * @param string|null $handle
      */
-    public function handle(): string;
+    public function handle(?string $handle = null);
 
     /**
      * Get the type of the global set.
@@ -42,7 +42,7 @@ interface GlobalSet
      * @param \Statamic\Sites\Site
      * @return \WithCandour\AardvarkSeo\Contracts\Globals\GlobalVariables
      */
-    public function makeLocalization(Site $site): GlobalVariables;
+    public function makeLocalization(Site $site);
 
     /**
      * Add a localization of the global set.

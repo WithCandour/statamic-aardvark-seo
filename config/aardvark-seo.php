@@ -20,7 +20,7 @@ return [
         'stores' => [
 
             'aardvark-seo-globals' => [
-                'class' => \WithCandour\AardvarkSeo\Stache\Stores\GlobalsStore::class,
+                'class' => \WithCandour\AardvarkSeo\Stache\Stores\GlobalSetStore::class,
                 'directory' => base_path('content/aardvark-seo/globals')
             ],
 
