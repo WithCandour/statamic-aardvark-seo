@@ -13,10 +13,10 @@ class SitemapController extends LaravelController
 {
     public function index()
     {
-        $storage = AardvarkStorage::getYaml('sitemap', Site::current(), true);
+       $storage = AardvarkStorage::getYaml('sitemap', Site::current(), true);
 
         if (!$storage->get('enable_sitemap', true)) {
-            abort(404);
+            throw new \Statamic\Exceptions\NotFoundHttpException;
         }
 
         $site = Site::current();
@@ -46,13 +46,13 @@ class SitemapController extends LaravelController
         $storage = AardvarkStorage::getYaml('sitemap', Site::current(), true);
 
         if (!$storage->get('enable_sitemap', true)) {
-            abort(404);
+            throw new \Statamic\Exceptions\NotFoundHttpException;
         }
 
         $sitemap = Sitemap::findByHandle($handle);
 
         if (!$sitemap) {
-            abort(404);
+            throw new \Statamic\Exceptions\NotFoundHttpException;
         }
 
         $site = Site::current();
