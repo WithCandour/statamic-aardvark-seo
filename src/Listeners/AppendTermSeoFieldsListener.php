@@ -27,9 +27,10 @@ class AppendTermSeoFieldsListener implements SeoFieldsListener
             $contents = $bp->contents();
 
             $on_page_bp = OnPageSeoBlueprint::requestBlueprint();
-            $on_page_fields = $on_page_bp->contents()['sections']['main'];
+            $on_page_key = (array_key_exists('tabs', $on_page_bp->contents() ? 'tabs' : 'sections');
+            $on_page_fields = $on_page_bp->contents()[$on_page_key]['main'];
 
-            $contents['sections']['SEO'] = $on_page_fields;
+            $contents[$on_page_key]['SEO'] = $on_page_fields;
 
             $bp->setContents($contents);
         }
