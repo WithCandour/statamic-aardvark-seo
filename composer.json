@@ -41,6 +41,7 @@
     },
     "require": {
         "spatie/schema-org": "^3.2",
+        "statamic/cms": "^4.0",
         "whitecube/lingua": "^1.0"
     }
 }
