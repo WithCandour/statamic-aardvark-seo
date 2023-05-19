@@ -35,10 +35,10 @@
             </data-list-table>
         </div>
     </data-list>
-    <div v-else class="md:pt-8 max-w-2xl mx-auto">
+    <div v-else class="md:pt-16 max-w-2xl mx-auto">
         <div class="w-full md:w-1/2">
-            <h1 class="mb-4">Redirects</h1>
-            <p class="text-grey-70 leading-normal mb-4 text-lg antialiased">
+            <h1 class="mb-8">Redirects</h1>
+            <p class="text-gray-700 leading-normal mb-8 text-lg antialiased">
                 Redirects are used to direct users to content which may have been removed or deleted.
             </p>
             <a :href="this.createUrl" class="btn-primary btn-lg">Create a redirect</a>
