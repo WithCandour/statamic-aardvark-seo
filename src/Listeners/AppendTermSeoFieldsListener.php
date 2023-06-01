@@ -3,9 +3,9 @@
 namespace WithCandour\AardvarkSeo\Listeners;
 
 use Statamic\Events\TermBlueprintFound;
+use Statamic\Support\Str;
 use WithCandour\AardvarkSeo\Blueprints\CP\OnPageSeoBlueprint;
 use WithCandour\AardvarkSeo\Listeners\Contracts\SeoFieldsListener;
-use Statamic\Support\Str;
 
 class AppendTermSeoFieldsListener implements SeoFieldsListener
 {
@@ -27,9 +27,7 @@ class AppendTermSeoFieldsListener implements SeoFieldsListener
             $contents = $bp->contents();
 
             $on_page_bp = OnPageSeoBlueprint::requestBlueprint();
-            $on_page_fields = $on_page_bp->contents()['sections']['main'];
-
-            $contents['sections']['SEO'] = $on_page_fields;
+            $contents['tabs']['SEO'] = $on_page_bp->contents()['tabs']['main'];
 
             $bp->setContents($contents);
         }

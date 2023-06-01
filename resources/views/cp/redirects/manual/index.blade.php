@@ -3,7 +3,7 @@
 @section('content')
     <breadcrumbs :crumbs='@json($crumbs)'></breadcrumbs>
 
-    <div class="flex items-center mb-3">
+    <div class="flex items-center mb-6">
         <h1 class="flex-1">{{ $title }}</h1>
         <div>
             <a href="{{ cp_route('aardvark-seo.redirects.manual-redirects.create') }}" class="btn-primary">{{ __('aardvark-seo::redirects.actions.create') }}</a>
