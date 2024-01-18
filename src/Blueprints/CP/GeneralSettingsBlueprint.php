@@ -171,7 +171,6 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'type' => 'sites',
                                 'max_items' => 1,
                                 'display' => __('aardvark-seo::general.fields.default_locale.display'),
-                                'instructions' => __('aardvark-seo::general.fields.default_locale.instruct'),
                             ],
                         ],
                     ],

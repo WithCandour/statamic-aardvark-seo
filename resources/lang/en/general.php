@@ -57,6 +57,13 @@ return [
             'display' => 'No Index',
             'instruct' => 'Prevent indexing across the entire site.',
         ],
+        'default_locale_section' => [
+            'display' => 'Default Locale',
+            'instruct' => 'Select a locale to use as a default hreflang tag (see [https://developers.google.com/search/blog/2013/04/x-default-hreflang-for-international-pages](https://developers.google.com/search/blog/2013/04/x-default-hreflang-for-international-pages)).',
+        ],
+        'default_locale' => [
+            'display' => 'Default Locale',
+        ],
     ]
 
 ];
