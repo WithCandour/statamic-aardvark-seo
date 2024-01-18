@@ -11,6 +11,10 @@ class ParseLocaleModifier extends Modifier
 
     public static function index($value)
     {
+        if($value == 'x-default') {
+            return $value;
+        }
+        
         $parsed = preg_replace('/\.utf8/i', '', $value);
 
         // Convert to W3C
