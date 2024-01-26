@@ -121,7 +121,7 @@ class AardvarkSeoTags extends Tags
                 return [
                     'url' => $localized_data->absoluteUrl(),
                     'locale' => $site->locale(),
-                    'default' => !empty($defaultLocale) ? $site->handle == $defaultLocale->handle : false,
+                    'default' => !empty($defaultLocale) ? $site->handle === $defaultLocale->handle : false,
                 ];
             }
 
