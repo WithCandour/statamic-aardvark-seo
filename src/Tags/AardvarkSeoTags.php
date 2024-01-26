@@ -126,7 +126,7 @@ class AardvarkSeoTags extends Tags
             }
 
             return null;
-        }, []) ->filter();
+        }, [])->filter();
 
         if (!empty($alternates)) {
             return view('aardvark-seo::tags.hreflang', [
