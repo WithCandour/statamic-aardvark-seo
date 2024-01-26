@@ -11,7 +11,7 @@ class ParseLocaleModifier extends Modifier
 
     public static function index($value)
     {
-        if($value == 'x-default') {
+        if($value === 'x-default') {
             return $value;
         }
         
