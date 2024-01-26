@@ -157,6 +157,22 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                                 'instructions' => __('aardvark-seo::general.fields.no_index_site.instruct'),
                             ],
                         ],
+                        [
+                            'handle' => 'default_locale_section',
+                            'field' => [
+                                'type' => 'section',
+                                'display' => __('aardvark-seo::general.fields.default_locale_section.display'),
+                                'instructions' => __('aardvark-seo::general.fields.default_locale_section.instruct'),
+                            ],
+                        ],
+                        [
+                            'handle' => 'default_locale',
+                            'field' => [
+                                'type' => 'sites',
+                                'max_items' => 1,
+                                'display' => __('aardvark-seo::general.fields.default_locale.display'),
+                            ],
+                        ],
                     ],
                 ],
             ],
