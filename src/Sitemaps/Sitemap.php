@@ -91,6 +91,7 @@ class Sitemap
                     ->where('collection', $this->handle)
                     ->where('site', Site::current()->handle())
                     ->where('redirect', '=', null)
+                    ->where('date', '<=', now()) // Exclude future posts by checking the post date is less than or equal to today
                     ->get();
                 break;
             case 'taxonomy':
