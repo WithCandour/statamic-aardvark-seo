@@ -66,29 +66,37 @@
             /**
              * Generates the title based on localisation fields.
              * If the current site is not the default locale and the 'meta_title' is not localised,
-             * it returns an empty string; otherwise, it returns the provided value.
+             * it returns an empty string; otherwise, it returns the provided value. It also handles the sync logic by updating
+             * the meta title based on the fields current sync state.
              *
              * @param {string} value - The original title value to potentially return.
-             * @return {string} - The localised title or an empty string.
+             * @return {string} - The localised title based on the current site's locale and field's sync state, or an empty string.
              */
             generateTitle(value) {
-
                 // Access the publish state from the Vuex store
                 const state = this.$store.state.publish[this.storeName];
 
+                // Check if state is defined, and if the current site has localizedFields and is not the default locale.
                 if(state && state.localizedFields && this.meta.default_locale !== state.site) {
 
+                    // If the field is not synced and has just been changed and is not currently focused,
+                    // reset the hasSyncedJustChanged flag and update the meta title to match the page title.
                     if (!this.isSynced && this.hasSyncedJustChanged && !this.isFocused) {
                         this.hasSyncedJustChanged = false;
+                        // ToDo: Best practice: dispatch an action or commit a mutation instead
                         state.values.meta_title = state.values.title;
                         return state.values.title;
                     }
 
+                    // If the field is synced and has just been changed and is not currently focused, clear the meta title.
                     if(this.isSynced && this.hasSyncedJustChanged && !this.isFocused) {
+                        // ToDo: Best practice: dispatch an action or commit a mutation instead
                         state.values.meta_title = '';
                     }
 
+                    // If the field is synced and has not just changed, ensure the meta title remains cleared.
                     if(this.isSynced && !this.hasSyncedJustChanged) {
+                        // ToDo: Best practice: dispatch an action or commit a mutation instead
                         state.values.meta_title = '';
                     }
 
@@ -99,6 +107,7 @@
                 // Return the provided value as default
                 return value;
             },
+
             validateMeta(length) {
                 let validation;
                 switch (true) {
