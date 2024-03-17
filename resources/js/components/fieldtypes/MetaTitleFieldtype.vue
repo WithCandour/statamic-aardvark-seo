@@ -21,13 +21,9 @@
 
         data() {
             return {
-                isFocussed: false,
+                isFocused: false,
                 hasSyncedJustChanged: false,
             };
-        },
-
-        created() {
-            this.processed = 0; // This is a plain JavaScript property, not a reactive data property
         },
 
         computed: {
@@ -59,7 +55,7 @@
 
         methods: {
             toggleFocus(focusState) {
-                this.isFocussed = focusState;
+                this.isFocused = focusState;
             },
             generatePlaceholder() {
                 const state = this.$store.state.publish[this.storeName];
@@ -77,20 +73,18 @@
              */
             generateTitle(value) {
 
-                this.processed++;
-
                 // Access the publish state from the Vuex store
                 const state = this.$store.state.publish[this.storeName];
 
                 if(state && state.localizedFields && this.meta.default_locale !== state.site) {
 
-                    if (!this.isSynced && this.hasSyncedJustChanged && !this.isFocussed) {
+                    if (!this.isSynced && this.hasSyncedJustChanged && !this.isFocused) {
                         this.hasSyncedJustChanged = false;
                         state.values.meta_title = state.values.title;
                         return state.values.title;
                     }
 
-                    if(this.isSynced && this.hasSyncedJustChanged && !this.isFocussed && this.processed > 0) {
+                    if(this.isSynced && this.hasSyncedJustChanged && !this.isFocused) {
                         state.values.meta_title = '';
                     }
 
