@@ -2,7 +2,7 @@
     <div class="meta-field-validator__outer">
         <div class="meta-field-validator__field-container">
             <div class="input-group">
-                <input :value="generateTitle(value)" @input="update($event.target.value)" @keyup="handleKeyUp" type="text" :name="name" :id="id" :placeholder="generatePlaceholder()" class="input-text" />
+                <input @focus="toggleFocus(true)" @blur="toggleFocus(false)" :value="generateTitle(value)" @input="update($event.target.value)" @keyup="handleKeyUp" type="text" :name="name" :id="id" :placeholder="generatePlaceholder()" class="input-text" />
             </div>
             <progress max="70" :value="contentLength" :class="'meta-field-validator__progress meta-field-validator__progress--' + validation.step" />
         </div>
@@ -14,11 +14,53 @@
     import MetaDataAnalyser from './mixins/MetaDataAnalyser';
 
     export default {
+
         mixins: [Fieldtype, MetaDataAnalyser],
 
         inject: ['storeName'],
 
+        data() {
+            return {
+                isFocussed: false,
+                hasSyncedJustChanged: false,
+            };
+        },
+
+        created() {
+            this.processed = 0; // This is a plain JavaScript property, not a reactive data property
+        },
+
+        computed: {
+            /**
+             * Computes the synchronization state based on whether the current handle
+             * is included in the localizedFields array from the Vuex store state.
+             * @returns {Boolean} The sync state.
+             */
+            isSynced() {
+                const state = this.$store.state.publish[this.storeName];
+                if (state && state.localizedFields) {
+                    return !state.localizedFields.includes(this.config.handle);
+                }
+                return false;
+            },
+        },
+
+        watch: {
+            /**
+             * Watches for changes in the `isSynced` computed property to perform
+             * actions or log its changes.
+             */
+            isSynced(newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    this.hasSyncedJustChanged = true;
+                }
+            },
+        },
+
         methods: {
+            toggleFocus(focusState) {
+                this.isFocussed = focusState;
+            },
             generatePlaceholder() {
                 const state = this.$store.state.publish[this.storeName];
                 return this.meta.site_name
@@ -34,11 +76,28 @@
              * @return {string} - The localised title or an empty string.
              */
             generateTitle(value) {
+
+                this.processed++;
+
                 // Access the publish state from the Vuex store
                 const state = this.$store.state.publish[this.storeName];
 
-                // Check if the state exists, has localizedFields, and if the current site is not the default locale
-                if (state && state.localizedFields && this.meta.default_locale !== state.site) {
+                if(state && state.localizedFields && this.meta.default_locale !== state.site) {
+
+                    if (!this.isSynced && this.hasSyncedJustChanged && !this.isFocussed) {
+                        this.hasSyncedJustChanged = false;
+                        state.values.meta_title = state.values.title;
+                        return state.values.title;
+                    }
+
+                    if(this.isSynced && this.hasSyncedJustChanged && !this.isFocussed && this.processed > 0) {
+                        state.values.meta_title = '';
+                    }
+
+                    if(this.isSynced && !this.hasSyncedJustChanged) {
+                        state.values.meta_title = '';
+                    }
+
                     // Return the value only if 'meta_title' is a localised field
                     return state.localizedFields.includes('meta_title') ? value : '';
                 }
