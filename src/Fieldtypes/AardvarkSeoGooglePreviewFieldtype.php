@@ -34,6 +34,7 @@ class AardvarkSeoGooglePreviewFieldtype extends Fieldtype
             'site_url' => $site->absoluteUrl(),
             'title_separator' => $data->get('title_separator', '|'),
             'title_order' => $data->get('title_order', 'title_first'),
+            'append_site_name' => (bool) $data->get('append_site_name', false),
             'favicon_url' => $faviconUrl,
         ];
     }

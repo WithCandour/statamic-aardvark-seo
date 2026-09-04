@@ -61,18 +61,19 @@ export default {
             return (typeof this.value === 'string' && this.value) ? this.value : '';
         },
 
-        // Mirrors PageDataParser::generatePageTitle: a custom meta title is used as-is,
-        // only the entry title fallback gets the site name appended.
+        // Mirrors PageDataParser::generatePageTitle: a custom meta title is used as-is
+        // unless the "append site name" setting is on; the entry title fallback always gets it.
         showSiteName() {
-            return !this.editableValue;
+            return !this.editableValue || this.meta.append_site_name;
         },
 
         fullTitle() {
-            if (this.editableValue) return this.editableValue;
-            if (!this.entryTitle) return '';
+            const title = this.editableValue || this.entryTitle;
+            if (!title) return '';
+            if (!this.showSiteName) return title;
             return this.isSiteFirst
-                ? this.sitePrefix + this.entryTitle
-                : this.entryTitle + this.siteSuffix;
+                ? this.sitePrefix + title
+                : title + this.siteSuffix;
         },
 
         fullTitleLength() {

@@ -29,6 +29,10 @@ return [
             'display' => 'Name',
             'instruct' => 'This will be used in generated meta titles as well as the OpenGraph site name property'
         ],
+        'append_site_name' => [
+            'display' => 'Append site name to custom meta titles',
+            'instruct' => 'By default a custom meta title is used as-is. Enable this to add the separator and site name to custom meta titles too, just like generated titles.'
+        ],
         'favicon_section' => [
             'display' => 'Favicon',
             'instruct' => 'Upload a favicon to show in search results and the browser.'
