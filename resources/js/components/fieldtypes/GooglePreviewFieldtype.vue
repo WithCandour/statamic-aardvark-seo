@@ -31,10 +31,9 @@ export default {
             const url = new URL(site_url || 'https://example.com');
             const breadcrumb = `${url.origin} › ${slug || ''}`;
 
-            const baseTitle = meta_title || title;
-            const composedTitle = title_order === 'site_first'
-                ? `${site_name} ${title_separator} ${baseTitle}`
-                : `${baseTitle} ${title_separator} ${site_name}`;
+            const composedTitle = meta_title || (title_order === 'site_first'
+                ? `${site_name} ${title_separator} ${title}`
+                : `${title} ${title_separator} ${site_name}`);
 
             return {
                 title: composedTitle,
