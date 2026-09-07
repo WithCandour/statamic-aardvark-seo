@@ -48,8 +48,6 @@ class ServiceProvider extends AddonServiceProvider
         ],
     ];
 
-    protected $middlewareGroups = [];
-
     protected $modifiers = [
         ParseLocaleModifier::class,
     ];
@@ -77,14 +75,6 @@ class ServiceProvider extends AddonServiceProvider
 
     public function boot()
     {
-        if (! config('aardvark-seo.disable_redirects')) {
-            $this->middlewareGroups = [
-                'statamic.web' => [
-                    RedirectsMiddleware::class,
-                ],
-            ];
-        }
-
         parent::boot();
 
         // Set up views path
@@ -204,6 +194,18 @@ class ServiceProvider extends AddonServiceProvider
                 $permission->children($children);
             })->label('Configure Aardvark Settings');
         });
+    }
+
+    /**
+     * Prepend the middleware so a 404 served from the static cache still reaches the redirects check
+     */
+    protected function bootMiddleware()
+    {
+        if (! config('aardvark-seo.disable_redirects')) {
+            $this->app['router']->prependMiddlewareToGroup('statamic.web', RedirectsMiddleware::class);
+        }
+
+        return $this;
     }
 
     /**
