@@ -26,14 +26,15 @@ export default {
             if (!this.publishContainer) return { title: '', breadcrumb: '', description: '' };
 
             const { meta_title, meta_description, slug, title } = this.publishContainer.values;
-            const { site_name, site_url, title_separator, title_order } = this.meta;
+            const { site_name, site_url, title_separator, title_order, append_site_name } = this.meta;
 
             const url = new URL(site_url || 'https://example.com');
             const breadcrumb = `${url.origin} › ${slug || ''}`;
 
-            const composedTitle = meta_title || (title_order === 'site_first'
-                ? `${site_name} ${title_separator} ${title}`
-                : `${title} ${title_separator} ${site_name}`);
+            const baseTitle = meta_title || title;
+            const composedTitle = (meta_title && !append_site_name) ? meta_title : (title_order === 'site_first'
+                ? `${site_name} ${title_separator} ${baseTitle}`
+                : `${baseTitle} ${title_separator} ${site_name}`);
 
             return {
                 title: composedTitle,

@@ -1,21 +1,14 @@
 <template>
     <div>
-        <div class="flex items-center rounded-md border bg-white text-sm shadow-sm focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-200 dark:border-gray-600 dark:bg-gray-800 dark:focus-within:border-blue-600 dark:focus-within:ring-blue-900">
-            <span v-if="showSiteName && isSiteFirst" class="shrink-0 whitespace-nowrap pl-3 text-gray-400 dark:text-gray-500">{{ sitePrefix }}</span>
-            <input
-                ref="input"
-                type="text"
-                :value="editableValue"
-                @input="onInput"
-                :placeholder="entryTitle"
-                :readonly="isReadOnly"
-                :name="name"
-                :id="id"
-                class="min-w-0 flex-1 border-0 bg-transparent py-1.5 text-gray-800 outline-none placeholder:text-gray-400 dark:text-gray-200 dark:placeholder:text-gray-500"
-                :class="showSiteName && isSiteFirst ? 'pl-0 pr-3' : 'px-3'"
-            />
-            <span v-if="showSiteName && !isSiteFirst" class="shrink-0 whitespace-nowrap pr-3 text-gray-400 dark:text-gray-500">{{ siteSuffix }}</span>
-        </div>
+        <ui-input
+            :model-value="editableValue"
+            @update:model-value="update"
+            :placeholder="entryTitle"
+            :id="id"
+            :read-only="isReadOnly"
+            :prepend="showSiteName && isSiteFirst ? sitePrefix.trim() : null"
+            :append="showSiteName && !isSiteFirst ? siteSuffix.trim() : null"
+        />
         <div class="mt-2 flex items-center gap-2">
             <div class="h-1 flex-1 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
                 <div
@@ -61,18 +54,19 @@ export default {
             return (typeof this.value === 'string' && this.value) ? this.value : '';
         },
 
-        // Mirrors PageDataParser::generatePageTitle: a custom meta title is used as-is,
-        // only the entry title fallback gets the site name appended.
+        // Mirrors PageDataParser::generatePageTitle: a custom meta title is used as-is
+        // unless the "append site name" setting is on; the entry title fallback always gets it.
         showSiteName() {
-            return !this.editableValue;
+            return !this.editableValue || this.meta.append_site_name;
         },
 
         fullTitle() {
-            if (this.editableValue) return this.editableValue;
-            if (!this.entryTitle) return '';
+            const title = this.editableValue || this.entryTitle;
+            if (!title) return '';
+            if (!this.showSiteName) return title;
             return this.isSiteFirst
-                ? this.sitePrefix + this.entryTitle
-                : this.entryTitle + this.siteSuffix;
+                ? this.sitePrefix + title
+                : title + this.siteSuffix;
         },
 
         fullTitleLength() {
@@ -105,12 +99,6 @@ export default {
             if (this.remaining < 0) return 'text-red-500';
             if (this.remaining < 10) return 'text-orange-400';
             return 'text-gray-500 dark:text-gray-400';
-        },
-    },
-
-    methods: {
-        onInput(e) {
-            this.update(e.target.value);
         },
     },
 };

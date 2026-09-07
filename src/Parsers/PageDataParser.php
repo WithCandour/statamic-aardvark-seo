@@ -169,15 +169,20 @@ class PageDataParser
      */
     public static function generatePageTitle($data, $ctx)
     {
-        if ($data->get('meta_title') && $data->get('meta_title')->raw()) {
-            return Parse::template($data->get('meta_title'), $ctx->all());
-        }
-
-        if ($data->get('response_code') === 404) {
-            $data->put('title', '404');
-        }
-
         $storage = self::getSettingsBlueprintWithValues($ctx, 'general', new GeneralSettingsBlueprint());
+
+        $appendSiteName = $storage->get('append_site_name');
+        $appendSiteName = $appendSiteName instanceof \Statamic\Fields\Value ? $appendSiteName->value() : $appendSiteName;
+
+        if ($data->get('meta_title') && $data->get('meta_title')->raw()) {
+            $title = Parse::template($data->get('meta_title'), $ctx->all());
+
+            if (! $appendSiteName) {
+                return $title;
+            }
+        } else {
+            $title = $data->get('response_code') === 404 ? '404' : $data->get('title');
+        }
 
         $titleOrder = $storage->get('title_order');
         $titleOrderValue = $titleOrder instanceof \Statamic\Fields\Value ? $titleOrder->raw() : $titleOrder;
@@ -186,12 +191,12 @@ class PageDataParser
             return implode(' ', [
                 $storage->get('site_name'),
                 $storage->get('title_separator'),
-                $data->get('title'),
+                $title,
             ]);
         }
 
         return implode(' ', [
-            $data->get('title'),
+            $title,
             $storage->get('title_separator'),
             $storage->get('site_name'),
         ]);

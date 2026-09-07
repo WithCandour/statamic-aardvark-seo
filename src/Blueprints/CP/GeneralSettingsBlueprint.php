@@ -54,6 +54,15 @@ class GeneralSettingsBlueprint implements AardvarkBlueprint
                             'width' => 33,
                         ],
                     ],
+                    [
+                        'handle' => 'append_site_name',
+                        'field' => [
+                            'type' => 'toggle',
+                            'display' => __('aardvark-seo::general.fields.append_site_name.display'),
+                            'instructions' => __('aardvark-seo::general.fields.append_site_name.instruct'),
+                            'default' => false,
+                        ],
+                    ],
                 ],
             ],
         ];
